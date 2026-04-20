@@ -19,4 +19,4 @@ jobs:
           app-name: 'doomdocs'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E314694CD5324F45AE26B8AAAF2D0BAC }}
-          package: ./index.html  # Change path if your file lives elsewhere
+          package: .
