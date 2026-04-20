@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DOOM — Hacktool Documentation</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap');
+
+:root{
+--bg:#030c09;
+--bg2:#061210;
+--bg3:#091a15;
+--surface:#0b1a15;
+--surface2:#0e2019;
+--border:#0f3a2e;
+--border2:#1a5040;
+--primary:#00ff9c;
+--primary-dim:#00cc7a;
+--primary-dark:#004d2e;
+--secondary:#00d4ff;
+--secondary-dark:#003d4d;
+--accent:#ff003c;
+--warn:#ffb700;
+--purple:#b84fff;
+--text:#b8dfc8;
+--text-dim:#4d7a60;
+--text-muted:#2a5040;
+--glow:0 0 12px rgba(0,255,156,0.5),0 0 24px rgba(0,255,156,0.2);
+--glow-sm:0 0 6px rgba(0,255,156,0.4);
+--glow-sec:0 0 8px rgba(0,212,255,0.4);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body{
+background:var(--bg);
+color:var(--text);
+font-family:'Share Tech Mono','Courier New',monospace;
+height:100vh;
+overflow:hidden;
+display:flex;
+flex-direction:column;
+}
+
+/* Scanlines */
+body::before{
+content:'';
+position:fixed;
+inset:0;
+background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.06) 2px,rgba(0,0,0,0.06) 4px);
+pointer-events:none;
+z-index:9999;
+}
+
+/* Grid bg */
+body::after{
+content:'';
+position:fixed;
+inset:0;
+background-image:linear-gradient(rgba(0,255,156,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,156,0.025) 1px,transparent 1px);
+background-size:48px 48px;
+pointer-events:none;
+z-index:0;
+}
+
+/* ── HEADER ─────────────────────────────────────────────── */
+.header{
+background:rgba(3,12,9,0.98);
+border-bottom:1px solid var(--border);
+padding:0 24px;
+height:58px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+position:relative;
+z-index:100;
+flex-shrink:0;
+}
+.header::after{
+content:'';
+position:absolute;
+bottom:-1px;left:0;right:0;height:1px;
+background:linear-gradient(90deg,transparent 0%,var(--primary) 40%,var(--secondary) 60%,transparent 100%);
+opacity:0.6;
+}
+
+.logo{
+font-family:'Orbitron',monospace;
+font-size:1.5rem;
+font-weight:900;
+color:var(--primary);
+text-shadow:var(--glow);
+letter-spacing:6px;
+user-select:none;
+}
+.logo-sub{
+font-family:'Share Tech Mono',monospace;
+font-size:0.62rem;
+color:var(--text-dim);
+letter-spacing:3px;
+display:block;
+margin-top:1px;
+}
+
+.header-right{
+display:flex;
+align-items:center;
+gap:20px;
+font-size:0.68rem;
+color:var(--text-dim);
+}
+.header-badge{
+display:flex;
+align-items:center;
+gap:6px;
+}
+.dot{
+width:6px;height:6px;border-radius:50%;
+background:var(--primary);
+box-shadow:var(--glow-sm);
+animation:blink 2s ease-in-out infinite;
+}
+.dot.sec{background:var(--secondary);box-shadow:var(--glow-sec);}
+.dot.warn{background:var(--warn);}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.25;}}
+
+/* ── LAYOUT ─────────────────────────────────────────────── */
+.layout{
+display:flex;
+flex:1;
+overflow:hidden;
+position:relative;
+z-index:1;
+}
+
+/* ── SIDEBAR ─────────────────────────────────────────────── */
+.sidebar{
+width:270px;
+background:rgba(6,18,14,0.97);
+border-right:1px solid var(--border);
+display:flex;
+flex-direction:column;
+flex-shrink:0;
+}
+
+.sidebar-top{
+padding:12px;
+border-bottom:1px solid var(--border);
+}
+.search-wrap{position:relative;}
+.search-wrap input{
+width:100%;
+background:var(--bg);
+border:1px solid var(--border);
+color:var(--primary);
+font-family:'Share Tech Mono',monospace;
+font-size:0.78rem;
+padding:7px 10px 7px 28px;
+outline:none;
+transition:border-color 0.2s,box-shadow 0.2s;
+}
+.search-wrap input::placeholder{color:var(--text-muted);}
+.search-wrap input:focus{border-color:var(--primary);box-shadow:var(--glow-sm);}
+.search-icon{
+position:absolute;
+left:9px;top:50%;transform:translateY(-50%);
+color:var(--primary);font-size:0.75rem;pointer-events:none;
+}
+
+.cat-count{
+display:flex;
+justify-content:space-between;
+margin-top:8px;
+font-size:0.65rem;
+color:var(--text-dim);
+}
+
+.sidebar-nav{
+flex:1;
+overflow-y:auto;
+padding:6px 0 12px;
+}
+.sidebar-nav::-webkit-scrollbar{width:3px;}
+.sidebar-nav::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+
+.cat-label{
+padding:10px 12px 4px;
+font-size:0.6rem;
+color:var(--text-dim);
+letter-spacing:3px;
+text-transform:uppercase;
+display:flex;
+align-items:center;
+gap:8px;
+}
+.cat-label::before{content:'';width:8px;height:1px;background:var(--primary);}
+.cat-label::after{content:'';flex:1;height:1px;background:var(--border);}
+
+.nav-item{
+padding:5px 12px 5px 20px;
+font-size:0.77rem;
+cursor:pointer;
+color:var(--text-dim);
+border-left:2px solid transparent;
+transition:all 0.12s;
+display:flex;
+justify-content:space-between;
+align-items:center;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+}
+.nav-item:hover{color:var(--primary);border-left-color:var(--primary-dim);background:rgba(0,255,156,0.04);}
+.nav-item.active{color:var(--primary);border-left-color:var(--primary);background:rgba(0,255,156,0.07);text-shadow:0 0 8px rgba(0,255,156,0.3);}
+
+.nav-item-guide{color:var(--secondary);}
+.nav-item-guide:hover{color:var(--secondary);border-left-color:var(--secondary);background:rgba(0,212,255,0.04);}
+.nav-item-guide.active{color:var(--secondary);border-left-color:var(--secondary);background:rgba(0,212,255,0.07);}
+
+/* ── MAIN CONTENT ────────────────────────────────────────── */
+.content{
+flex:1;
+overflow-y:auto;
+padding:24px 28px;
+}
+.content::-webkit-scrollbar{width:5px;}
+.content::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+
+/* sections */
+.view{display:none;}
+.view.active{display:block;}
+
+/* ── HOME/OVERVIEW ───────────────────────────────────────── */
+.home-hero{
+text-align:center;
+padding:40px 0 32px;
+}
+.hero-title{
+font-family:'Orbitron',monospace;
+font-size:3rem;
+font-weight:900;
+color:var(--primary);
+text-shadow:var(--glow);
+letter-spacing:12px;
+}
+.hero-sub{
+font-size:0.8rem;
+color:var(--text-dim);
+letter-spacing:4px;
+margin-top:8px;
+}
+.hero-divider{
+width:300px;
+height:1px;
+background:linear-gradient(90deg,transparent,var(--primary),transparent);
+margin:16px auto;
+}
+
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+gap:12px;
+margin:24px 0;
+}
+.stat-card{
+background:var(--surface);
+border:1px solid var(--border);
+padding:16px 12px;
+text-align:center;
+transition:border-color 0.2s;
+}
+.stat-card:hover{border-color:var(--border2);}
+.stat-n{
+font-family:'Orbitron',monospace;
+font-size:1.8rem;
+color:var(--primary);
+text-shadow:var(--glow);
+}
+.stat-l{
+font-size:0.6rem;
+color:var(--text-dim);
+letter-spacing:2px;
+margin-top:4px;
+}
+
+.quick-grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+gap:10px;
+margin-top:16px;
+}
+.quick-card{
+background:var(--surface);
+border:1px solid var(--border);
+padding:14px;
+cursor:pointer;
+transition:all 0.15s;
+}
+.quick-card:hover{border-color:var(--primary-dim);background:var(--surface2);}
+.quick-card-title{
+font-family:'Orbitron',monospace;
+font-size:0.75rem;
+color:var(--primary);
+margin-bottom:4px;
+}
+.quick-card-desc{
+font-size:0.7rem;
+color:var(--text-dim);
+line-height:1.5;
+}
+
+/* ── SECTION HEADINGS ────────────────────────────────────── */
+.sec-title{
+font-family:'Orbitron',monospace;
+font-size:1.1rem;
+color:var(--primary);
+text-shadow:var(--glow-sm);
+margin-bottom:16px;
+display:flex;
+align-items:center;
+gap:12px;
+}
+.sec-title::after{
+content:'';flex:1;height:1px;
+background:linear-gradient(90deg,var(--border2),transparent);
+}
+
+/* ── COMMAND CARDS ───────────────────────────────────────── */
+.cmd-grid{display:flex;flex-direction:column;gap:8px;}
+
+.cmd-card{
+background:var(--surface);
+border:1px solid var(--border);
+transition:border-color 0.15s;
+}
+.cmd-card:hover{border-color:var(--border2);}
+.cmd-card.open{border-color:var(--primary-dim);}
+
+.cmd-header{
+padding:11px 14px;
+cursor:pointer;
+display:flex;
+align-items:center;
+gap:10px;
+background:rgba(0,0,0,0.15);
+user-select:none;
+}
+.cmd-name{
+font-family:'Orbitron',monospace;
+font-size:0.82rem;
+color:var(--primary);
+letter-spacing:1px;
+flex-shrink:0;
+}
+.cmd-short{
+font-size:0.72rem;
+color:var(--text-dim);
+flex:1;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+}
+.cmd-chevron{
+color:var(--text-muted);
+font-size:0.85rem;
+transition:transform 0.2s;
+flex-shrink:0;
+}
+.cmd-card.open .cmd-chevron{transform:rotate(90deg);color:var(--primary);}
+
+.cmd-body{
+display:none;
+padding:14px 16px;
+border-top:1px solid var(--border);
+}
+.cmd-card.open .cmd-body{display:block;}
+
+.usage-label,.opt-section-label,.details-section-label,.ex-section-label{
+font-size:0.6rem;
+color:var(--text-dim);
+letter-spacing:3px;
+text-transform:uppercase;
+margin-bottom:6px;
+margin-top:12px;
+}
+.usage-label{margin-top:0;}
+
+.usage-table{
+width:100%;
+border-collapse:collapse;
+margin-bottom:4px;
+}
+.usage-table tr:hover td{background:rgba(0,255,156,0.03);}
+.usage-table td{
+padding:4px 8px;
+font-size:0.76rem;
+vertical-align:top;
+border-bottom:1px solid rgba(15,58,46,0.4);
+}
+.usage-table td:first-child{
+color:var(--secondary);
+white-space:nowrap;
+padding-right:16px;
+}
+.usage-table td:last-child{color:var(--text-dim);}
+
+.opt-list{list-style:none;font-size:0.75rem;}
+.opt-list li{
+display:flex;
+gap:10px;
+padding:3px 0;
+border-bottom:1px solid rgba(15,58,46,0.3);
+}
+.opt-k{color:var(--warn);min-width:180px;flex-shrink:0;}
+.opt-v{color:var(--text-dim);}
+
+.detail-text{
+font-size:0.76rem;
+color:var(--text);
+line-height:1.65;
+padding:8px 10px;
+background:rgba(0,0,0,0.2);
+border-left:2px solid var(--border2);
+}
+
+.ex-list{list-style:none;}
+.ex-list li{
+font-size:0.74rem;
+padding:5px 10px;
+color:var(--primary);
+background:var(--bg2);
+border:1px solid var(--border);
+margin-bottom:4px;
+line-height:1.5;
+}
+.ex-list li::before{content:'$ ';color:var(--text-muted);}
+
+/* ── GUIDE SECTIONS ──────────────────────────────────────── */
+.guide-wrap{max-width:780px;}
+
+.guide-h1{
+font-family:'Orbitron',monospace;
+font-size:1.6rem;
+font-weight:700;
+color:var(--primary);
+text-shadow:var(--glow);
+margin-bottom:6px;
+}
+.guide-h2{
+font-family:'Orbitron',monospace;
+font-size:1rem;
+color:var(--secondary);
+margin:28px 0 10px;
+padding-bottom:6px;
+border-bottom:1px solid var(--border);
+}
+.guide-h3{
+font-size:0.85rem;
+color:var(--warn);
+margin:18px 0 8px;
+letter-spacing:1px;
+}
+.guide-p{
+font-size:0.78rem;
+color:var(--text);
+line-height:1.75;
+margin-bottom:10px;
+}
+.guide-divider{
+height:1px;
+background:linear-gradient(90deg,var(--primary-dark),transparent);
+margin:8px 0 20px;
+}
+
+.code-block{
+background:var(--bg2);
+border:1px solid var(--border);
+padding:12px 16px;
+font-family:'Share Tech Mono',monospace;
+font-size:0.77rem;
+color:var(--primary);
+margin:10px 0;
+overflow-x:auto;
+position:relative;
+white-space:pre;
+}
+.code-block .cb-label{
+position:absolute;
+top:4px;right:8px;
+font-size:0.58rem;
+color:var(--text-muted);
+letter-spacing:1px;
+}
+
+.tip-box{
+background:rgba(0,212,255,0.04);
+border:1px solid rgba(0,212,255,0.15);
+border-left:3px solid var(--secondary);
+padding:12px 14px;
+margin:12px 0;
+font-size:0.77rem;
+color:var(--text);
+line-height:1.65;
+}
+.tip-box b{color:var(--secondary);}
+.tip-label{font-size:0.6rem;color:var(--secondary);letter-spacing:2px;display:block;margin-bottom:4px;}
+
+.warn-box{
+background:rgba(255,0,60,0.04);
+border:1px solid rgba(255,0,60,0.15);
+border-left:3px solid var(--accent);
+padding:12px 14px;
+margin:12px 0;
+font-size:0.77rem;
+color:var(--text);
+line-height:1.65;
+}
+.warn-label{font-size:0.6rem;color:var(--accent);letter-spacing:2px;display:block;margin-bottom:4px;}
+
+.badge{
+display:inline-block;
+padding:2px 7px;
+font-size:0.62rem;
+letter-spacing:1px;
+text-transform:uppercase;
+margin-right:4px;
+}
+.b-sys{background:rgba(0,212,255,0.12);color:var(--secondary);}
+.b-file{background:rgba(255,183,0,0.12);color:var(--warn);}
+.b-net{background:rgba(0,255,156,0.12);color:var(--primary);}
+.b-hack{background:rgba(255,0,60,0.12);color:var(--accent);}
+.b-spy{background:rgba(184,79,255,0.12);color:var(--purple);}
+.b-script{background:rgba(0,212,255,0.08);color:var(--secondary);}
+
+.inline-cmd{
+display:inline;
+color:var(--primary);
+background:rgba(0,255,156,0.08);
+padding:1px 5px;
+border:1px solid rgba(0,255,156,0.2);
+font-size:0.75rem;
+}
+
+/* flow diagram */
+.flow-chain{
+display:flex;
+flex-wrap:wrap;
+align-items:center;
+gap:4px;
+margin:12px 0;
+}
+.flow-node{
+background:var(--surface);
+border:1px solid var(--border2);
+padding:6px 12px;
+font-size:0.73rem;
+color:var(--primary);
+white-space:nowrap;
+}
+.flow-arrow{color:var(--text-dim);font-size:0.9rem;}
+
+/* macro special commands table */
+.spec-table{width:100%;border-collapse:collapse;font-size:0.77rem;}
+.spec-table th{
+text-align:left;
+padding:5px 10px;
+border-bottom:1px solid var(--border2);
+font-size:0.62rem;
+letter-spacing:2px;
+color:var(--text-dim);
+}
+.spec-table td{
+padding:6px 10px;
+border-bottom:1px solid rgba(15,58,46,0.3);
+vertical-align:top;
+}
+.spec-table td:first-child{color:var(--warn);white-space:nowrap;}
+.spec-table td:last-child{color:var(--text-dim);line-height:1.55;}
+</style>
+</hea
+<body>
+
+<header class="header">
+  <div>
+    <div class="logo">DOOM<span>Grey Hack Hacktool // Command Reference</span></div>
+  </div>
+  <div class="header-right">
+    <div class="header-badge"><span class="dot"></span> ONLINE</div>
+    <div class="header-badge"><span class="dot sec"></span> GREY HACK</div>
+    <div class="header-badge"><span class="dot warn"></span> v4+</div>
+  </div>
+</header>
+
+<div class="layout">
+
+<div class="sidebar">
+  <div class="sidebar-top">
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input type="text" id="searchInput" placeholder="search commands...">
+    </div>
+    <div class="cat-count">
+      <span id="cmdCount">0 commands</span>
+      <span id="filteredCount"></span>
+    </div>
+  </div>
+  <nav class="sidebar-nav" id="sidebarNav"></nav>
+</div>
+
+<main class="content" id="mainContent">
+
+<!-- HOME VIEW -->
+<div class="view active" id="view-home">
+  <div class="home-hero">
+    <div class="hero-title">DOOM</div>
+    <div class="hero-sub">GREY HACK HACKTOOL — COMMAND REFERENCE</div>
+    <div class="hero-divider"></div>
+    <div class="guide-p" style="max-width:600px;margin:0 auto;text-align:center;">
+      A comprehensive reference for all Doom commands and features. Use the sidebar to browse commands by category or search for specific commands. Navigate guides for in-depth tutorials.
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-n" id="totalCmds">90+</div><div class="stat-l">COMMANDS</div></div>
+    <div class="stat-card"><div class="stat-n">8</div><div class="stat-l">CATEGORIES</div></div>
+    <div class="stat-card"><div class="stat-n">7</div><div class="stat-l">GUIDE SECTIONS</div></div>
+    <div class="stat-card"><div class="stat-n">MP</div><div class="stat-l">MULTIPLAYER ONLY</div></div>
+  </div>
+
+  <div class="sec-title">QUICK ACCESS</div>
+  <div class="quick-grid">
+    <div class="quick-card" onclick="showView('guide-install')">
+      <div class="quick-card-title">▶ GETTING STARTED</div>
+      <div class="quick-card-desc">Install Doom, set up repositories, configuration overview.</div>
+    </div>
+    <div class="quick-card" onclick="showView('guide-hacking')">
+      <div class="quick-card-title">▶ HACKING GUIDE</div>
+      <div class="quick-card-desc">hack, hacklib, bounce exploits, escalation and sessions.</div>
+    </div>
+    <div class="quick-card" onclick="showView('guide-macros')">
+      <div class="quick-card-title">▶ MACROS</div>
+      <div class="quick-card-desc">Create and run macro files, special commands, #jump, #if.</div>
+    </div>
+    <div class="quick-card" onclick="showView('guide-piped')">
+      <div class="quick-card-title">▶ PIPED COMMANDS</div>
+      <div class="quick-card-desc">Use | to chain commands, $p variable, clip and grep patterns.</div>
+    </div>
+    <div class="quick-card" onclick="showView('guide-proxy')">
+      <div class="quick-card-title">▶ PROXY SETUP</div>
+      <div class="quick-card-desc">Stay anonymous — proxy chains, dpath, and dcall management.</div>
+    </div>
+    <div class="quick-card" onclick="showView('guide-exploit')">
+      <div class="quick-card-title">▶ EXPLOIT SYSTEM</div>
+      <div class="quick-card-desc">Library scanning, shells/computers/files, zero-day payloads.</div>
+    </div>
+  </div>
+
+  <div class="sec-title" style="margin-top:28px;">EXPLOIT CHAIN</div>
+  <div class="flow-chain">
+    <div class="flow-node">proxy -c</div><div class="flow-arrow">→</div>
+    <div class="flow-node">map [ip]</div><div class="flow-arrow">→</div>
+    <div class="flow-node">hack -shell -any [ip] [port]</div><div class="flow-arrow">→</div>
+    <div class="flow-node">escalate</div><div class="flow-arrow">→</div>
+    <div class="flow-node">pass -r</div><div class="flow-arrow">→</div>
+    <div class="flow-node">clean</div>
+  </div>
+</div>
+
+<!-- COMMAND VIEW (dynamically populated) -->
+<div class="view" id="view-cmds">
+  <div class="sec-title" id="cmdViewTitle">COMMANDS</div>
+  <div class="cmd-grid" id="cmdGrid"></div>
+</div>
+
+<!-- GUIDE: GETTING STARTED -->
+<div class="view" id="view-guide-install">
+<div class="guide-wrap">
+<div class="guide-h1">GETTING STARTED</div>
+<div class="guide-divider"></div>
+
+<div class="guide-p">Doom is only available for Grey Hack <b>multiplayer</b>. It can be requested and used by anyone — new player or veteran, guild member or solo.</div>
+
+<div class="guide-h2">1. JOIN THE DISCORD</div>
+<div class="guide-p">To obtain the tool, first join the official Doom Discord server:</div>
+<div class="code-block">https://discord.gg/nF58jBwVSJ</div>
+<div class="guide-p">Open a Ticket in the server and request a personal in-game repository IP. This IP is <b>personal</b> — keep it safe and never leave it noted anywhere in-game.</div>
+
+<div class="guide-h2">2. ADD THE REPOSITORY</div>
+<div class="guide-p">Escalate to root first, then add the repository IP you received:</div>
+<div class="code-block">sudo -s
+apt-get addrepo [YOUR_REPO_IP]
+apt-get update
+apt-get install doom /root</div>
+<div class="warn-box"><div class="warn-label">CRITICAL</div>After downloading, immediately remove the repository IP from your apt source to keep it safe.</div>
+<div class="code-block">apt-get delrepo [YOUR_REPO_IP]
+apt-get update</div>
+
+<div class="guide-h2">3. ADD YOUR HACKSHOP</div>
+<div class="guide-p">Before doing anything else, add your hackshop IP (received during tutorial/email creation). Doom uses it to download and update required libraries.</div>
+<div class="code-block">apt-get addrepo [HACKSHOP_IP]
+apt-get update</div>
+
+<div class="guide-h2">4. RUN DOOM</div>
+<div class="guide-p">From a root terminal, simply run:</div>
+<div class="code-block">doom</div>
+<div class="guide-p">On first run, Doom will prompt you to set an <b>encryption key</b> — this is your password used to encrypt sensitive files including the dcall payload. Choose something memorable but secure.</div>
+<div class="guide-p">Doom will also check for <code>metaxploit.so</code> and <code>crypto.so</code> libraries and offer to download them. A <code>dfiles/</code> folder and eventually a <code>doomDB/</code> folder will be created in the same directory as the Doom binary.</div>
+
+<div class="guide-h2">5. FILES STRUCTURE</div>
+<div class="code-block">/root/
+  doom              ← the binary
+  dfiles/
+    calls/          ← custom call scripts
+    macros/         ← macro files
+    logs/           ← dtop logs
+    wifi/           ← captured wifi .cap files
+    monitor/        ← doomspy downloaded logs
+    unseclibs/      ← dlib weak libraries
+    seclibs/        ← slib secure libraries
+  doomDB/           ← library data & password dicts</div>
+
+<div class="guide-h2">6. CONFIGURATION</div>
+<div class="guide-p">Open the configuration menu with:</div>
+<div class="code-block">config</div>
+<div class="guide-p">Key settings to understand:</div>
+<div class="spec-table" style="margin-top:8px;">
+<table class="spec-table">
+<thead><tr><th>SETTING</th><th>DESCRIPTION</th></tr></thead>
+<tbody>
+<tr><td>RESUME RESULTS</td><td>When enabled, shows only one result of the same type (e.g., one guest shell instead of three). Reduces clutter.</td></tr>
+<tr><td>DATABASE LINK</td><td>Keep enabled. Doom will use and populate the database for library info and passwords.</td></tr>
+<tr><td>REMOTE DATABASE</td><td>Configure if you want multiple Doom installs to share the same database via SSH.</td></tr>
+<tr><td>METAXPLOIT / CRYPTO PATH</td><td>Recommended to move these libs to your dfiles folder rather than /lib to prevent them from being exploited.</td></tr>
+<tr><td>DCALL INJECT</td><td>If a target crashes when uploading dcall, enable this to create it on-target instead.</td></tr>
+<tr><td>DCALL NAME</td><td>Set a custom name for your dcall file to avoid conflicts with other Doom users.</td></tr>
+<tr><td>CUSTOM LOG PATH</td><td>Path to a template file used when corrupting target logs.</td></tr>
+<tr><td>INTERNAL DICT</td><td>Doom builds a brute-force dictionary at startup. Disable after running sys -ph -internal once to speed up startup.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<!-- GUIDE: PROMPTS -->
+<div class="view" id="view-guide-prompts">
+<div class="guide-wrap">
+<div class="guide-h1">PROMPTS & NAVIGATION</div>
+<div class="guide-divider"></div>
+
+<div class="guide-h2">MAIN PROMPT</div>
+<div class="guide-p">The main prompt is your home PC. It shows:</div>
+<div class="code-block">—[DOOM]—[P2]—[MAIN]—{PUBLIC_IP}—{LOCAL_IP}—[/current/path]||——[user]:~$</div>
+<div class="tip-box">
+<div class="tip-label">PROMPT FIELDS</div>
+<b>[P2]</b> — number of proxy sessions in chain<br>
+<b>PUBLIC_IP</b> — your network's public IP<br>
+<b>LOCAL_IP</b> — your device's LAN IP<br>
+<b>/current/path</b> — active path used for relative commands<br>
+<b>[user]</b> — current user
+</div>
+
+<div class="guide-h2">TARGET PROMPTS</div>
+<div class="guide-p">When connected to a target, sessions stack in a chain. The prompt shows the current target session:</div>
+<div class="code-block">—[DOOM]—[P4]—[SHELL]—{TARGET_PUB}—{TARGET_LAN}—[/root]||——[root]:~$</div>
+<div class="tip-box">
+<div class="tip-label">SESSION TYPES</div>
+<b>SHELL</b> — full access, can run scripts, hack, connect, upload binaries<br>
+<b>COMPUTER</b> — most commands available, no script execution or hacks<br>
+<b>FILE</b> — limited, can read/copy/delete/list files<br>
+<b>PCOMPUTER</b> — partial computer object (from bounce exploits)<br>
+<b>[MC]</b> — metaxploit and/or crypto cached for this session
+</div>
+
+<div class="guide-h2">NAVIGATION COMMANDS</div>
+<div class="spec-table">
+<table class="spec-table">
+<thead><tr><th>COMMAND</th><th>ACTION</th></tr></thead>
+<tbody>
+<tr><td>main</td><td>Close all sessions, return to main prompt</td></tr>
+<tr><td>back / close / 0</td><td>Close current session, go back to previous one</td></tr>
+<tr><td>backc</td><td>Close all regular target sessions, keep proxy sessions open</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="guide-h2">CONTEXT COMMANDS</div>
+<div class="guide-p">Run commands on a different target context without switching prompt:</div>
+<div class="code-block">// Run Terminal.exe on home system while on a target prompt
+>main Terminal.exe
+
+// Run on a named alias session
+>s1 open /var/system.log</div>
+<div class="guide-p">To set an alias on the current cached session:</div>
+<div class="code-block">rcache -a s1</div>
+</div>
+</div>
+
+<!-- GUIDE: EXPLOIT SYSTEM -->
+<div class="view" id="view-guide-exploit">
+<div class="guide-wrap">
+<div class="guide-h1">GAME EXPLOIT SYSTEM</div>
+<div class="guide-divider"></div>
+<div class="guide-p">The exploit system revolves around vulnerabilities in library files. Each library version has a unique set of memory/value pairs that can be exploited to get shells, computer objects, files, or trigger special effects.</div>
+
+<div class="guide-h2">LIBRARY SCANNING</div>
+<div class="guide-p">Scanning discovers the memory/value pairs of a library version. Doom saves all data to doomDB — subsequent interactions skip the scan entirely. Doom scans automatically when it first interacts with an unknown library version.</div>
+<div class="tip-box"><div class="tip-label">TIP</div>Use <span class="inline-cmd">libdata [libname]</span> to view saved scan data. Use <span class="inline-cmd">scan -u</span> to force an update of saved data.</div>
+
+<div class="guide-h2">SESSION TYPES</div>
+<div class="spec-table">
+<table class="spec-table">
+<thead><tr><th>TYPE</th><th>CAPABILITIES</th></tr></thead>
+<tbody>
+<tr><td>SHELL</td><td>Full access — scripts, hacking, uploading binaries, connecting to other targets, escalating privileges. Highest utility.</td></tr>
+<tr><td>COMPUTER</td><td>Read/write files, interact with system, change permissions. Cannot run scripts or perform new hacks.</td></tr>
+<tr><td>FILE</td><td>Read, copy, delete, list file system. Most limited but still useful for data extraction.</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="guide-h2">BOUNCE EXPLOIT</div>
+<div class="guide-p">A bounce exploit occurs when a router library vulnerability returns a COMPUTER object. By passing a <code>[lanIP]</code> as an extra parameter to hack/hacklib, the returned computer object belongs to that LAN device instead of the router itself — allowing you to target machines with no open ports.</div>
+<div class="code-block">// Attack router and bounce to target at 192.168.1.2
+hack 170.110.50.20 0 192.168.1.2
+// or using hacklib from inside the network
+hacklib kernel_router.so 192.168.1.2</div>
+<div class="tip-box"><div class="tip-label">DVAR TIP</div>dvar -a bounce hacklib -computer -any<br>// Then use: bounce 192.168.0.2</div>
+
+<div class="guide-h3">Finding a Bounce Library</div>
+<div class="guide-p">1. Connect to a proxy via <span class="inline-cmd">proxy -q</span><br>2. Run <span class="inline-cmd">map</span> to find a LAN IP (e.g. 192.168.1.2)<br>3. Run <span class="inline-cmd">hacklib 192.168.1.2</span> and try each library<br>4. Any COMPUTER result with that LAN IP = bounce exploit<br>5. Download the lib with <span class="inline-cmd">dlib -a /lib/[libname]</span></div>
+
+<div class="guide-h2">ZERO-DAY EXPLOITS (PAYLOAD)</div>
+<div class="guide-p">Zero-day exploits use debug mode credentials to access a library's internals and extract data through payload vulnerabilities. Use <span class="inline-cmd">debuglib</span> to scan for zero-days and <span class="inline-cmd">payload</span> to exploit them. Credentials are managed with <span class="inline-cmd">zcred</span>.</div>
+<div class="warn-box"><div class="warn-label">WARNING</div>Using debuglib remotely on a PC can leave logs. Use it from a proxy to avoid traces.</div>
+</div>
+</div>
+
+<!-- GUIDE: HACKING -->
+<div class="view" id="view-guide-hacking">
+<div class="guide-wrap">
+<div class="guide-h1">HACKING GUIDE</div>
+<div class="guide-divider"></div>
+
+<div class="guide-h2">HACK COMMAND</div>
+<div class="guide-p">Hack performs remote attacks using an IP and port. When using public IP, the router forwards the connection to the service. From inside a network you can use LAN IPs directly.</div>
+<div class="code-block">// Full attack on all vulnerabilities (recommended first time)
+hack 170.110.50.20 0
+
+// Attack a specific service port
+hack 170.110.50.20 22
+
+// Use domain URL
+hack www.site.com 0
+
+// Bounce to internal target
+hack 170.110.50.20 0 192.168.1.2
+
+// Auto-connect to first root shell found
+hack -shell -root 170.110.50.20 0
+
+// Auto-connect to any shell
+hack -shell -any 170.110.50.20 0
+
+// Scan and list entry points
+hack -l 170.110.50.20</div>
+
+<div class="tip-box"><div class="tip-label">DVAR TIP</div>dvar -a shell hack -shell -any<br>// Then use: shell 115.124.207.47 22</div>
+
+<div class="guide-h2">HACKLIB COMMAND</div>
+<div class="guide-p">Hacklib attacks library files directly — it can only be used from an existing shell session on the target.</div>
+<div class="code-block">// Attack all vulnerabilities (selection menu)
+hacklib
+
+// Attack specific library
+hacklib libssh.so
+
+// Direct attack on specific vulnerability
+hacklib -l
+
+// Auto-connect to root computer via bounce
+hacklib -computer -root init.so 192.168.1.2</div>
+
+<div class="guide-h2">ESCALATE PRIVILEGES</div>
+<div class="guide-p">From a guest shell, <span class="inline-cmd">escalate</span> uploads dcall and attempts a dictionary brute-force attack on the root password. Works reliably against NPCs; less effective against players with strong passwords.</div>
+<div class="code-block">// From guest shell
+escalate</div>
+<div class="guide-p">If you only have COMPUTER or FILE access, try extracting data first:</div>
+<div class="code-block">pass -u    // user passwords
+pass -m    // email credentials
+pass -b    // bank credentials</div>
+
+<div class="guide-h2">REVERSE SHELL SOCIAL ENGINEERING</div>
+<div class="guide-p">For targets with no open ports, use the rshell + funny game email approach:</div>
+<div class="guide-p">1. Get target's email via bounce exploit + <span class="inline-cmd">pass -m</span><br>
+2. Install rshell server on a router: <span class="inline-cmd">rshell -i</span> then <span class="inline-cmd">rshell -s</span><br>
+3. Login to an employee email: <span class="inline-cmd">mail -m [email] [passwd]</span><br>
+4. Send a funny game email to target with your rshell server IP + port 1222<br>
+5. When target runs the game, check: <span class="inline-cmd">rshell -l</span><br>
+6. Connect to the new rshell session</div>
+
+<div class="guide-h2">DLIB — LIBRARY MANAGEMENT</div>
+<div class="guide-p">Store and quickly upload weak libraries to targets for exploitation:</div>
+<div class="code-block">dlib -a /lib/init.so   // add library to dlib store
+dlib -l                // list stored libs
+dlib -u                // upload menu (select lib to upload to target)
+dlib -u init.so        // upload specific lib</div>
+</div>
+</div>
+
+<!-- GUIDE: MACROS -->
+<div class="view" id="view-guide-macros">
+<div class="guide-wrap">
+<div class="guide-h1">MACROS</div>
+<div class="guide-divider"></div>
+<div class="guide-p">Macros are text files stored in <code>../dfiles/macros/</code> where each line is a Doom command. Run them with <code>@macroname</code>.</div>
+
+<div class="guide-h2">CREATING MACROS</div>
+<div class="code-block">// Create a new macro file
+macro -n mymacro
+
+// Or open an existing one
+macro -o mymacro
+
+// List all macros
+macro -l</div>
+
+<div class="guide-h2">MACRO PARAMS</div>
+<div class="guide-p">Pass parameters when running a macro. Inside the file, use <code>$1</code>, <code>$2</code>, etc:</div>
+<div class="code-block">// Macro file: attack.macro
+hack -shell -any $1 0
+escalate
+dfile /var/$2 /root
+echo File $2 downloaded from $1
+
+// Run it
+@attack 170.150.55.20 system.log</div>
+
+<div class="guide-h2">MACRO BREAKS</div>
+<div class="spec-table">
+<table class="spec-table">
+<thead><tr><th>TYPE</th><th>DESCRIPTION</th></tr></thead>
+<tbody>
+<tr><td>Auto Break</td><td>Triggered if a session command (hack, hacklib, escalate, rshell, rcache) fails. Prevents commands running on wrong target.</td></tr>
+<tr><td>Manual Break</td><td>Triggered by the <span class="inline-cmd">break</span> command. Useful in conditional logic.</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="guide-h2">SPECIAL MACRO COMMANDS</div>
+<div class="spec-table">
+<table class="spec-table">
+<thead><tr><th>COMMAND</th><th>DESCRIPTION</th></tr></thead>
+<tbody>
+<tr><td>#jump</td><td>Creates a jump point. On auto break, macro jumps here instead of stopping. Auto break also calls <span class="inline-cmd">backc</span> first.</td></tr>
+<tr><td>#onbreak</td><td>Marks the jump point for manual <span class="inline-cmd">break</span> command (without auto backc).</td></tr>
+<tr><td>#command</td><td>Prefix any command with # — it only executes IF the command directly before it caused an auto break. Ignored otherwise.</td></tr>
+<tr><td>#hold</td><td>Pauses macro and prompts user to continue or stop. Useful when you need to take a manual action mid-macro.</td></tr>
+<tr><td>#if ... #endif</td><td>Block-style conditional. Commands inside only execute if condition is true.</td></tr>
+<tr><td>#loop N ... #endloop</td><td>Block-style loop. Use $n for index. Cleaner than the inline loop command for complex iterations.</td></tr>
+<tr><td>#macro name ... #endmacro</td><td>Define an inline macro callable within the same file. Use 1$, 2$ for params.</td></tr>
+<tr><td>// comment</td><td>Lines starting with // are ignored (comments).</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="guide-h2">FULL EXAMPLE</div>
+<div class="code-block">// Try root shell first, fall back to any shell
+hack -shell -root 170.110.50.20 0
+#hack -shell -any 170.110.50.20 0
+escalate
+dfile /home/user/file.txt /root
+rm /home/user/file.txt
+clean
+#jump
+proxy -clean</div>
+</div>
+</div>
+
+<!-- GUIDE: PIPED COMMANDS -->
+<div class="view" id="view-guide-piped">
+<div class="guide-wrap">
+<div class="guide-h1">PIPED COMMANDS</div>
+<div class="guide-divider"></div>
+<div class="guide-p">Chain commands with <code>|</code> to pass the response of one command to the next. The piped response is always a string accessible via <code>$p</code>.</div>
+
+<div class="code-block">// Basic pipe
+cat /etc/passwd | echo $p
+
+// Save response to clip variable
+map 170.120.55.10 | clip m $p
+
+// Use saved variable later
+echo $m</div>
+
+<div class="tip-box"><div class="tip-label">NOTES</div>
+• If a piped command fails, there is no response and the next command using $p will not execute<br>
+• When piped, some commands behave differently (suppress their normal output)<br>
+• Piped response is always a string
+</div>
+
+<div class="guide-h2">CLIP COMMAND</div>
+<div class="guide-p">Store values in single-letter variables (a-z, excluding $p and $n which are reserved):</div>
+<div class="code-block">clip a MY TEXT HERE       // store text
+clip a -a MORE TEXT       // append to existing
+clip a -s MORE TEXT       // append with space
+clip a -l MORE TEXT       // append on new line
+clip -clear               // clear all variables
+clip -null a b c          // set a, b, c to null
+echo $a                   // use the variable</div>
+
+<div class="guide-h2">GREP FOR DATA EXTRACTION</div>
+<div class="code-block">// Find first line containing pattern
+grep -n1 root /etc/passwd
+
+// Return first line matching pattern, pipe it
+map | grep -n1 *192.168.0.2 -v $p | echo ip: $p
+
+// Return line by number
+grep -i 1 /etc/passwd      // first line
+grep -i -1 /etc/passwd     // last line
+
+// Count lines
+grep -c /etc/passwd</div>
+
+<div class="guide-h2">IF COMMAND</div>
+<div class="code-block">if $a : echo not null
+if $a == true : echo is true
+if $a != null : echo a is NOT NULL ? echo a IS NULL
+if $a == blue : @mymacro ? echo not blue</div>
+
+<div class="guide-h2">PROXY CHAIN TIP</div>
+<div class="guide-p">Use piped commands and dvars to create powerful one-liners:</div>
+<div class="code-block">// Connect to 2 saved + 2 quick proxies
+dvar -a pcon proxy -c 2 && proxy -q && proxy -q
+// Run: pcon</div>
+</div>
+</div>
+
+<!-- GUIDE: PROXY -->
+<div class="view" id="view-guide-proxy">
+<div class="guide-wrap">
+<div class="guide-h1">PROXY & DCALL</div>
+<div class="guide-divider"></div>
+
+<div class="warn-box"><div class="warn-label">IMPORTANT</div>Before doing any hacking, ALWAYS use proxies to protect yourself and stay hidden. Skip this and risk getting hacked back by players.</div>
+
+<div class="guide-h2">PROXY SETUP</div>
+<div class="guide-p">Doom uses random NPC routers as proxies — they're easy to hack and their admins don't trigger traces from router logs.</div>
+<div class="code-block">// Add 4 proxies to your saved list (max 10)
+proxy -a 4
+
+// Connect to all saved proxies
+proxy -c
+
+// Connect to 2 saved proxies
+proxy -c 2
+
+// Connect to a quick random proxy (not saved)
+proxy -q
+
+// Restore last proxy sessions from cache
+proxy -p
+
+// Clean logs and doom files from proxy chain
+proxy -clean</div>
+
+<div class="tip-box"><div class="tip-label">RECOMMENDED ROUTINE</div>
+proxy -c 2   (2 saved proxies)<br>
+proxy -q     (random quick proxy)<br>
+proxy -q     (another random quick proxy)<br><br>
+This gives you a 4-hop chain. The end proxies are random and won't be reused, making monitoring extremely difficult.
+</div>
+
+<div class="guide-h2">DCALL</div>
+<div class="guide-p">dcall is Doom's payload file — unique to your installation. Many shell commands require it to be uploaded to the target first. By default, Doom uploads it to <code>/home/guest</code> automatically.</div>
+<div class="guide-p">When <code>/home/guest</code> doesn't have write permission or doesn't exist (common with PvP targets), you need to configure a custom upload path using <span class="inline-cmd">dpath</span>:</div>
+<div class="code-block">// Add a custom path for dcall upload
+dpath -a /tmp
+
+// List and activate a saved path
+dpath -l
+
+// Or activate directly
+dpath -l /tmp</div>
+<div class="guide-p">Alternatively, use <span class="inline-cmd">inject -dcall</span> to create dcall on-target instead of uploading it, or enable the DCALL INJECT option in config.</div>
+
+<div class="guide-h2">RCACHE — SESSION CACHE</div>
+<div class="guide-p">Every shell/computer/file session you obtain is cached. Use rcache to reconnect or set aliases:</div>
+<div class="code-block">rcache              // list all cached sessions
+rcache -a s1        // alias current session as 's1'
+rcache s1           // reconnect to 's1'
+rcache -clear       // clear all cached sessions
+rcache -s           // list currently connected sessions</div>
+</div>
+</div>
+
+</main>
+</div>
+
+<script>
+const CMDS = {
+"apt-get":{cat:"system",short:"Install and manage programs",usage:[["apt-get install [program] [(opt) path]","Install program"],["apt-get search [program]","Search program"],["apt-get show [repo_address]","Show repository"],["apt-get addrepo [repo_address]","Add repository"],["apt-get delrepo [repo_address]","Delete repository"],["apt-get update","Update repositories"],["apt-get upgrade","Upgrade installed programs"],["apt-get [-m]","Install metaxploit.so"],["apt-get [-c]","Install crypto.so"],["apt-get [-mc]","Install metaxploit.so and crypto.so"]],opts:[["[(opt) path]","Optional installation path"]],detail:"Apt-get downloads programs from repositories. Use addrepo/update to add a new source.",examples:["apt-get addrepo 170.110.50.20","apt-get update","apt-get install doom /root","apt-get -m"]},
+"break":{cat:"scripting",short:"Cause a macro break",usage:[["break","Cause a macro break, jump to next #onbreak"],["break [-jump]","Cause a macro break or jump to next #jump"]],detail:"Break causes a manual macro break. Unlike auto breaks, it jumps to the next #onbreak point and will NOT run an auto backc command. If no #onbreak exists, it jumps to next #jump. Use -jump to jump directly to #jump.",examples:["if $a : echo $a ? break","if $a : echo $a ? break -jump"]},
+"call":{cat:"scripting",short:"Execute custom scripts",usage:[["call [script_name] params...","Call a script from host system"],["call [-r] [script_name] params...","Upload and call script from target system"]],opts:[["callObject","Get target object (shell, computer, file, or map with pcomputer/pfile)"],["callMetax","Target MetaxploitLib if already cached"],["callResponse","Send back string response for piped commands"],["PIPED RESPONSE","Script saves response to get_custom_object.callResponse"]],detail:"Call launches custom scripts from ../dfiles/calls folder. Objects are exposed on get_custom_object for script customization.",examples:["call myscript param1 param2","call -r myscript param1 param2"]},
+"cat":{cat:"files",short:"Print file contents",usage:[["cat [(opt) -l] [file path]","Print content of a file"],["cat [(opt) -l] [-f] [folder path]","Print content of all files in a folder"]],opts:[["(opt) -l","Read file from host PC"],["PIPED RESPONSE","Returns file content"]],detail:"Cat prints file contents. Read permission is needed.",examples:["cat /etc/passwd","cat -f /etc","cat -l /home/user/file.txt"]},
+"cd":{cat:"files",short:"Change current directory",usage:[["cd [folder path]","Change current path on current system"]],detail:"Cd changes the current working path on the local or remote target.",examples:["cd /home","cd myFolder","cd .."]},
+"cdfile":{cat:"files",short:"Check if a path exists",usage:[["cdfile [path]","Check if a path exists"]],opts:[["PIPED RESPONSE","Returns 'true' or 'false'"]],detail:"Cdfile checks if a path exists and can select a file/folder when using partial computer sessions where ls is unavailable.",examples:["cdfile /lib/init.so"]},
+"check":{cat:"system",short:"Validate current session",usage:[["check","Checks if current session is still valid"]],detail:"Check performs a secure target session validation to avoid crashes from invalid sessions.",examples:["check"]},
+"chgrp":{cat:"system",short:"Change group of a file",usage:[["chgrp [(opt) -R] [group] [path]","Change group of file or folder"]],opts:[["(opt) -R","Apply recursively to all files and subfolders"]],detail:"Chgrp changes the group owner of a file or folder.",examples:["chgrp root /home/user/file.txt","chgrp -R root /home"]},
+"chmod":{cat:"system",short:"Change file permissions",usage:[["chmod [(opt) -R] [u,g,o+wrx] [path]","Change permissions of a file or folder"]],opts:[["(opt) -R","Apply recursively to all files and subfolders"],["r/w/x","Read, write, execute permissions"],["u/g/o","User, group, other"]],detail:"Chmod changes permissions of files and folders. Permissions: r (read), w (write), x (run). Targets: u (user), g (group), o (other). Root has total permission on all files.",examples:["chmod u+wrx /home/user/file.txt","chmod -R ugo-wrx /home"]},
+"chown":{cat:"system",short:"Change owner of a file",usage:[["chown [(opt) -R] [owner] [path]","Change owner of file or folder"]],opts:[["(opt) -R","Apply recursively"]],detail:"Chown changes the owner of files or folders.",examples:["chown root /home/user/file.txt","chown -R root /home"]},
+"cipher":{cat:"crypto",short:"Decipher hashed passwords",usage:[["cipher [hash]","Decipher a hashed password"],["cipher [name:hash]","Decipher a hashed password with username"],["cipher [(opt) -r] [file path]","Decipher hashed passwords in a file"]],opts:[["(opt) -r","Only decipher root password from file"],["PIPED RESPONSE","Returns deciphered password"]],detail:"Decipher password hashes. All deciphered passwords are saved to doomDB for dictionary attacks and quick future lookups.",examples:["cipher 5f4dcc3b5aa765d61d8327deb882cf99","cipher root:5f4dcc3b5aa765d61d8327deb882cf99","cipher /etc/passwd"]},
+"clean":{cat:"attack",short:"Remove traces and payload files",usage:[["clean","Corrupt log and clean doom payload files on current system"],["clean [-c]","Corrupt log and clean all connected systems"],["clean [-r]","Corrupt log and clean all cached systems"],["clean [-r] [public_ip]","Clean all systems in specified network"]],detail:"Clean removes your traces on targets — deletes files uploaded by doom and corrupts logs.",examples:["clean","clean -c","clean -r 170.110.50.20"]},
+"cleanbank":{cat:"attack",short:"Corrupt bank transaction logs",usage:[["cleanbank","Override bank transactions log with corrupted text"]],detail:"Cleanbank corrupts /server/transactions.log on the target with a configured template file.",examples:["cleanbank"]},
+"cleanlog":{cat:"attack",short:"Corrupt target log file",usage:[["cleanlog","Override log file with corrupted text"]],detail:"Cleanlog corrupts target logs or replaces home PC log with an empty log from a configured path.",examples:["cleanlog"]},
+"clear":{cat:"system",short:"Clear the terminal screen",usage:[["clear","Clear the terminal screen"]],detail:"Clears all text from the current terminal.",examples:["clear"]},
+"clip":{cat:"scripting",short:"Save a value to a variable",usage:[["clip [letter] [(opt) -a/-s/-l] [value...]","Save a value in a variable"],["clip [-clear] [(opt) letter(s)]","Clear all or specific variables"],["clip [-null] [(opt) letter(s)]","Set null to all or specific variables"]],opts:[["[letter]","Single letter variable (a-z, excluding p/n)"],["(opt) -a/-s/-l","-a append, -s append with space, -l append on new line"],["$letter","Use $a, $b... to pass variable to a command"],["specials","$ip, $lan, $user are special read-only variables"]],detail:"Clip assigns a letter as a variable. Variables persist for the entire session.",examples:["clip d 170.110.50.20","clip a -a more text","clip -clear","clip -null a b c"]},
+"colors":{cat:"system",short:"Configure custom colors",usage:[["colors","Open custom color configuration"]],detail:"Use Colors to configure Doom's display colors.",examples:["colors"]},
+"compile":{cat:"system",short:"Compile a source file",usage:[["compile [file path] [destiny path]","Compile source code to binary"]],detail:"Compile converts a .src source code file into a binary file at the destination folder.",examples:["compile /root/script.src /root"]},
+"corrupt":{cat:"attack",short:"Delete target boot files",usage:[["corrupt [(opt) -y]","Delete target boot files for Corrupt Data missions"]],opts:[["[(opt) -y","Auto-accept confirmation"]],detail:"Most used on Corrupt Data missions. Deletes target boot files.",examples:["corrupt","corrupt -y"]},
+"cp":{cat:"files",short:"Copy a file",usage:[["cp [file path] [destiny path]","Copy file to destination path"]],detail:"Cp copies files to a different folder.",examples:["cp /root/myprogram /home/guest"]},
+"crypto":{cat:"crypto",short:"Manage target crypto library",usage:[["crypto [-a]","Obtain and cache target cryptoLib with dcall"],["crypto [-r]","Remove target cryptoLib from cache"],["crypto [-c] [file_path]","Check if a file is encrypted"]],detail:"Crypto manages the target's cryptoLib object in cache for future encryption/decryption commands.",examples:["crypto -a","crypto -r","crypto -c text.txt"]},
+"debuglib":{cat:"exploit",short:"Interact with lib in debug mode",usage:[["debuglib [ip] [port]","Obtain remote library in debug mode"],["debuglib [lib_path]","Obtain local library in debug mode"],["debuglib [-pa] [(opt) path] [User:Password]","Auto patch all local libs in /lib"],["debuglib [-ta] [(opt) path] [User:Password]","Auto test all local libs in /lib"],["debuglib [-c] [lib_path]","Check if a local lib is patched"],["debuglib [-c] [ip] [port]","Check if a remote lib is patched"],["debuglib [-ca] [(opt) path/public_IP]","Check all remote libs"]],opts:[["(opt) path","Folder path, -slib or -dlib. Default: /lib"]],detail:"Debuglib interacts with a lib in debug mode. Active rumor credentials required. Can scan for zero-day exploits, patch, or test libraries. IMPORTANT: Using remotely on a PC can leave logs — use from a proxy.",examples:["debuglib /lib/init.so","debuglib 170.110.50.20 0","debuglib -pa User:Password","debuglib -ta User:Password","debuglib -c 170.110.50.20 0","debuglib -ca 170.110.50.20"]},
+"dec":{cat:"crypto",short:"Decrypt an encrypted file",usage:[["dec [file/folder path] [passwd] [(opt) -l]","Decrypt an encrypted file"],["dec [-b] [file_path] [(opt) -l]","Brute force decrypt a file"]],opts:[["(opt) -l","Run on home system"],["folder_path","If folder, decrypts all files inside"]],detail:"Dec decrypts files using crypto.so. You need the password used to encrypt the file. Use -b for brute force decryption.",examples:["dec targetfile.txt 1234","dec myfile.txt 1234 -l","dec -b myfile.txt"]},
+"dfile":{cat:"files",short:"Download file from target",usage:[["dfile [file/folder path] [(opt) destination path]","Download a file or folder from target system"]],opts:[["(opt) destination path","Default is host current path"],["-f","If folder, add -f as last param to ignore subfolders"],["PIPED_RESPONSE","Returns file full destination path"]],detail:"Dfile downloads a file using shell connections from target PC. Path can be full path, filename from current path, or a custom path key from 'dir' command.",examples:["dfile /root/file.txt /home/user","dfile /root/file.txt","dfile pathkey /home/guest","dfile /home/user/MyFolder /home/guest"]},
+"dir":{cat:"files",short:"Manage custom path variables",usage:[["dir [-l]","List custom path variables"],["dir [-a] [key] [full_path]","Save a path with a key"],["dir [-r] [key]","Delete a saved path variable"]],detail:"Dir manages custom path shortcuts. Store full paths with a single key for use in any command that accepts a path parameter.",examples:["dir -l","dir -a log /var/system.log","dir -r log"]},
+"dkill":{cat:"system",short:"Stop doom internal processes",usage:[["dkill [doom_proc]","Stop all doom processes by name"],["dkill [doom pid]","Stop specific doom process by PID"]],opts:[["hdtop","dtop running on host PC"],["tdtop","All dtop running on targets"],["sshb","All SSH brute running"],["mailb","All mail brute running"],["maild","All mail domain running"],["hspym","doomspy -m on host PC"],["tspym","All doomspy -m on target PCs"],["spyl","All doomspy -l running"],["hspyr","doomspy -lr on host PC"],["tspyr","doomspy -lr on target PC"],["hrshell","rshell -m on host PC"],["trshell","rshell -m on target PC"],["ddosd","All doomdos -d running"]],detail:"Dkill kills Doom internal processes without stopping the entire script.",examples:["dkill hdtop","dkill 1245","dkill sshb"]},
+"dlib":{cat:"exploit",short:"Manage unsecured library store",usage:[["dlib [-l]","List stored unsecured libs"],["dlib [-a] [file path]","Copy a lib to dfiles"],["dlib [-u] [(opt) lib_name]","Upload unsecured lib to target"],["dlib [-r] [lib_name]","Delete library from unseclib folder"]],detail:"Dlib stores and quickly uploads weak libraries to targets. Libraries are stored in /dfiles/unseclibs/. Useful for uploading bounce exploit libs.",examples:["dlib -l","dlib -a /lib/net.so","dlib -u","dlib -u init.so","dlib -r init.so"]},
+"dmon":{cat:"intel",short:"Monitor file paths for changes",usage:[["dmon [file paths...]","Monitor files/paths for changes"]],opts:[["file/folder paths...","One or several full paths"],["PIPED RESPONSE","Returns 'true' if triggered"]],detail:"Dmon monitors one or several paths for changes, permission changes, deletions, or creation. Can trigger piped commands when a change is detected.",examples:["dmon /var/system.log | if $p == true : wifi -j essid"]},
+"doom":{cat:"system",short:"Open a new doom instance",usage:[["doom [(opt) command]","Open a new doom instance on new Terminal"]],opts:[["(opt) command","Run single command on startup"],["piped","Use || instead of | for piped commands in the command"],["quick macro","Use && instead of & for quick macro commands"]],detail:"Opens a new instance of Doom on a new Terminal window. The new instance goes directly to input prompt, skipping startup checks.",examples:["doom","doom config","doom @mymacro"]},
+"doomdos":{cat:"attack",short:"Flood target system",usage:[["doomdos [-f] [number] [(opt file_path)]","Flood target filesystem with files"],["doomdos [-fh] [number] [(opt file_path)]","Flood target /home with files"],["doomdos [-r] [number] [ip] [port] [(opt) proc_name]","Create rshell connections to flood RAM"],["doomdos [-d]","Degrade target hardware health"]],opts:[["[number]","Number of files (1-250) or procs (1-120)"],["[(opt file_path)]","Template file. Default from CONFIG"],["[(opt) proc_name]","Proc name. Default: rshell_client"]],detail:"Doomdos floods target systems. Create files to fill the filesystem, start processes to exhaust RAM, or degrade hardware health.",examples:["doomdos -f 50","doomdos -f 50 /root/dos.txt","doomdos -fh 50","doomdos -r 5 170.110.50.20 1222 Terminal","doomdos -d"]},
+"doomguy":{cat:"scripting",short:"Run greyscript code at runtime",usage:[["doomguy [-c] [code...]","Run inline greyscript code"],["doomguy [-i]","Continuous input mode to run code"],["doomguy [-f] [file_path]","Run code from file"]],opts:[["code","Inline greyscript code using ; as line separator"],["object","Use same var names as call scripts to access target objects"],["Strings","Use single quotes for string values: var = 'value'"],["PIPED_RESPONSE","Return a string as response"]],detail:"Doomguy is a greyscript interpreter to run greyscript code at runtime, without compiling new binaries.",examples:["doomguy router = get_router ; print(router)","doomguy -i","doomguy -f code.src"]},
+"doomsday":{cat:"attack",short:"Full network attack",usage:[["doomsday","Local vector attack — obtain all passwords, mails, banks"],["doomsday [public_ip]","Remote vector attack on network router"],["doomsday [-m] [(opt) public_ip]","Local/remote attack — mail accounts only"],["doomsday [-b] [(opt) public_ip]","Local/remote attack — bank accounts only"],["doomsday [-u] [(opt) public_ip]","Local/remote attack — network usernames only"],["doomsday [-c] [(opt) public_ip] [(opt) command]","Run a command on all targets in network"],["doomsday [-rshell]","Run a command on all rshells on a server"],["doomsday [-rcache] [(opt) public_ip] [(opt) command]","Use cached targets to run a command"],["doomsday [-clear]","Clear doomsday cache for current network"]],opts:[["[(opt) public_ip]","Remote attack target"],["[(opt) command]","Optional command to run on all targets"],["PIPED RESPONSE","Returns pass/mail/bank data print"]],detail:"Doomsday attacks the entire network using a bounce vector. For best results, use locally on a router with a root bounce exploit lib uploaded. Remotely, success is lower.",examples:["doomsday","doomsday 170.110.50.20","doomsday -m","doomsday -b","doomsday -c","doomsday -rshell"]},
+"doomshell":{cat:"network",short:"Create a reverse shell connection",usage:[["doomshell [public IP] [port] [(opt) procName]","Start reverse shell connection to rshell server"]],opts:[["(opt) ProcName","Process name. Default: doom"]],detail:"Doomshell creates a reverse shell connection from the target to the specified rshell server.",examples:["doomshell 170.110.50.20 1222","doomshell 170.110.50.20 1222 Terminal"]},
+"doomspy":{cat:"intel",short:"Monitor connections and networks",usage:[["doomspy [-m]","Monitor rshell connections for new log breaches"],["doomspy [-d]","Download logs from monitored systems"],["doomspy [-da]","Download all non-corrupted logs without menu"],["doomspy [-rhttp] [log_path]","Upload log file to all rshell http servers"],["doomspy [-l] [(opt) -p]","Monitor network for new connected targets"],["doomspy [-l] [public_ip] [(opt) -p]","Remote monitor for new targets"],["doomspy [-lp] [lan_ip]","Monitor specific LAN IP for when it connects"],["doomspy [-lr]","Monitor rshell server and auto-connect to new connection"],["doomspy [-p]","Bounce attack network to detect player computer"],["doomspy [-p] [public_ip]","Remote bounce to detect player computer"],["doomspy [-t] [(opt) -p]","Monitor current target log"]],opts:[["(opt) -p","Stop and return 'true' or lanIP as piped response when triggered"]],detail:"Doomspy monitors connections and networks. -m monitors rshell connections and downloads logs automatically. -l watches for new devices connecting to a network.",examples:["doomspy -m","doomspy -d","doomspy -rhttp /root/system.log","doomspy -l","doomspy -l 170.110.50.20","doomspy -lr","doomspy -p","doomspy -p 170.110.50.20"]},
+"doomware":{cat:"attack",short:"Create malware binaries",usage:[["doomware -m","Open doomware creation menu"],["doomware [-rshell] [pub_ip] [port] [proc_name] [(opt) path]","Create rshell malware"],["doomware [-ps] [procs_names] [(opt) path]","Create altered ps binary that hides procs"]],opts:[["[(opt) path]","Optional path. Default: current path"],["[procs_names]","Procs to hide. Pattern: name:name:name"]],detail:"Doomware creates malware binaries to deploy against targets.",examples:["doomware -m","doomware -rshell 170.110.50.20 1222 Terminal /root","doomware -ps rshell:doomshell /root"]},
+"dpath":{cat:"exploit",short:"Manage dcall upload paths",usage:[["dpath [-l]","List saved custom payload paths"],["dpath [-l] [dpath]","Activate or deactivate a saved path"],["dpath [-a] [path]","Add a custom payload path"],["dpath [-r] [path]","Delete a saved payload path"]],detail:"Manages paths Doom uses to upload dcall payload. Default is /home/guest. Use when target lacks write-accessible /home/guest.",examples:["dpath -l","dpath -l /root","dpath -a /home"]},
+"dtop":{cat:"intel",short:"Monitor system processes in real-time",usage:[["dtop","Monitor system procs and hardware usage real-time"],["dtop [-l] [(opt) number or -all]","Print home dtop logs"],["dtop [-lt] [(opt) number or -all]","Print target dtop logs"],["dtop [-cl]","Clear home dtop log"],["dtop [-ct]","Clear target dtop log"]],opts:[["[(opt) number or -all]","Number for last n entries, or -all. Default: 20"]],detail:"Dtop monitors system processes, hardware usage, and file changes in real-time. Logs saved to ../dfiles/logs/",examples:["dtop","dtop -l","dtop -l 50","dtop -cl"]},
+"dvar":{cat:"scripting",short:"Create custom command aliases",usage:[["dvar [-l]","List custom command variables"],["dvar [-a] [var] [cmd params...]","Save a command as a variable"],["dvar [-r] [key]","Delete a saved custom variable"],["dvar [-p]","Parse dvars as a macro"]],opts:[["PIPED RESPONSE","-p returns a quick macro with dvar -a commands for all dvars"]],detail:"Dvar creates custom command shortcuts with fixed params. Useful for frequently used commands with parameters.",examples:["dvar -l","dvar -a cl cleanlog","dvar -a cc clean -c","dvar -a shell hack -shell -any","dvar -a bounce hacklib -computer -any"]},
+"echo":{cat:"scripting",short:"Print text or file content",usage:[["echo [text...]","Print text"],["echo [-f] [file path]","Print file content"]],detail:"Echo prints text or file content. Unlike cat, it does not add header or labels.",examples:["echo This is my print...","echo $a","echo -f file.txt"]},
+"edit":{cat:"files",short:"Edit file content",usage:[["edit [file path]","Edit file content via input"],["edit [file path] [text] (opt)","Edit file content with text"],["edit [file path] [-f] [source_file_path] (opt)","Edit file content with source file"]],opts:[["(opt) -e","Append to end of file"],["(opt) -b","Append to beginning of file"],["(opt) -l[number]","Append to specific line"]],detail:"Edit makes edits to text files. Can override all content or append at beginning, end, or specific line.",examples:["edit file.txt My text here","edit file.txt -f myfile.txt","edit file.txt -e","edit file.txt My text here -l3"]},
+"editl":{cat:"files",short:"Edit file on host system",usage:[["editl [file path]","Edit host file via input"],["editl [file path] [text] (opt)","Edit host file with text"],["editl [file path] [-f] [source_file_path] (opt)","Edit host file with source"]],opts:[["(opt) -e","Append to end"],["(opt) -b","Append to beginning"],["(opt) -l[number]","Append to specific line"]],detail:"Same as edit but operates on the host (local) system files.",examples:["editl file.txt My text here","editl file.txt -f myfile.txt","editl file.txt My text here -l3"]},
+"enc":{cat:"crypto",short:"Encrypt a file",usage:[["enc [file/folder path] [passwd] [(opt) -l]","Encrypt a file"]],opts:[["(opt) -l","Run on home system"],["folder_path","If folder, encrypts all files inside"]],detail:"Enc encrypts files using crypto.so. The password is required to decrypt the file later.",examples:["enc targetfile.txt 1234","enc myfile.txt 1234 -l"]},
+"escalate":{cat:"exploit",short:"Escalate to root access",usage:[["escalate","Escalate to root access"]],detail:"Escalate combines dictionary, brute force and decipher attacks to escalate from guest/user to root. The more populated your doomDB is with passwords, the more effective it becomes. Requires SHELL session with write-accessible folder.",examples:["escalate"]},
+"find":{cat:"files",short:"Find files and act on results",usage:[["find [-dfile] [filename/*pattern/-type] [(opt) dest]","Find files and download"],["find [-rm] [filename/*pattern/-type]","Find files and delete"],["find [-cat] [filename/*pattern/-type]","Find files and print content"],["find [-ls] [filename/*pattern/-type]","Find files and print ls-style"],["find [-print] [filename/*pattern/-type]","Find files and print their paths"],["find [-open] [filename/*pattern/-type]","Try to open files with GUI programs"]],opts:[["[-b]","Break macro if no match found"],["*pattern","Pattern/regex search starting with *"],["*-type","Special types: -files, -text, -bin, -hide, -p[rwx]"],["type -files","All files (ignore folders)"],["type -text","All text files"],["type -bin","All binary files"],["type -hide","All hidden files and folders"],["type -p[rwx]","Find by permission: -pw, -prw, -prwx"],["PIPED RESPONSE","-print returns all found paths"]],detail:"Find searches for files by name or pattern and runs an action on the results.",examples:["find -dfile system.log","find -dfile *chat","find -ls *.so","find -ls -pw"]},
+"flood":{cat:"attack",short:"DDoS attack",usage:[["flood [public_IP] [port]","Start a DDoS attack"]],detail:"Flood performs a DDoS attack flooding the target's connection. For effectiveness, attack must come from several different networks. Requires 12-100 simultaneous attacks depending on target net speed.",examples:["flood 170.150.20.0 22"]},
+"ftp":{cat:"network",short:"Connect to FTP service",usage:[["ftp [user@passwd] [ip] [(opt) port]","Connect to FTP service"]],opts:[["(opt) port","Default: 21"],["(opt) -p","Run as dcall launch from last proxy"]],detail:"Ftp connects and obtains a shell target. All Doom shell commands are available in this connection.",examples:["ftp root@password 170.110.50.20","ftp root@password 170.110.50.20 21"]},
+"gcoscan":{cat:"scripting",short:"Scan get_custom_object",usage:[["gcoscan [-l]","Scan and list get_custom_object values"],["gcoscan [-s]","Create shell sessions from shells in gco"]],detail:"Gcoscan scans what is stored on get_custom_object map. Useful for inspecting exposed objects.",examples:["gcoscan -l","gcoscan -s"]},
+"grep":{cat:"scripting",short:"Search file content",usage:[["grep [-n(number)] [text/*pattern] [(opt) -l] [path]","Search for lines matching text or pattern"],["grep [-w(number)] [*pattern] [(opt) -l] [path]","Search for words matching pattern"],["grep [-r(number)] [*pattern] [(opt) -l] [path]","Search for matches of pattern"],["grep [-i] [number] [(opt) -l] [file path]","Return specific line by number"],["grep [-s] [number] [(opt) -l] [file path]","Return specific string by number"],["grep [-c] [(opt) -l] [file path]","Return number of lines in file"],["grep [-sc] [column] [(opt) -l] [file path]","Return specific column values"]],opts:[["[-n(number)]","Number of matches. -n1 returns only first"],["[number]","For -i/-s: exact line/string. Negative = from end"],["[text/*pattern]","Text for exact match or pattern starting with *"],["[column]","Column number, can use multiple like 1;3;5"],["[(opt) -l]","Search on home system"],["[(opt) -v]","Use -v for clip variable file path ($a,$b,$c)"],["PIPED RESPONSE","Returns found matches"]],detail:"Grep finds content matches in files or folders. Returns the full line for any match found.",examples:["grep -n1 root /etc/passwd","grep -w *^[a-z] /etc/passwd","grep -r *^[a-z] /root/file.txt","grep -i 1 /etc/passwd","grep -i -1 /etc/passwd","grep -c /etc/passwd"]},
+"groupadd":{cat:"system",short:"Add user to a group",usage:[["groupadd [user] [new group]","Add a group to a user"]],detail:"Groupadd includes a user in a specific group, granting permissions to files related to that group.",examples:["groupadd myuser root"]},
+"groupdel":{cat:"system",short:"Remove user from a group",usage:[["groupdel [user] [group]","Remove a group from a user"]],detail:"Groupdel removes a user from a specific group.",examples:["groupdel myuser root"]},
+"groups":{cat:"system",short:"List user groups",usage:[["groups [user]","List groups of the user"]],detail:"Lists all groups that a user belongs to.",examples:["groups myuser"]},
+"hack":{cat:"exploit",short:"Remote library exploit attack",usage:[["hack [ip/url] [port] [(opt) passwd/lanIp]","Exploit remote library — attack all vulnerabilities"],["hack [-l] [(opt) ip/url] [(opt) port]","List and exploit specific vulnerability"],["hack [-type] [-user] [ip/url] [port] [(opt) passwd/lanIp]","Auto-connect to specified result type"]],opts:[["(opt) passwd/lanIp","Extra param for some exploits. Default: local IP for port 0, 'pass' otherwise"],["-type","-shell, -computer, -file, or -any"],["-user","-root, -user, or -any"],["PIPED RESPONSE","When used with -type returns object user type"]],detail:"Hack is the main remote attack command. Scans and attacks all library vulnerabilities. Use -type/-user for auto-connect (ideal for macros).",examples:["hack 170.110.50.20 0","hack www.site.com 0","hack 170.110.50.20 0 192.168.0.2","hack 170.110.50.20 22","hack -shell -any 170.110.50.20 0","hack -l 170.110.50.20"]},
+"hacklib":{cat:"exploit",short:"Local library exploit attack",usage:[["hacklib [(opt) passwd/lanIp]","Exploit all local libraries"],["hacklib [library name] [(opt) passwd/lanIp]","Exploit specific local library"],["hacklib [-l]","Exploit with specific vector attack"],["hacklib [-type] [-user] [(opt) lib name] [(opt) passwd/lanIp]","Auto-connect to specified result type"]],opts:[["(opt) passwd/lanIp","Password or LAN IP as exploit extra param"],["-type","-shell, -computer, -file, or -any"],["-user","-root, -user, or -any"],["PIPED RESPONSE","When used with -type returns object user type"]],detail:"Hacklib attacks libraries directly from inside a shell session. The local approach — attacks /lib folder libraries.",examples:["hacklib","hacklib kernel_router.so","hacklib -computer -root init.so 192.168.0.2","hacklib -l"]},
+"hash":{cat:"crypto",short:"Generate a hash",usage:[["hash [-md5] [entry]","Generate a MD5 hash"]],opts:[["PIPED RESPONSE","Returns generated hash"]],detail:"Hash generates encrypted hashes for the provided input.",examples:["hash -md5 doom"]},
+"if":{cat:"scripting",short:"Conditional command execution",usage:[["if [var1] [(opt) operator var2] [:] [command...] [(opt) ? [command...]]","Test variable and run command if true"]],opts:[["[(opt) operator]","== != ="],["[(opt) ? command]","Command to run if condition is false"]],detail:"If tests a variable value and runs a command based on the result. Works best combined with macros and clip variables.",examples:["if $a : echo $a","if $a == true : echo yes","if $a != null : echo not null ? echo is null","if $a == blue : @mymacro ? clean"]},
+"ifconfig":{cat:"network",short:"Network interface information",usage:[["ifconfig","Show internet connection information"],["ifconfig [net interface] [lanIp] [gateway]","Change device LAN IP and gateway"]],detail:"Shows or changes network connection information for the system.",examples:["ifconfig","ifconfig eth0 192.168.0.4 192.168.0.1"]},
+"inject":{cat:"exploit",short:"Create binaries on target",usage:[["inject [-dcall] [(opt) path]","Create and compile dcall on target system"],["inject [-pwget] [(opt) path]","Create binary to read passwd file"],["inject [source_file] [(opt) destiny_path]","Create binary from source file on target"]],opts:[["(opt) path","Default: /home/guest or custom payload path"],["(opt) destiny_path","Default: target current path"]],detail:"Inject creates and compiles binary files on the target system. Alternative to uploading files when targets crash on file upload due to bad hardware.",examples:["inject -dcall","inject /root/source.src /etc/init.d"]},
+"input":{cat:"scripting",short:"Capture user input to variable",usage:[["input [letter] [(opt) -a/-s/-l] [(opt) input_text]","Save user input in a variable"]],opts:[["[letter]","Single letter variable (excluding p/n)"],["[(opt) -a/-s/-l","-a append, -s with space, -l new line"]],detail:"Input prompts the user for input and stores it in a clip variable.",examples:["input a Set IP:"]},
+"kill":{cat:"system",short:"Kill a process",usage:[["kill [PID]","Kill process by PID"],["kill [proc_name]","Kill all processes with this name"],["kill [-a]","Kill all running processes"]],detail:"Kill terminates processes on the system. Use ps to list running processes.",examples:["kill 6452","kill Terminal","kill -a"]},
+"launch":{cat:"system",short:"Launch a binary file",usage:[["launch [file path] params...","Launch a binary"],["launch [-l] [file path] params...","Launch binary from home system"]],opts:[["callObject","Target object exposed on get_custom_object"],["callMetax","Target MetaxploitLib if cached"],["callResponse","String response for piped commands"],["PIPED RESPONSE","Script saves response to get_custom_object.callResponse"]],detail:"Launch runs binary files. Can launch .exe GUI programs — launching .exe on target can trigger an active trace. Objects are exposed on get_custom_object.",examples:["launch /bin/nmap 170.110.50.20","launch /usr/bin/Terminal.exe","launch -l /usr/bin/Terminal.exe"]},
+"lcd":{cat:"files",short:"Change host computer path",usage:[["lcd [folder path]","Change host computer current path"]],detail:"Lcd changes the current working path on the host (home) computer.",examples:["lcd /home","lcd myFolder","lcd .."]},
+"libdata":{cat:"intel",short:"View library data from DB",usage:[["libdata [lib_name] [lib_version] [(opt) -v]","Show library info from doomDB"],["libdata [lib_name] [lib_version] [-e]","Edit library data"],["libdata [-m] [db_path]","Merge libdata from another doomDB"]],opts:[["(opt) -v","Hide requirements information"]],detail:"Libdata shows all info for libraries stored in doomDB. Use -e to edit/reset/delete an entry (useful after misidentification against PvP targets).",examples:["libdata libssh.so","libdata libssh.so 1.2.1","libdata libssh.so 1.2.1 -e"]},
+"libfind":{cat:"intel",short:"Scan networks for libraries",usage:[["libfind [-fr] [number] [library/port:version]","Scan networks to find specific library versions"],["libfind [-sr] [number] (opt)[library] [(opt) -u]","Scan networks and scan libraries"],["libfind [-ar] [number] [library] [(opt) -u]","Scan networks and attack library vulnerabilities"]],opts:[["[number]","Number of IPs to search. Use *number for desired results"],["[library:version]","Pattern: library:version;library:version"],["[library]","Pattern: library;library"],["[(opt) -u]","Force update DB library data"],["PIPED RESPONSE","libfind -fr returns found results"]],detail:"Libfind automatically scans random networks to find and scan libraries, populating doomDB quickly.",examples:["libfind -fr 100 libssh.so:1.7.5","libfind -fr *1 libssh.so:1.7.5","libfind -sr 100 kernel_router.so;libssh.so"]},
+"libsearch":{cat:"intel",short:"Search doomDB for libraries",usage:[["libsearch [-l] [libname] / [-t] [type] / [-u] [user] / [-p] / [-c] [check text]","Search libdata DB"]],opts:[["Param order","Any of -l/-t/-u/-p/-c can be omitted and reordered"],["-l","Specific libname"],["-t","Object type: shell, computer, computer_bounce, file, number"],["-u","User: root, user, guest, unknown"],["-p","Search for lib with active payload vulnerability"],["-c","Must be after all others. Use 'none' or check texts separated by ','"],["PIPED RESPONSE","Returns list of matching libraries"]],detail:"Libsearch searches doomDB for libraries matching specific criteria.",examples:["libsearch -l kernel_router.so -t shell -u root","libsearch -t computer_bounce -u root"]},
+"lls":{cat:"files",short:"List host system files",usage:[["lls [(opt) path]","List files and folders of host computer"],["lls [-d] [(opt) path]","List files, folders and all subfolders"],["lls [-f] [(opt) path]","List only file names without details"]],opts:[["(opt) path","Specific path. Default: current path"],["PIPED RESPONSE","Returns each path listed"]],detail:"Lls lists the files of the host (home) system.",examples:["lls","lls -d /","lls /home"]},
+"ln":{cat:"files",short:"Create a symlink",usage:[["ln [(opt) -l] [path file] [path to link]","Create symlink"]],opts:[["(opt) -l","Create symlink on host machine"]],detail:"Ln creates symbolic links of files or folders.",examples:["ln /home/user/file.txt /home/user/Desktop/file.txt"]},
+"lookup":{cat:"network",short:"Get IP from web address",usage:[["lookup [address]","Get the IP of a web address"]],opts:[["PIPED RESPONSE","Returns found IP"]],detail:"Lookup finds the IP address of a web domain address.",examples:["lookup www.site.com"]},
+"loop":{cat:"scripting",short:"Run command in a loop",usage:[["loop [number/list] [command] [params...]","Run command in a loop"],["loop [number/list] [@macro] [params...]","Run a macro in a loop"],["loop [number/list] [command | command]","Run piped commands in a loop"],["loop [number/list] [command & command]","Run quick macro in a loop"]],opts:[["number","Number of loops (must be > 1)"],["list","Clip var with a list — each line is an iteration item"],["true","Endless loop (must have a break condition)"],["pid","Endless loop that can be killed with dkill pid"],["$n","Loop index (starting at 1) or current list item"]],detail:"Loop runs commands a specified number of times. Internally creates a macro with #jump/#onbreak. Can iterate over clip var lists.",examples:["loop 5 grep -i $n file.txt | echo","loop $a echo $n","loop true echo LOOP $n && wait 1","loop pid echo $n && wait 1"]},
+"ls":{cat:"files",short:"List files in current system",usage:[["ls [(opt) path]","List files and folders"],["ls [-d] [(opt) path]","List files, folders and all subfolders"],["ls [-f] [(opt) path]","List only file names without details"]],opts:[["(opt) path","Specific path. Default: current path"],["PIPED RESPONSE","Returns each path listed"]],detail:"Ls lists files on the current (local or remote) system.",examples:["ls","ls -d /","ls /lib"]},
+"macro":{cat:"scripting",short:"Manage and run macro files",usage:[["@macroName [params...]","Run macro commands"],["macro [-l]","List all saved macros"],["macro [macroName]","Print macro content"],["macro [-n] [filename]","Create new macro file"],["macro [-o] [filename]","Open macro file"]],detail:"Macros are text files in /dfiles/macros/ where each line is a Doom command. Run with @macroname. Commands that fail will auto-break the macro — use #jump to handle this gracefully.",examples:["@mymacro","@mymacro 192.168.0.2","macro -l","macro mymacro","macro -n newmacro"]},
+"mail":{cat:"network",short:"Email account management",usage:[["mail [-l]","List cached email accounts"],["mail [-m] [email] [password]","Login to email account"],["mail [-m] [username]","Login to cached email account"],["mail [-a] [email] [password]","Add email to cache"],["mail [-read] [username] [(opt) mailID/number]","Read emails from cached account"],["mail [-del] [username] [(opt) mailID/number]","Delete emails from cached account"],["mail [-n] [username]","Get total email count"],["mail [-clean]","Clean mail cache"],["mail [-b] [mail address] [(opt) number] [(opt) max]","Dictionary attack on email address"]],opts:[["[(opt) mailID/number]","Specific mail ID or number, or nothing for all"],["[(opt) number]","Resume brute force from this attempt"],["PIPED RESPONSE","Different per command"]],detail:"Mail groups email-related commands for access, attack and exploitation.",examples:["mail -l","mail -m Jack@domain.com passwd","mail -m Jack","mail -a Jack@domain.com passwd","mail -read Jack","mail -b targetmail@company.com"]},
+"map":{cat:"network",short:"Scan network IPs and ports",usage:[["map [(opt) ip/url]","Scan network IPs and ports"],["map [-c]","Print last cached map scan"]],opts:[["(opt) ip/url","Public IP for remote scan or domain URL. Omit for local scan"],["PIPED RESPONSE","Returns list of lan_ip and port"]],detail:"Map is Doom's nmap — scans a target's remote or local network for services with open ports. Local scan requires dcall upload.",examples:["map 170.110.50.20","map www.site.com","map"]},
+"math":{cat:"scripting",short:"Perform calculations",usage:[["math [equation]","Make calculations"],["math floor/ceil [number]","Round number up or down"],["math [number] [(opt) base] base [new_base]","Convert number to another base"]],opts:[["operators","+ - * / %"],["parentheses","() can be used"],["Valid structure","Each number/operator must be a separate param"],["PIPED RESPONSE","Returns calculation result"]],detail:"Math performs simple calculations. Each number and operator must be a separate parameter.",examples:["math 2 * 5","math 2 + 10 - ( 2 * 5 )","math floor 3.7"]},
+"metax":{cat:"exploit",short:"Manage metaxploit library cache",usage:[["metax [-a]","Obtain and cache target MetaxploitLib with dcall"],["metax [-r]","Remove target MetaxploitLib from cache"]],detail:"Metax manages the target's MetaxploitLib object in cache for future uses.",examples:["metax -a","metax -r"]},
+"mkdir":{cat:"files",short:"Create a new folder",usage:[["mkdir [new path]","Create new folder on current system"],["mkdir [-l] [new path]","Create new folder on host system"]],examples:["mkdir /home/user/newfolder","mkdir -l /home/user/newfolder"]},
+"mv":{cat:"files",short:"Move a file or folder",usage:[["mv [file/folder path] [destiny path]","Move file or folder"]],detail:"Mv moves a file or folder to a different path. Read and write permissions required.",examples:["mv /home/guest/file.txt /home/user"]},
+"netpass":{cat:"intel",short:"Manage cached network root passwords",usage:[["netpass [-l] [(opt) public_IP]","Check cached network root password"],["netpass [-r] [(opt) public_IP]","Reset cached network root password"],["netpass [-ra]","Reset all cached network root passwords"]],opts:[["PIPED RESPONSE","-l: Returns cached network root password"]],detail:"Netpass manages cached network root passwords obtained and used to optimize escalation on systems in that network.",examples:["netpass -l","netpass -r","netpass -r 170.110.50.20"]},
+"ofunc":{cat:"scripting",short:"Use object functions directly",usage:[["ofunc [-c] [function] [(opt) param]","Use a computer object function"],["ofunc [-f] [path] [function] [(opt) param]","Use a file object function"]],opts:[["function","The exact function name"],["PIPED RESPONSE","Same response as the script function"]],detail:"Ofunc calls computer and file object functions not covered by specific commands. Piped response is the exact return value which can be null, true, false, or a string.",examples:["ofunc -f /home/user/myprogram size"]},
+"open":{cat:"system",short:"Open file with GUI program",usage:[["open [(opt) -l] [file_path]","Open a file using associated .exe program"]],opts:[["(opt) -l","Open file from home system"]],detail:"Open uses the associated .exe program to open file types.",examples:["open myImage.jpg","open -l myImage.jpg"]},
+"pass":{cat:"exploit",short:"Obtain user passwords",usage:[["pass [-r]","Obtain root password"],["pass [-u]","Obtain all user passwords"],["pass [-m]","Obtain all user mail passwords"],["pass [-b]","Obtain all user bank passwords"],["pass [-a]","Obtain all passwords (accounts, mail, bank)"]],opts:[["PIPED RESPONSE","Returns each password in format user:passwd"]],detail:"Pass obtains and auto-deciphers passwords on the system.",examples:["pass -r","pass -u","pass -m","pass -b","pass -a"]},
+"passwd":{cat:"system",short:"Change or brute user password",usage:[["passwd [username]","Change user password (prompts for new password)"],["passwd [username] [new passwd]","Change user password directly"],["passwd [-l]","Check cached user password"],["passwd [-b] [(opt) username]","Try brute force on user password"]],opts:[["PIPED RESPONSE","-l: Returns cached user password"]],examples:["passwd myuser","passwd myuser 1234","passwd -l","passwd -b"]},
+"payload":{cat:"exploit",short:"Exploit library zero-day",usage:[["payload [ip] [port] [user:passwd]","Payload a remote library"],["payload [lib_name] [user:passwd]","Payload a local library"]],opts:[["user:passwd","Zero-day credential. Can use zcred key"],["PIPED RESPONSE","Returns user if successful"]],detail:"Payload hacks remote or local libs using zero-day exploits. Returns a partial computer and partial file. Payload memory must already be discovered and saved in doomDB.",examples:["payload 170.110.50.20 0 John:mypasswd01","payload kernel_module.so John:mypasswd01"]},
+"ping":{cat:"network",short:"Ping a LAN IP",usage:[["ping [ip]","Ping an IP on the network"]],detail:"Ping checks if you can reach a LAN IP on the network.",examples:["ping 192.168.0.2"]},
+"proxy":{cat:"network",short:"Manage proxy connections",usage:[["proxy [-l]","List stored proxies"],["proxy [-a] [number/IP]","Add proxies or IP to stored list (max 10)"],["proxy [-r] [proxy ip]","Remove a proxy from stored data"],["proxy [-ra]","Remove all stored proxies"],["proxy [-q]","Quick connect to a random proxy"],["proxy [-c] [(opt) number]","Connect to all or n random stored proxies"],["proxy [-c] [IP]","Connect to specific saved proxy"],["proxy [-clean]","Clean logs and doom files from proxies in session"],["proxy [-p]","Restore last proxy sessions from cache"]],opts:[["[number]","Value between 1 and 10"]],detail:"Proxy stores up to 10 random NPC router targets as proxies. Aliases are auto-set (p2, p3...) for each connected proxy.",examples:["proxy -l","proxy -q","proxy -c","proxy -c 2","proxy -a 10","proxy -clean"]},
+"ps":{cat:"system",short:"List running processes",usage:[["ps","List running processes"],["ps [-s] [procname] [user]","Search and list processes by name/user"]],opts:[["PIPED RESPONSE","Returns list of running procs or 'no_procs'"]],examples:["ps","ps -s Terminal root"]},
+"pwd":{cat:"system",short:"Print current path",usage:[["pwd","Print current path"]],examples:["pwd"]},
+"rcache":{cat:"network",short:"Manage cached target sessions",usage:[["rcache","Show all cached target connections"],["rcache [-clear]","Clear all cached results"],["rcache [public_ip] [local_ip] [(opt) -type]","Connect to cached target"],["rcache [alias]","Connect to cached target by alias"],["rcache [-a] [alias]","Set alias on current session cache"],["rcache [-a] [alias] [public_ip] [local_ip] [(opt) -type]","Set alias on specific session"],["rcache [-l]","List all cached sessions"],["rcache [-s]","List currently connected sessions"]],opts:[["[(opt) -type]","-shell, -computer, -file, or -any"]],detail:"Rcache caches all sessions obtained — shell, computer, or file. Priority: shell > computer > file, then root > user > guest > unknown.",examples:["rcache","rcache -clear","rcache 170.110.50.20 192.168.0.2","rcache shell1","rcache -a shell1"]},
+"reboot":{cat:"system",short:"Reboot computer",usage:[["reboot [(opt) -sm]","Reboot computer"]],opts:[["(opt) -sm","Reboot in safe mode"]],detail:"Reboots your own system or target. When used on a target session, the session is closed and removed from rcache.",examples:["reboot","reboot -sm"]},
+"regex":{cat:"scripting",short:"Manage custom regex patterns",usage:[["regex [-l]","List saved regex patterns"],["regex [-a] [key] [regex]","Save a regex with a key"],["regex [-r] [key]","Delete a saved regex"]],detail:"Regex stores patterns with a single key for quick access in any command that uses regex/pattern matching.",examples:["regex -l","regex -a upper ^[A-Z]","regex -r upper"]},
+"rename":{cat:"files",short:"Rename a file or folder",usage:[["rename [file/folder path] [new name]","Rename a file or folder"]],examples:["rename /home/myFolder Libs"]},
+"rep":{cat:"scripting",short:"Replace text patterns",usage:[["rep [text] [pattern] [new value]","Replace text/pattern with new value"],["rep [(opt) -l] [-f] [filepath] [regex/pattern] [new value]","Replace file content"]],opts:[["(opt) -l","Use -l for file in home system"],["-space/-char10","Special replacement values"],["PIPED RESPONSE","Returns content after replacement"]],detail:"Rep replaces a string or pattern with a new value. Can operate on text from clip variables or directly on file content.",examples:["rep $a value new_value","rep -f file.txt *oldtext newtext"]},
+"reverse":{cat:"intel",short:"Reverse engineer a binary",usage:[["reverse [binary file path] [(opt) destiny path]","Reverse engineer a binary with import allowed"]],opts:[["(opt) destiny path","Path for temporary source files"]],detail:"Reverse uses a binary with import allowed to extract all global variable information. A temporary .src will be created and compiled. Useful for CTF missions and PvP.",examples:["reverse /root/myscript"]},
+"rm":{cat:"files",short:"Delete files and folders",usage:[["rm [path file/folder]","Delete single file or empty folder"],["rm [-r] [path file/folder]","Delete non-empty folder"],["rm [-rf] [path file/folder]","Delete all files in folder (ignore subfolders)"],["rm [-ra] [path file/folder]","Delete all files and subfolders"],["rm [-w]","Wipe all system files except /var (needs root + confirmation)"],["rm [-wy]","Wipe all system files except /var (no confirmation)"]],detail:"Rm deletes files and folders. After deleting files on a remote target, corrupt the log as deletions create log entries.",examples:["rm /root/file.txt","rm -rf /root/Downloads","rm -r /root/myFolder","rm -w"]},
+"rnd":{cat:"scripting",short:"Generate random values",usage:[["rnd [-ip]","Generate a random public IP"],["rnd [-passwd] [size]","Generate random alphanumeric password"],["rnd [-iplist] [IP with missing block] [(opt) range]","Generate list of IPs"],["rnd [-line] [list]","Return random line from list variable"]],opts:[["IP with missing block","Use x for missing block: 192.168.0.x"],["range","e.g. 1:150"],["PIPED RESPONSE","Returns generated values"]],examples:["rnd -ip","rnd -passwd 12","rnd -iplist 192.168.0.x","rnd -line $a"]},
+"rshell":{cat:"network",short:"Manage reverse shell server",usage:[["rshell [-l]","List all reverse shell connections"],["rshell [-k]","List rshell connections to kill"],["rshell [-m]","Monitor rshell connections to server"],["rshell [-i]","Install Rshell service"],["rshell [-s]","Start Rshell service"],["rshell [-d]","Stop Rshell service"],["rshell [public IP] [local IP]","Direct connect to a reverse shell"]],opts:[["(opt) ProcName","Process name. Default: doom"],["(opt) -home","Add -home as last param to use home system rshell server"]],detail:"Rshell manages your rshell server and connections, or installs it on target systems.",examples:["rshell -l","rshell -k","rshell -m","rshell -i","rshell -s","rshell 170.110.50.20 192.168.1.2","rshell -l -home"]},
+"scan":{cat:"intel",short:"Scan a library for vulnerabilities",usage:[["scan [(opt) -u]","Scan library on /lib (selection menu)"],["scan [(opt) -u] [file path] [(opt) -v]","Scan a library file"],["scan [(opt) -u] [ip] [port] [(opt) -v]","Scan a remote library"],["scan [(opt) -u] [-a] [(opt) -v]","Scan all libraries on /lib"]],opts:[["(opt) -v","Print only library version"],["(opt) -u","Force update of DB library data"]],detail:"Scan discovers library vulnerabilities and saves data to doomDB. If DB already has data for the library, returns from DB. Use -u to force update.",examples:["scan","scan /lib/net.so","scan 170.110.50.20 22","scan -a"]},
+"secure":{cat:"attack",short:"Secure system access",usage:[["secure [-p]","Remove all permissions on all files/folders"],["secure [-po] [user]","Remove permissions and change owner/group"],["secure [-r]","Secure to root-only access (confirmation needed)"],["secure [-ry]","Secure to root-only access (no confirmation)"],["secure [-home]","Secure home system to root group only"],["secure [-rp]","Restore permissions to default"]],detail:"Secure removes permissions and changes owner/groups to restrict system access.",examples:["secure -home","secure -r","secure -ry","secure -p","secure -po","secure -rp"]},
+"send":{cat:"network",short:"Transfer files between sessions",usage:[["send [alias] [file/folder path] [(opt) destination path]","Transfer file from current to alias shell target"]],opts:[["(opt) destination path","Default: alias target current path"],["-f","If folder, ignore subfolders"]],detail:"Send transfers files from the current shell target to another shell session. Path can be full path, filename, or custom path key from 'dir' command.",examples:["send session1 /root/file.txt /home/user","send session1 /root/file.txt","send session1 /home/user/MyFolder /home/guest"]},
+"service":{cat:"network",short:"Install and manage remote services",usage:[["service [-i] [service_name]","Install a remote service"],["service [-s] [service_name]","Start a remote service"],["service [-d] [service_name]","Stop a remote service"],["service [-c] [service_name]","List server conf params"],["service [-c] [service_name] [paramKey] [new_value]","Change service conf param"]],opts:[["service_name","ssh, ftp, http, rshell, repository/repo, chat"],["paramKey","encrypt, message, end, dec"],["PIPED RESPONSE","Returns 'true' if successful"]],detail:"Service installs, starts, or stops remote services on the target machine.",examples:["service -i ssh","service -s ssh","service -d ssh","service -c http"]},
+"silentlog":{cat:"scripting",short:"Silence log output types",usage:[["silentlog [type,type]","Silence or restore a log type"],["silentlog [-all]","Silence all log types"],["silentlog [-reset]","Reset all logs silence state"],["silentlog [-l]","Check logs state"]],opts:[["type","log, info, warn, fail. Can combine: log,info,warn"]],detail:"Silentlog silences specific log types — useful before loops to reduce screen output.",examples:["silentlog log,info","silentlog -all","silentlog -reset","silentlog -l"]},
+"slib":{cat:"exploit",short:"Manage secure library store",usage:[["slib [-l]","List stored secure libs"],["slib [-a] [file path]","Copy a lib to dfiles"],["slib [-u] [(opt) lib_name]","Upload secure lib to target"],["slib [-r] [lib_name]","Delete library from seclib folder"]],detail:"Slib stores and quickly uploads secure libraries to targets. Libraries stored in /dfiles/seclibs/.",examples:["slib -l","slib -a /lib/net.so","slib -u","slib -u init.so","slib -r init.so"]},
+"smart":{cat:"intel",short:"Interact with smart devices",usage:[["smart [-m]","Print device smart model"],["smart [-a] [on/off]","Turn device alarm on or off"],["smart [-o] [power] [temp]","Override device power and temperature"]],detail:"Smart interacts with smart appliance devices. May require exploiting the device lib first to override settings.",examples:["smart -m","smart -a off","smart -o 1000 20"]},
+"smtp":{cat:"intel",short:"Scan SMTP service for emails",usage:[["smtp [ip] [(opt) port]","Scan an SMTP service"]],opts:[["(opt) port","Default: 23"]],examples:["smtp 170.110.50.20 23"]},
+"sniffer":{cat:"intel",short:"Intercept connections",usage:[["sniffer [(opt) -s]","Start sniffer to intercept connections"]],opts:[["(opt) -s","Capture Encode.src"]],detail:"Sniffer waits and intercepts connections to the target, capturing passwords and Encode.src. Script is stuck in a loop until a connection happens.",examples:["sniffer","sniffer -s"]},
+"sort":{cat:"scripting",short:"Sort a list variable",usage:[["sort [list] [(opt) -r]","Sort a list"]],opts:[["(opt) -r","Sort in reverse order"],["PIPED RESPONSE","Returns sorted list"]],examples:["sort $a","sort $a -r"]},
+"split":{cat:"scripting",short:"Split a string by pattern",usage:[["split [string] [pattern] [(opt) index]","Split string by pattern"],["split [(-f or -l)] [file_path] [pattern] [(opt) index]","Split file content by pattern"]],opts:[["-f/-l","Use -f for target file, -l for home file"],["index","Starting at 0, can be negative or range"],["PIPED RESPONSE","Returns split string or indexed item"]],detail:"Split splits a string by a pattern and returns the desired index or the split list with one item per line.",examples:["split $a :","split $a : -1"]},
+"ssh":{cat:"network",short:"Connect to SSH service",usage:[["ssh [user@passwd] [ip] [(opt) port]","Connect to SSH service"],["ssh [-l]","Show saved SSH connections"],["ssh [server name]","Connect to saved SSH server"],["ssh [-b] [(opt file_path)] [ip] [port] [(opt) user] [(opt) number]","Brute force SSH server"]],opts:[["(opt) port","Default: 22"],["(opt) user","Default: root"],["(opt) number","Resume brute from this attempt"],["(opt) file_path","Load dictionary from specific file"],["(opt) -p","Run as dcall launch from last proxy"]],detail:"Ssh connects to SSH services. Can save connections using sshlist for quick access.",examples:["ssh root@passwd 170.110.50.20 22","ssh -l","ssh myserver","ssh -b 170.110.50.20 22 root"]},
+"sshlist":{cat:"network",short:"Manage saved SSH connections",usage:[["sshlist [-l]","Show saved SSH connection info"],["sshlist [-a] [key] [user@passwd] [ip] [(opt) port]","Save SSH connection"],["sshlist [-r] [key]","Delete saved SSH connection"]],opts:[["(opt) port","Default: 22"]],detail:"Sshlist stores SSH connection details. Saved connections can also be used as doomDB remote server references.",examples:["sshlist -l","sshlist -a host root@password 170.110.50.20 22","sshlist -r host"]},
+"start":{cat:"system",short:"Start target shell terminal",usage:[["start","Start target shell terminal"]],detail:"Start opens a regular shell terminal for the target. Doom closes and you are placed in the target terminal.",examples:["start"]},
+"sudo":{cat:"system",short:"Change user",usage:[["sudo [-s] [(opt) password]","Change user to root"],["sudo [-u] [user] [(opt) password]","Change to specific user"]],opts:[["[(opt) password]","Pass password without prompt"]],examples:["sudo -s","sudo -u admin","sudo -s mypassword"]},
+"time":{cat:"scripting",short:"Time execution",usage:[["time [-s]","Start a time mark"],["time [-p]","Print elapsed time"]],opts:[["PIPED RESPONSE","Returns elapsed time in seconds"]],detail:"Time tracks elapsed time in seconds between routines.",examples:["time -s","time -p"]},
+"touch":{cat:"files",short:"Create a new text file",usage:[["touch [(opt) -l] [file name] [(opt) text]","Create a new text file"]],opts:[["[(opt) -l","Create file on host PC"],["[(opt) text]","Set file content with this text"]],detail:"Creates a new empty (or pre-populated) text file.",examples:["touch newFile.txt","touch /home/guest/newFile.txt","touch notes.txt Initial content here"]},
+"traffic":{cat:"intel",short:"Interact with traffic systems",usage:[["traffic [-s]","Start traffic net control"]],detail:"Traffic interacts with traffic camera systems via libtrafficnet.so.",examples:["traffic -s"]},
+"ufile":{cat:"files",short:"Upload file to target",usage:[["ufile [file/folder path] [(opt) destination path]","Upload file or folder from host to target"]],opts:[["(opt) destination path","Default: target current path"],["-f","If folder, add -f as last param to ignore subfolders"],["PIPED_RESPONSE","Returns file full destination path"]],detail:"Ufile uploads files from your PC to the connected shell target. Works on computer connections too but only for text files.",examples:["ufile /root/file.txt /home/guest","ufile /root/file.txt","ufile pathKey /home/guest","ufile /home/user/MyFolder /home/guest"]},
+"useradd":{cat:"system",short:"Add a new user",usage:[["useradd [new username] [(opt) passwd]","Add a new user (requires root)"]],detail:"Useradd creates a new user on the system. Root access required.",examples:["useradd newUser","useradd newUser password123"]},
+"userdel":{cat:"system",short:"Delete a user",usage:[["userdel [(opt) -r] [username]","Delete a user from the system"]],opts:[["(opt) -r","Delete all user files. Requires root"]],detail:"Userdel removes a user from the system. Root access required.",examples:["userdel myUser","userdel -r myUser"]},
+"wait":{cat:"scripting",short:"Wait for n seconds",usage:[["wait [number]","Script waits for number of seconds"]],opts:[["number","Must be between 0.01 and 300"]],examples:["wait 0.5","wait 5"]},
+"whois":{cat:"network",short:"Show network admin info",usage:[["whois [ip]","Show network admin information"]],opts:[["PIPED RESPONSE","Returns IP info"]],examples:["whois 170.110.50.20"]},
+"wifi":{cat:"network",short:"Wifi hacking tool",usage:[["wifi","Start wifi automatic hack tool"],["wifi [-j] [(opt) essid]","Connect to random or specific wifi essid"],["wifi [-c] [essid]","Crack wifi by essid name"],["wifi [-l/-lp]","List all wifi or only cracked ones"]],opts:[["PIPED RESPONSE","-l: Returns list of all available wifi"]],detail:"Starts the wifi tool to select and crack a wifi signal. Captured .cap files saved to ../dfiles/wifi/essid.cap",examples:["wifi","wifi -j JohnWifi","wifi -c JohnWifi","wifi -l"]},
+"zap":{cat:"files",short:"Remove a line from a file",usage:[["zap [-f] [filePath] [number]","Remove specific line from file"],["zap [-l] [home_filePath] [number]","Remove line from home system file"],["zap [-v] [clip_var] [number]","Remove line from clip variable text"]],opts:[["number","Integer ≠ 0. Negative = relative to end"],["PIPED RESPONSE","'true' for file zap or new text for var zap"]],examples:["zap -f file.txt 10","zap -l file.txt 10","zap -v $a 10"]},
+"zcred":{cat:"exploit",short:"Manage zero-day credentials",usage:[["zcred [-l]","List saved zero-day credentials"],["zcred [-a] [key] [user] [passwd]","Add and save zero-day credentials"],["zcred [-r] [key]","Delete saved credential by key"]],detail:"Zcred stores zero-day credentials with keys for easy access in debuglib and payload commands. Adding a new credential tests it for validation.",examples:["zcred -l","zcred -a mykey John02738 pass382"]}
+};
+
+const CATEGORIES = {
+"exploit":  {label:"EXPLOIT",   color:"#ff003c"},
+"network":  {label:"NETWORK",   color:"#00ff9c"},
+"files":    {label:"FILES",     color:"#ffb700"},
+"system":   {label:"SYSTEM",    color:"#00d4ff"},
+"intel":    {label:"INTEL",     color:"#b84fff"},
+"attack":   {label:"ATTACK",    color:"#ff003c"},
+"crypto":   {label:"CRYPTO",    color:"#00d4ff"},
+"scripting":{label:"SCRIPTING", color:"#00d4ff"}
+};
+
+const GUIDES = [
+{id:"guide-install",  label:"Getting Started"},
+{id:"guide-prompts",  label:"Prompts & Navigation"},
+{id:"guide-exploit",  label:"Exploit System"},
+{id:"guide-hacking",  label:"Hacking Guide"},
+{id:"guide-macros",   label:"Macros"},
+{id:"guide-piped",    label:"Piped Commands"},
+{id:"guide-proxy",    label:"Proxy & Dcall"}
+];
+
+function buildSidebar(){
+  const nav = document.getElementById("sidebarNav");
+  nav.innerHTML = "";
+
+  // Home item
+  const homeEl = document.createElement("div");
+  homeEl.className = "nav-item active";
+  homeEl.textContent = "⌂  Overview";
+  homeEl.dataset.view = "home";
+  homeEl.onclick = () => showView("home");
+  nav.appendChild(homeEl);
+
+  // Guides section
+  const guideLabel = document.createElement("div");
+  guideLabel.className = "cat-label";
+  guideLabel.textContent = "GUIDES";
+  nav.appendChild(guideLabel);
+
+  GUIDES.forEach(g => {
+    const el = document.createElement("div");
+    el.className = "nav-item nav-item-guide";
+    el.textContent = g.label;
+    el.dataset.view = "guide-" + g.id.replace("guide-","");
+    el.onclick = () => showView(g.id);
+    nav.appendChild(el);
+  });
+
+  // Commands by category
+  const catCmds = {};
+  Object.keys(CMDS).sort().forEach(k => {
+    const c = CMDS[k].cat;
+    if (!catCmds[c]) catCmds[c] = [];
+    catCmds[c].push(k);
+  });
+
+  Object.keys(CATEGORIES).forEach(cat => {
+    if (!catCmds[cat]) return;
+    const lbl = document.createElement("div");
+    lbl.className = "cat-label";
+    lbl.textContent = CATEGORIES[cat].label;
+    nav.appendChild(lbl);
+
+    catCmds[cat].forEach(cmd => {
+      const el = document.createElement("div");
+      el.className = "nav-item";
+      el.textContent = cmd;
+      el.dataset.cmd = cmd;
+      el.onclick = () => showCmd(cmd);
+      nav.appendChild(el);
+    });
+  });
+
+  document.getElementById("cmdCount").textContent = Object.keys(CMDS).length + " commands";
+  document.getElementById("totalCmds").textContent = Object.keys(CMDS).length;
+}
+
+function buildCmdCard(cmd){
+  const d = CMDS[cmd];
+  const card = document.createElement("div");
+  card.className = "cmd-card";
+  card.id = "card-" + cmd;
+
+  const hdr = document.createElement("div");
+  hdr.className = "cmd-header";
+  hdr.innerHTML = `<span class="cmd-name">${cmd}</span><span class="cmd-short">${d.short||""}</span><span class="cmd-chevron">›</span>`;
+  hdr.onclick = () => card.classList.toggle("open");
+
+  const body = document.createElement("div");
+  body.className = "cmd-body";
+
+  let html = '<div class="usage-label">USAGE</div>';
+  html += '<table class="usage-table">';
+  d.usage.forEach(u => {
+    html += `<tr><td><code>${u[0]}</code></td><td>${u[1]||""}</td></tr>`;
+  });
+  html += '</table>';
+
+  if (d.opts && d.opts.length){
+    html += '<div class="opt-section-label">PARAMETERS &amp; OPTIONALS</div>';
+    html += '<ul class="opt-list">';
+    d.opts.forEach(o => {
+      html += `<li><span class="opt-k">${o[0]}</span><span class="opt-v">${o[1]}</span></li>`;
+    });
+    html += '</ul>';
+  }
+
+  if (d.detail){
+    html += '<div class="details-section-label">DETAILS</div>';
+    html += `<div class="detail-text">${d.detail}</div>`;
+  }
+
+  if (d.examples && d.examples.length){
+    html += '<div class="ex-section-label">EXAMPLES</div>';
+    html += '<ul class="ex-list">';
+    d.examples.forEach(e => { html += `<li>${e}</li>`; });
+    html += '</ul>';
+  }
+
+  body.innerHTML = html;
+  card.appendChild(hdr);
+  card.appendChild(body);
+  return card;
+}
+
+let currentView = "home";
+let currentCat = null;
+
+function showView(viewId){
+  // Remove all active views
+  document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
+  document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
+
+  currentView = viewId;
+
+  // Show the right view
+  if (viewId === "home"){
+    document.getElementById("view-home").classList.add("active");
+    document.querySelector(".nav-item[data-view='home']").classList.add("active");
+  } else if (viewId.startsWith("guide-")){
+    const el = document.getElementById("view-" + viewId);
+    if (el) el.classList.add("active");
+    const navItem = document.querySelector(`.nav-item[data-view='${viewId}']`);
+    if (navItem) navItem.classList.add("active");
+  } else {
+    // Category view
+    showCategory(viewId);
+  }
+}
+
+function showCategory(cat){
+  const grid = document.getElementById("cmdGrid");
+  const title = document.getElementById("cmdViewTitle");
+  grid.innerHTML = "";
+
+  const label = CATEGORIES[cat] ? CATEGORIES[cat].label : cat.toUpperCase();
+  title.textContent = label + " COMMANDS";
+
+  const cmds = Object.keys(CMDS).sort().filter(k => CMDS[k].cat === cat);
+  cmds.forEach(cmd => grid.appendChild(buildCmdCard(cmd)));
+
+  document.getElementById("view-cmds").classList.add("active");
+  currentCat = cat;
+}
+
+function showCmd(cmd){
+  const d = CMDS[cmd];
+  if (!d) return;
+
+  // Show commands view for the right category
+  showCategory(d.cat);
+
+  // Highlight nav item
+  document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
+  const navItem = document.querySelector(`.nav-item[data-cmd='${cmd}']`);
+  if (navItem) navItem.classList.add("active");
+
+  // Open the card after a brief render delay
+  setTimeout(() => {
+    const card = document.getElementById("card-" + cmd);
+    if (card){
+      card.classList.add("open");
+      card.scrollIntoView({behavior:"smooth", block:"start"});
+    }
+  }, 50);
+}
+
+// Search
+document.getElementById("searchInput").addEventListener("input", function(){
+  const q = this.value.toLowerCase().trim();
+  const nav = document.getElementById("sidebarNav");
+  const items = nav.querySelectorAll(".nav-item[data-cmd]");
+
+  if (!q){
+    items.forEach(i => { i.style.display = ""; });
+    nav.querySelectorAll(".cat-label").forEach(c => { c.style.display = ""; });
+    document.getElementById("filteredCount").textContent = "";
+    return;
+  }
+
+  let count = 0;
+  items.forEach(i => {
+    const cmd = i.dataset.cmd;
+    const match = cmd.includes(q) || (CMDS[cmd] && CMDS[cmd].short && CMDS[cmd].short.toLowerCase().includes(q));
+    i.style.display = match ? "" : "none";
+    if (match) count++;
+  });
+
+  document.getElementById("filteredCount").textContent = count + " found";
+
+  // Hide empty category labels
+  nav.querySelectorAll(".cat-label").forEach(lbl => {
+    let next = lbl.nextElementSibling;
+    let hasVisible = false;
+    while (next && !next.classList.contains("cat-label")){
+      if (next.dataset.cmd && next.style.display !== "none") hasVisible = true;
+      next = next.nextElementSibling;
+    }
+    lbl.style.display = hasVisible ? "" : "none";
+  });
+
+  // Show search results in main panel
+  if (q.length >= 2){
+    const matched = Object.keys(CMDS).sort().filter(k =>
+      k.includes(q) ||
+      (CMDS[k].short && CMDS[k].short.toLowerCase().includes(q)) ||
+      (CMDS[k].detail && CMDS[k].detail.toLowerCase().includes(q))
+    );
+    if (matched.length > 0){
+      document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
+      const grid = document.getElementById("cmdGrid");
+      const title = document.getElementById("cmdViewTitle");
+      grid.innerHTML = "";
+      title.textContent = "SEARCH: " + q.toUpperCase();
+      matched.forEach(cmd => grid.appendChild(buildCmdCard(cmd)));
+      document.getElementById("view-cmds").classList.add("active");
+    }
+  }
+});
+
+buildSidebar();
+</script>
+
+</body>
+</html>
