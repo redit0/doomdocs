@@ -1,7 +1,7 @@
-<!--
+﻿<!--
   ╔══════════════════════════════════════════════╗
-  ║           Created by  ChaoticCrumb           ║
   ║       Grey Hack Hacktool Documentation       ║
+  ║         Portal Created by ChaoticCrumb       ║
   ╚══════════════════════════════════════════════╝
 -->
 <!DOCTYPE html>
@@ -33,9 +33,19 @@
 --text:#b8dfc8;
 --text-dim:#4d7a60;
 --text-muted:#2a5040;
---glow:0 0 12px rgba(197, 0, 0, 0.5),0 0 24px rgba(255, 30, 0, 0.2);
+--glow:0 0 12px rgba(0,255,156,0.5),0 0 24px rgba(0,255,156,0.2);
 --glow-sm:0 0 6px rgba(0,255,156,0.4);
 --glow-sec:0 0 8px rgba(0,212,255,0.4);
+--tool-doom:#920101;
+--tool-doom-glow:rgba(146, 1, 1, 0.5);
+--tool-5hell:#2382ff;
+--tool-5hell-glow:rgba(35,130,255,0.5);
+--tool-hex:#16cff0;
+--tool-hex-glow:rgba(22,207,240,0.25);
+--tool-viper:#c8860a;
+--tool-viper-glow:rgba(200,134,10,0.25);
+--tool-grey:#ff8400;
+--label-grey:#727272;
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -937,7 +947,7 @@ color:var(--secondary);
 line-height:1;
 }
 </style>
-</hea
+</head>
 <body>
 
 <!-- ─── HUB LAYER ─────────────────────────────────────────── -->
@@ -967,9 +977,9 @@ line-height:1;
   <div class="tools-grid">
 
     <!-- DOOM -->
-    <div class="tool-card live" data-glyph="D" onclick="openTool('doom')">
+    <div class="tool-card live" style="color:var(--tool-doom); text-shadow:0 0 12px var(--tool-doom-glow),0 0 24px rgba(146, 1, 1, 0.2)" data-glyph="D" onclick="openTool('doom')">
       <div class="tc-head">
-        <div class="tc-name">DOOM</div>
+        <div class="tc-name" style="color:var(--tool-doom); text-shadow:0 0 12px var(--tool-doom-glow),0 0 24px rgba(146, 1, 1, 0.2)">DOOM</div>
         <div class="tc-status live">● LIVE</div>
       </div>
       <div class="tc-divider"></div>
@@ -984,9 +994,9 @@ line-height:1;
     </div>
 
     <!-- 5HELL -->
-    <div class="tool-card live" data-glyph="$" onclick="openTool('5hell')">
+    <div class="tool-card live" style="color:var(--tool-5hell);text-shadow:0 0 12px var(--tool-5hell-glow),0 0 24px rgba(35,130,255,0.2)" data-glyph="$" onclick="openTool('5hell')">
       <div class="tc-head">
-        <div class="tc-name">5HELL</div>
+        <div class="tc-name" style="color:var(--tool-5hell);text-shadow:0 0 12px var(--tool-5hell-glow),0 0 24px rgba(35,130,255,0.2)">5HELL</div>
         <div class="tc-status live">● LIVE</div>
       </div>
       <div class="tc-divider"></div>
@@ -1001,56 +1011,60 @@ line-height:1;
     </div>
 
     <!-- HEX -->
-    <div class="tool-card soon" data-glyph="H">
+    <div class="tool-card live" style="color:var(--tool-hex);text-shadow:0 0 12px var(--tool-hex-glow),0 0 24px rgba(22,207,240,0.1)" data-glyph="H" onclick="openTool('hex')">
       <div class="tc-head">
-        <div class="tc-name">HEX</div>
-        <div class="tc-status soon">SOON</div>
+        <div class="tc-name" style="color:var(--tool-hex);text-shadow:0 0 12px var(--tool-hex-glow),0 0 24px rgba(22,207,240,0.1)">HEX</div>
+        <div class="tc-status live">● LIVE</div>
       </div>
       <div class="tc-divider"></div>
-      <div class="tc-desc">State-persistent exploit toolkit. Session stack navigation, typed Exploit objects, Result wrappers, and structured dispatch maps for systematic attacks.</div>
+      <div class="tc-desc">State-persistent exploit toolkit. Session stack navigation, typed Exploit objects, Result wrappers, and three structured dispatch maps for systematic attacks.</div>
       <div class="tc-meta">
+        <span class="tc-tag">20 COMMANDS</span>
         <span class="tc-tag">SESSION STACK</span>
-        <span class="tc-tag">EXPLOIT OBJECTS</span>
-        <span class="tc-tag">NUKE OPS</span>
+        <span class="tc-tag">6 GUIDES</span>
+        <span class="tc-tag">LOCAL SOURCE</span>
       </div>
+      <div class="tc-action">OPEN DOCUMENTATION</div>
     </div>
 
     <!-- VIPER -->
-    <div class="tool-card soon" data-glyph="V">
+    <div class="tool-card live" style="color:var(--tool-viper);text-shadow:0 0 12px var(--tool-viper-glow),0 0 24px rgba(200,134,10,0.1)" data-glyph="V" onclick="openTool('viper')">
       <div class="tc-head">
-        <div class="tc-name">VIPER</div>
-        <div class="tc-status soon">SOON</div>
+        <div class="tc-name" style="color:var(--tool-viper);text-shadow:0 0 12px var(--tool-viper-glow),0 0 24px rgba(200,134,10,0.1)">VIPER</div>
+        <div class="tc-status soon">⚠ LEGACY</div>
       </div>
       <div class="tc-divider"></div>
-      <div class="tc-desc">ExtensionMediator structured hacktool. Typed command system, session manager, theme layer, config, and macro engine built on the Architecture A DI pattern.</div>
+      <div class="tc-desc">Deprecated ExtensionMediator structured hacktool. Architecture A DI pattern reference — typed command system, session manager, theme layer, and config system.</div>
       <div class="tc-meta">
         <span class="tc-tag">ARCHITECTURE A</span>
-        <span class="tc-tag">SESSION MGR</span>
-        <span class="tc-tag">THEMES</span>
+        <span class="tc-tag">DEPRECATED</span>
+        <span class="tc-tag">4 GUIDES</span>
       </div>
+      <div class="tc-action">OPEN REFERENCE</div>
     </div>
 
     <!-- GREYSCRIPT -->
-    <div class="tool-card soon" data-glyph="GS">
+    <div class="tool-card live" data-glyph="GS" onclick="openTool('greyscript')">
       <div class="tc-head">
         <div class="tc-name">GREYSCRIPT</div>
-        <div class="tc-status soon">SOON</div>
+        <div class="tc-status live">● LIVE</div>
       </div>
       <div class="tc-divider"></div>
       <div class="tc-desc">GreyScript language reference and Grey Hack API guide. Data types, OOP patterns, built-in intrinsics, and the complete game object API documentation.</div>
       <div class="tc-meta">
-        <span class="tc-tag">LANGUAGE REF</span>
-        <span class="tc-tag">GH API</span>
+        <span class="tc-tag">9 SECTIONS</span>
+        <span class="tc-tag">FULL GH API</span>
         <span class="tc-tag">PATTERNS</span>
         <span class="tc-tag">INTRINSICS</span>
       </div>
+      <div class="tc-action">OPEN REFERENCE</div>
     </div>
 
   </div><!-- /tools-grid -->
 </div><!-- /hub-body -->
 
 <div class="hub-footer">
-  <span style="color:var(--accent)">DOOM</span> TOOL BY @GSQ &nbsp;·&nbsp; <span style="color:#2382ff">5HELL</span> TOOL BY @PLU70 &nbsp;·&nbsp; <span style="color:#16cff0">Hex</span> TOOL BY @redit0 &nbsp;·&nbsp; SITE BY @CHAOTICCRUMB &nbsp;·&nbsp; ALL TOOLS FOR <span class="gh-link" style="color:var(--text-dim);text-decoration-color:var(--border2)" onclick="openGHModal()">GREY HACK</span>
+  <span style="color:var(--accent)">DOOM</span> TOOL BY @GSQ &nbsp;·&nbsp; <span style="color:var(--tool-5hell)">5HELL</span> TOOL BY @PLU70 &nbsp;·&nbsp; <span style="color:var(--tool-hex)">HEX</span> TOOL BY @redit0 &nbsp;·&nbsp; <span style="color:var(--tool-viper)">VIPER 3.0</span> BY @cantemizyurek &nbsp;·&nbsp; PORTAL BY @ChaoticCrumb &nbsp;·&nbsp; ALL TOOLS FOR <span class="gh-link" style="color:var(--text-dim);text-decoration-color:var(--border2)" onclick="openGHModal()">GREY HACK</span>
 </div>
 
 </div><!-- /hub -->
@@ -1062,7 +1076,7 @@ line-height:1;
   <div style="display:flex;align-items:center;gap:16px;">
     <button class="hub-back" onclick="showHub()">◁ HUB</button>
     <div>
-      <div class="logo"><span style="color:rgb(146, 1, 1)">DOOM</span> - <span><span class="gh-link" onclick="openGHModal()">Grey Hack</span> Hacktool // Command Reference</span></div>
+      <div class="logo"><span style="color:var(--tool-doom)">DOOM</span> - <span><span class="gh-link" onclick="openGHModal()">Grey Hack</span> Hacktool // Command Reference</span></div>
     </div>
   </div>
   <div class="header-right">
@@ -1093,7 +1107,7 @@ line-height:1;
 <!-- HOME VIEW -->
 <div class="view active" id="view-home">
   <div class="home-hero">
-    <div class="hero-title" style="color:rgb(146, 1, 1)">DOOM</div>
+    <div class="hero-title" style="color:var(--tool-doom)">DOOM</div>
     <div class="hero-sub"><span class="gh-link" style="text-decoration-color:var(--text-dim)" onclick="openGHModal()">GREY HACK</span> HACKTOOL — COMMAND REFERENCE</div>
     <div class="hero-divider"></div>
     <div class="guide-p" style="max-width:600px;margin:0 auto;text-align:center;">
@@ -1581,8 +1595,7 @@ rcache -s           // list currently connected sessions</div>
 </div>
 </div>
 
-<p style="width:fit-content; margin: 1.5rem auto 0.5rem; color:#727272; font-size:0.75rem; letter-spacing:0.08em;"><span style="color:red">DOOM</span> Tool Created By: @GSQ</p>
-<p style="width:fit-content; margin: 1.5rem auto 0.5rem; color:#727272; font-size:0.75rem; letter-spacing:0.08em;">Site Created By: @ChaoticCrumb</p>
+<p style="width:fit-content; margin: 1.5rem auto 0.5rem; color:var(--label-grey); font-size:0.75rem; letter-spacing:0.08em;"><span style="color:var(--accent)">DOOM</span> Tool Created By: @GSQ</p>
   
 </main>
 </div>
@@ -1595,7 +1608,7 @@ rcache -s           // list currently connected sessions</div>
   <div style="display:flex;align-items:center;gap:16px;">
     <button class="hub-back" onclick="showHub()">◁ HUB</button>
     <div>
-      <div class="logo"><span style="color:#2382ff;text-shadow:0 0 12px rgba(35,130,255,0.4)">5HELL</span> - <span><span class="gh-link" onclick="openGHModal()">Grey Hack</span> Hacktool // Command Reference</span></div>
+      <div class="logo"><span style="color:var(--tool-5hell);text-shadow:0 0 12px rgba(35,130,255,0.4)">5HELL</span> - <span><span class="gh-link" onclick="openGHModal()">Grey Hack</span> Hacktool // Command Reference</span></div>
     </div>
   </div>
   <div class="header-right">
@@ -1626,7 +1639,7 @@ rcache -s           // list currently connected sessions</div>
 <!-- 5HELL HOME VIEW -->
 <div class="view active" id="sh-view-home">
   <div class="home-hero">
-    <div class="hero-title" style="color:#2382ff;text-shadow:0 0 12px rgba(35,130,255,0.5),0 0 24px rgba(35,130,255,0.2)">5HELL</div>
+    <div class="hero-title" style="color:var(--tool-5hell);text-shadow:0 0 12px rgba(35,130,255,0.5),0 0 24px rgba(35,130,255,0.2)">5HELL</div>
     <div class="hero-sub"><span class="gh-link" style="text-decoration-color:var(--text-dim)" onclick="openGHModal()">GREY HACK</span> HACKTOOL — COMMAND REFERENCE</div>
     <div class="hero-divider" style="background:linear-gradient(90deg,transparent,#2382ff,transparent)"></div>
     <div class="guide-p" style="max-width:600px;margin:0 auto;text-align:center;">
@@ -1774,7 +1787,7 @@ kore --silent               # re-enable output</div>
 <div class="guide-p">5hell's core input loop processes commands with full pipe support, EZ_CLIP token substitution, macro expansion, and GLASSPOOL session mirroring. Understanding these mechanics is key to scripting effective workflows.</div>
 
 <div class="guide-h2">THE PROMPT</div>
-<div class="guide-p">The default prompt is <code>|&gt;</code>. When GLASSPOOL is active, the prompt turns <b style="color:#2382ff">blue</b> — a visual indicator that file operations are targeting a remote machine. Toggle the full decorated prompt with:</div>
+<div class="guide-p">The default prompt is <code>|&gt;</code>. When GLASSPOOL is active, the prompt turns <b style="color:var(--tool-5hell)">blue</b> — a visual indicator that file operations are targeting a remote machine. Toggle the full decorated prompt with:</div>
 <div class="code-block">|> prompt    // toggles full prompt with IP/user/path display on/off</div>
 
 <div class="guide-h2">SINGLE PIPE ( | )</div>
@@ -2045,7 +2058,7 @@ kore --silent</div>
 <div class="code-block">|> probe 1.2.3.4</div>
 <div class="tip-box"><div class="tip-label">PORT COLORS</div>
 <b style="color:var(--primary)">Green</b> = open port &nbsp;|&nbsp; <b style="color:#00d4ff">Cyan</b> = known lib in database &nbsp;|&nbsp; <b style="color:var(--warn)">Gold</b> = unknown lib<br>
-<b style="color:var(--accent)">Red</b> = closed/firewalled &nbsp;|&nbsp; <b style="color:#ff8400">Orange</b> = no database found &nbsp;|&nbsp; <b style="color:#71858d">Grey</b> = no response
+<b style="color:var(--accent)">Red</b> = closed/firewalled &nbsp;|&nbsp; <b style="color:var(--tool-grey)">Orange</b> = no database found &nbsp;|&nbsp; <b style="color:#71858d">Grey</b> = no response
 </div>
 <div class="guide-p">Set the target globally so subsequent commands don't need the IP:</div>
 <div class="code-block">|> target 1.2.3.4 22</div>
@@ -2215,12 +2228,1740 @@ When running 5hell inside a compromised target via <span class="inline-cmd">infi
 </div>
 </div>
 
-<p style="width:fit-content; margin: 1.5rem auto 0.5rem; color:#727272; font-size:0.75rem; letter-spacing:0.08em;"><span style="color:#2382ff">5HELL</span> Tool Created By: @PLU70</p>
-<p style="width:fit-content; margin: 0.5rem auto 1.5rem; color:#727272; font-size:0.75rem; letter-spacing:0.08em;">Site Created By: @ChaoticCrumb</p>
+<p style="width:fit-content; margin: 1.5rem auto 0.5rem; color:var(--label-grey); font-size:0.75rem; letter-spacing:0.08em;"><span style="color:var(--tool-5hell)">5HELL</span> Tool Created By: @PLU70</p>
+<p style="width:fit-content; margin: 0.5rem auto 1.5rem; color:var(--label-grey); font-size:0.75rem; letter-spacing:0.08em;">Hacktool Documentation Portal</p>
 
 </main>
 </div><!-- /layout -->
 </div><!-- /toolspace-5hell -->
+
+
+<!-- ─── HEX TOOLSPACE ──────────────────────────────────────── -->
+<div id="toolspace-hex" class="toolspace">
+
+<header class="header">
+  <div style="display:flex;align-items:center;gap:16px;">
+    <button class="hub-back" onclick="showHub()">◁ HUB</button>
+    <div>
+      <div class="logo"><span style="color:var(--tool-hex);text-shadow:0 0 12px rgba(22,207,240,0.4)">HEX</span> - <span><span class="gh-link" onclick="openGHModal()">Grey Hack</span> Hacktool // Command Reference</span></div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="header-badge"><span class="dot"></span> ONLINE</div>
+    <div class="header-badge"><span class="dot sec"></span> <span class="gh-link" style="text-decoration-color:var(--text-dim)" onclick="openGHModal()">GREY HACK</span></div>
+    <div class="header-badge"><span class="dot warn"></span> v0.0.836</div>
+  </div>
+</header>
+
+<div class="layout">
+
+<div class="sidebar">
+  <div class="sidebar-top">
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input type="text" id="hx-searchInput" placeholder="search commands...">
+    </div>
+    <div class="cat-count">
+      <span id="hx-cmdCount">0 commands</span>
+      <span id="hx-filteredCount"></span>
+    </div>
+  </div>
+  <nav class="sidebar-nav" id="hx-sidebarNav"></nav>
+</div>
+
+<main class="content" id="hx-mainContent">
+
+<!-- HEX HOME -->
+<div class="view active" id="hx-view-home">
+  <div class="home-hero">
+    <div class="hero-title" style="color:var(--tool-hex);text-shadow:0 0 12px rgba(22,207,240,0.5),0 0 24px rgba(22,207,240,0.2)">HEX</div>
+    <div class="hero-sub"><span class="gh-link" style="text-decoration-color:var(--text-dim)" onclick="openGHModal()">GREY HACK</span> HACKTOOL — COMMAND REFERENCE</div>
+    <div class="hero-divider" style="background:linear-gradient(90deg,transparent,#16cff0,transparent)"></div>
+    <div class="guide-p" style="max-width:600px;margin:0 auto;text-align:center;">
+      HEX v0.0.836 by @redit0. Architecture C penetration framework using <span class="inline-cmd">get_custom_object</span> as persistent state. Three dispatch maps (g.tools / g.util / g.fs), context stack navigation, proxy chains, and full nuke operations.
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-n" id="hx-totalCmds">35</div><div class="stat-l">COMMANDS</div></div>
+    <div class="stat-card"><div class="stat-n">3</div><div class="stat-l">CATEGORIES</div></div>
+    <div class="stat-card"><div class="stat-n">6</div><div class="stat-l">GUIDE SECTIONS</div></div>
+    <div class="stat-card"><div class="stat-n">L</div><div class="stat-l">LOCAL SOURCE</div></div>
+  </div>
+
+  <div class="sec-title">QUICK ACCESS</div>
+  <div class="quick-grid">
+    <div class="quick-card" onclick="showViewHex('hx-view-guide-start')">
+      <div class="quick-card-title">▶ GETTING STARTED</div>
+      <div class="quick-card-desc">Install, setup, InsecureLibs, proxy config, first run.</div>
+    </div>
+    <div class="quick-card" onclick="showViewHex('hx-view-guide-arch')">
+      <div class="quick-card-title">▶ ARCHITECTURE</div>
+      <div class="quick-card-desc">get_custom_object state, dispatch maps, Result &amp; Exploit objects.</div>
+    </div>
+    <div class="quick-card" onclick="showViewHex('hx-view-guide-stack')">
+      <div class="quick-card-title">▶ SESSION STACK</div>
+      <div class="quick-card-desc">g.Target prototype, context navigation, swap and jump.</div>
+    </div>
+    <div class="quick-card" onclick="showViewHex('hx-view-guide-exploit')">
+      <div class="quick-card-title">▶ EXPLOIT WORKFLOW</div>
+      <div class="quick-card-desc">scan → hack → decipher. Exploit object, Result pattern.</div>
+    </div>
+    <div class="quick-card" onclick="showViewHex('hx-view-guide-proxy')">
+      <div class="quick-card-title">▶ PROXY CHAIN</div>
+      <div class="quick-card-desc">Multi-hop SSH proxies, proxy command, auto-routing.</div>
+    </div>
+    <div class="quick-card" onclick="showViewHex('hx-view-guide-nuke')">
+      <div class="quick-card-title">▶ NUKE OPERATIONS</div>
+      <div class="quick-card-desc">Hard nuke, soft nuke, mail nuke, network-wide net ops.</div>
+    </div>
+  </div>
+
+  <div class="sec-title" style="margin-top:28px;">EXPLOIT CHAIN</div>
+  <div class="flow-chain">
+    <div class="flow-node">scan [ip] [port]</div><div class="flow-arrow">→</div>
+    <div class="flow-node">hack [ip] [port]</div><div class="flow-arrow">→</div>
+    <div class="flow-node">swap [index]</div><div class="flow-arrow">→</div>
+    <div class="flow-node">decipher</div><div class="flow-arrow">→</div>
+    <div class="flow-node">log -a</div>
+  </div>
+</div>
+
+<!-- HEX CMDS VIEW -->
+<div class="view" id="hx-view-cmds">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+    <div class="sec-title" id="hx-cmdViewTitle" style="margin:0">COMMANDS</div>
+    <span id="hx-cmdViewCount" style="color:var(--text-dim);font-size:0.8rem"></span>
+  </div>
+  <div id="hx-cmdGrid"></div>
+</div>
+
+<!-- HEX GUIDE: GETTING STARTED -->
+<div class="view" id="hx-view-guide-start">
+<div class="guide-wrap">
+<div class="guide-h1">Getting Started</div>
+<div class="guide-divider"></div>
+
+<div class="guide-h2">Requirements</div>
+<div class="guide-p">HEX requires the following before exploitation commands will function:</div>
+<table class="spec-table"><thead><tr><th>PATH</th><th>PURPOSE</th></tr></thead><tbody>
+<tr><td>/root/InsecureLibs/init.so</td><td>Insecure lib for <span class="inline-cmd">poison</span> and LAN bounce exploits</td></tr>
+<tr><td>/root/SecureLibs/librshell.so</td><td>Required for <span class="inline-cmd">rshell start</span></td></tr>
+</tbody></table>
+
+<div class="guide-h2">1. OBTAIN HEX</div>
+<div class="guide-p">HEX source is available on GitHub. Clone or download the repository to get all GreyScript source files:</div>
+<div class="code-block"><span class="cb-label">GITHUB</span>https://github.com/redit0/hex-tool</div>
+
+<div class="guide-h2">2. REQUIRED LIBRARIES</div>
+<div class="guide-p">HEX uses <b>metaxploit.so</b> and <b>crypto.so</b>. These are loaded automatically at startup if available in the system. Ensure they're installed:</div>
+<div class="code-block">apt-get addrepo [HACKSHOP_IP]
+apt-get update
+apt-get install metaxploit /lib
+apt-get install crypto /lib</div>
+
+<div class="guide-h2">3. INSTALL GREYBEL-VS</div>
+<div class="guide-p"><b>Recommended compilation method:</b> Open VS Code and install the <b>Greybel VS</b> extension from the marketplace (search <span class="inline-cmd">greybel-vs</span>). Open the <span class="inline-cmd">hex-tool</span> folder in VS Code, then open <code>src/hex.src</code> and run <b>Greybel: Build file from context</b>. Compiled output will be saved to the <code>build/</code> folder.</div>
+
+<div class="guide-h2">4. OPTIONAL: SETUP MESSAGE HOOK (FOR AUTO-IMPORT)</div>
+<div class="guide-p">To enable automatic file creation and compilation directly in-game, install the <b>Message Hook.dll</b> — a BepInEx plugin that bridges VS Code and Grey Hack. <b>This step is optional</b> — you can use the Installer mode instead if you prefer.</div>
+<div class="guide-h3"><a class="gh-steam-link align-center" href="https://github.com/BepInEx/BepInEx/releases/tag/v5.4.23.2">BepInEx 5.x (RECOMMENDED)</a></div>
+<div class="guide-p">1. Download <b>BepInEx v5.4.23.2</b> from GitHub and extract it into your Grey Hack game folder (where <code>Grey Hack.exe</code> is located)</div>
+<div class="guide-p">2. Download <a style="color:var(--secondary);text-decoration:underline;text-decoration-color:var(--text-dim)" href="https://gist.github.com/ayecue/b45998fa9a8869e4bbfff0f448ac98f9/raw/ff8d7b0cb18b1ecd5a833b053ca05cbc5670628c/GreyHackMessageHook5.dll">GreyHackMessageHook5.dll</a> and place it in <code>BepInEx/plugins/</code></div>
+<div class="guide-p">3. Launch Grey Hack via Steam — BepInEx initializes automatically on Windows</div>
+<div class="guide-h3"><a class="gh-steam-link align-center" href="https://github.com/BepInEx/BepInEx/releases/tag/v6.0.0-pre.2">BepInEx 6.x (PRE-RELEASE)</a></div>
+<div class="guide-p">Alternatively, for newer systems (less stable): Download <b>BepInEx 6.0.0-pre.2 Unity.Mono</b>, extract to your game folder, place <a style="color:var(--secondary);text-decoration:underline;text-decoration-color:var(--text-dim)" href="https://gist.github.com/ayecue/b45998fa9a8869e4bbfff0f448ac98f9/raw/ff8d7b0cb18b1ecd5a833b053ca05cbc5670628c/GreyHackMessageHook.dll">GreyHackMessageHook.dll</a> in <code>BepInEx/plugins/</code>, and launch Grey Hack.</div>
+
+<div class="guide-h2">5. BUILD OPTIONS</div>
+<div class="guide-h3">OPTION A — GREYBEL AUTO-IMPORT (RECOMMENDED WITH MESSAGE HOOK)</div>
+<div class="guide-p">If you installed BepInEx above, configure VS Code settings to enable automatic file creation in-game:</div>
+<div class="code-block"><span class="cb-label">GREYBEL-VS SETTINGS</span>Create in-game > Active: true
+Create in-game > Auto Compile: true (optional)
+Transpiler > In-game Directory: /root/</div>
+<div class="guide-p">When you build in VS Code, files are automatically created and compiled in-game. No manual copy-paste needed.</div>
+
+<div class="guide-h3">OPTION B — GREYBEL INSTALLER (NO HOOK REQUIRED)</div>
+<div class="guide-p">If you don't have BepInEx installed, use Installer mode:</div>
+<div class="code-block"><span class="cb-label">GREYBEL-VS SETTINGS</span>Greybel > Transpiler > Installer > Active: true
+Installer > Auto Compile: true (optional)</div>
+<div class="guide-p">Build the project — Greybel generates installer `.src` files. Copy-paste each installer file's code into the Grey Hack script editor and compile. Run the installers in order to recreate the entire project in-game.</div>
+<div class="tip-box"><div class="tip-label">FILE SIZE LIMIT</div>If an installer exceeds ~160,000 characters, Greybel splits it automatically. Compile all installers in order.</div>
+
+<div class="guide-h3">OPTION C — MANUAL IN-GAME BUILD</div>
+<div class="guide-p">Copy source files from the repository into <code>/root/src</code> on your in-game machine. From a root terminal, compile:</div>
+<div class="code-block">cd /root/src
+build hex.src /root/</div>
+
+<div class="guide-h2">6. LAUNCH HEX</div>
+<div class="guide-p">Once compiled, move the binary to <code>/bin/</code> for easy access, then launch:</div>
+<div class="code-block">hex</div>
+<div class="guide-p">On first launch, HEX initializes all <span class="inline-cmd">get_custom_object</span> namespaces, loads the color system, registers built-in type extensions, and attaches local metaxploit and crypto libs if available.</div>
+
+<div class="guide-h2">7. CONFIGURE GAME MODE</div>
+<div class="guide-p">Edit <code>src/hex/constants.src</code> and uncomment the block matching your game mode. Rebuild after any changes:</div>
+<div class="code-block"><span class="cb-label">constants.src — OPTIONS</span>// Multiplayer (default)
+g.const.insecureComp = ["/root/InsecureLibs/init.so", "1.0.0", "0x32E65B93", "indopositionx"]
+
+// Nightly build servers
+// g.const.insecureComp = ["/root/InsecureLibs/init.so", "1.0.2", "0x7D6EE022", "stconobjecttransf"]
+
+// Singleplayer
+// g.const.insecureComp = ["/root/InsecureLibs/net.so", "1.0.0", "0x18EBA092", "redit0"]</div>
+<div class="warn-box"><div class="warn-label">MULTIPLAYER UPDATES</div>After any Grey Hack multiplayer update, verify that the <span class="inline-cmd">g.const.insecureComp</span> values match the current version. Mismatched exploit constants will cause <span class="inline-cmd">poison</span> and <span class="inline-cmd">net</span> operations to fail. Update and rebuild as needed.</div>
+
+<div class="guide-h2">8. POPULATE INSECURE LIBRARIES</div>
+<div class="guide-p">HEX uses vulnerable library files for exploitation. Create the following folders on your home computer and populate them with matching library versions:</div>
+<div class="code-block"><span class="cb-label">DIRECTORY SETUP</span>mkdir -p /root/InsecureLibs
+mkdir -p /root/SecureLibs</div>
+<div class="guide-h3">InsecureLibs</div>
+<div class="guide-p">Populate <code>/root/InsecureLibs/</code> with vulnerable <code>.so</code> files matching the versions configured in <span class="inline-cmd">constants.src</span>. These files are uploaded to target systems via the <span class="inline-cmd">poison</span> command to enable further exploitation.</div>
+
+<div class="guide-h3">SecureLibs</div>
+<div class="guide-p">Populate <code>/root/SecureLibs/</code> with <code>librshell.so</code>. This is required to use the <span class="inline-cmd">rshell start</span> command.</div>
+
+<div class="guide-h2">9. PROXY CONFIGURATION (OPTIONAL)</div>
+<div class="guide-p">HEX can pre-load proxies from two sources. Proxies are loaded automatically during proxy initialization:</div>
+<div class="guide-h3">Environment Variables (Greybel-VS Only)</div>
+<div class="guide-p">Configure in Greybel-VS transpiler environment variables:</div>
+<div class="code-block"><span class="cb-label">GREYBEL-VS TRANSPILER ENV</span>#envar proxies = [["1.2.3.4", 22, "user", "pass"], ["5.6.7.8", 22, "user2", "pass2"]]</div>
+
+<div class="guide-h3">Map.conf Files</div>
+<div class="guide-p">Create <code>Map.conf</code> files anywhere in the filesystem. HEX auto-scans the current file tree and loads proxy entries during proxy initialization. JSON format:</div>
+<div class="code-block"><span class="cb-label">Map.conf</span>[["1.2.3.4", 22, "user", "pass"], ["5.6.7.8", 22, "user2", "pass2"]]</div>
+<div class="tip-box"><div class="tip-label">TIP</div>Map.conf files are easier to manage than environment variables — store them in standard locations like <code>/root/</code> and HEX will find them automatically.</div>
+
+<div class="guide-h2">10. GREYBEL BUILD TYPES</div>
+<div class="guide-p">Configure the build output format in VS Code settings under <span class="inline-cmd">Greybel > Transpiler > Build Type</span>:</div>
+<table class="spec-table"><thead><tr><th>MODE</th><th>DESCRIPTION</th></tr></thead><tbody>
+<tr><td>Default</td><td>No transformation; best general-purpose output</td></tr>
+<tr><td>Uglify</td><td><b>NOT SUPPORTED</b> — HEX will not work if uglified</td></tr>
+<tr><td>Beautify</td><td>Formats code for readability (slower execution)</td></tr>
+</tbody></table>
+<div class="warn-box"><div class="warn-label">BUILD TYPE WARNING</div>Do not use the <b>Uglify</b> build type. HEX is not compatible with minified output. Always use <b>Default</b> or <b>Beautify</b>.</div>
+</div>
+</div>
+
+<!-- HEX GUIDE: ARCHITECTURE -->
+<div class="view" id="hx-view-guide-arch">
+<div class="guide-wrap">
+<div class="guide-h1">Architecture Overview</div>
+<div class="guide-divider"></div>
+
+<div class="guide-h2">Architecture C: get_custom_object</div>
+<div class="guide-p">HEX uses Architecture C — all persistent state lives on <span class="inline-cmd">get_custom_object</span> (referenced as <span class="inline-cmd">g</span>). State survives nested <span class="inline-cmd">shell.launch</span> calls without using <span class="inline-cmd">globals.*</span>. All namespaces are initialized at startup with <span class="inline-cmd">hasIndex</span> guards.</div>
+<div class="code-block"><span class="cb-label">STATE INIT</span>g = get_custom_object
+if not g.hasIndex("tools")   then g.tools   = {}
+if not g.hasIndex("util")    then g.util    = {}
+if not g.hasIndex("fs")      then g.fs      = {}
+if not g.hasIndex("func")    then g.func    = {}
+if not g.hasIndex("stack")   then g.stack   = {}
+if not g.hasIndex("context") then g.context = {}</div>
+
+<div class="guide-h2">Dispatch Maps</div>
+<table class="spec-table"><thead><tr><th>MAP</th><th>PURPOSE</th><th>COMMANDS</th></tr></thead><tbody>
+<tr><td>g.tools</td><td>Exploitation &amp; recon</td><td>scan, nmap, hack, decipher, rshell, poison, net, sniffer</td></tr>
+<tr><td>g.util</td><td>Utility commands</td><td>stack, swap, jump, proxy, log, tree, apt-get, terminal, lockdown</td></tr>
+<tr><td>g.fs</td><td>Filesystem operations</td><td>cd, rm, ps, kill, reboot</td></tr>
+</tbody></table>
+
+<div class="guide-h2">Result Object</div>
+<div class="guide-p">HEX uses a <span class="inline-cmd">Result</span> object for all return values. Check <span class="inline-cmd">.success</span> before using <span class="inline-cmd">.data</span>:</div>
+<div class="code-block"><span class="cb-label">RESULT PATTERN</span>r = Result.New(success, data, output)
+// success: 1 = ok, 0 = fail  |  data: payload  |  output: message
+
+if not r.success then
+    print r.output
+    return
+end if
+// use r.data</div>
+
+<div class="guide-h2">Exploit Object</div>
+<div class="guide-p">The <span class="inline-cmd">Exploit</span> class wraps a single metaxploit overflow. Used internally by <span class="inline-cmd">scan</span> and <span class="inline-cmd">hack</span>:</div>
+<div class="code-block"><span class="cb-label">EXPLOIT OBJECT</span>e = Exploit.New(metaLib, "0x32E65B93", "indopositionx")
+r = e.Overflow()         // optional extra arg for inject value
+
+if r.success then
+    shell = r.data       // shell / computer / file object
+    user  = e.result.user
+end if</div>
+
+<div class="guide-h2">Color System</div>
+<div class="guide-p">Colors are stored in <span class="inline-cmd">g.colors</span> as hex strings. Each key auto-generates a formatter at <span class="inline-cmd">g[key](str)</span>:</div>
+<table class="spec-table"><thead><tr><th>KEYS</th><th>SHADE</th><th>USE</th></tr></thead><tbody>
+<tr><td>b1 – b5</td><td>Blue</td><td>Primary UI, commands</td></tr>
+<tr><td>s1 – s4</td><td>Slate / purple</td><td>Secondary elements</td></tr>
+<tr><td>r1</td><td>Red</td><td>Errors, root user indicator</td></tr>
+<tr><td>o1</td><td>Orange</td><td>Warnings</td></tr>
+<tr><td>g1 – g2</td><td>Green</td><td>Success, exploit hits</td></tr>
+<tr><td>l1 – l3</td><td>Light / tan</td><td>Filenames, hostnames, labels</td></tr>
+<tr><td>y1</td><td>Yellow</td><td>Alert warnings</td></tr>
+</tbody></table>
+<div class="code-block"><span class="cb-label">COLOR USAGE</span>g.b3("text")         // → "&lt;color=#37b3cc&gt;&lt;b&gt;text&lt;/b&gt;&lt;/color&gt;"
+g.error("message")   // → g.r1("    [Error] message")
+g.func.format(str, ["u", "size=90%"])  // wrap with extra tags</div>
+</div>
+</div>
+
+<!-- HEX GUIDE: SESSION STACK -->
+<div class="view" id="hx-view-guide-stack">
+<div class="guide-wrap">
+<div class="guide-h1">Session Stack</div>
+<div class="guide-divider"></div>
+
+<div class="guide-h2">Context Stack Overview</div>
+<div class="guide-p">HEX maintains a context stack in <span class="inline-cmd">g.stack</span> — a map keyed by string integers (<span class="inline-cmd">"0"</span>, <span class="inline-cmd">"1"</span>, ...). The active context index is stored at <span class="inline-cmd">g.context.index</span>. Index <span class="inline-cmd">"0"</span> is always the home context.</div>
+<div class="code-block"><span class="cb-label">STACK ACCESS</span>g.stack["0"]                  // home context (always index "0")
+g.context.index               // current active index (string)
+g.stack[g.context.index]      // active context object</div>
+
+<div class="guide-h2">g.Target Fields</div>
+<table class="spec-table"><thead><tr><th>FIELD</th><th>TYPE</th><th>DESCRIPTION</th></tr></thead><tbody>
+<tr><td>type</td><td>string</td><td>"shell" | "computer" | "file"</td></tr>
+<tr><td>source</td><td>string</td><td>How acquired: "home", "overflow", "proxy (N)"</td></tr>
+<tr><td>shell</td><td>shell</td><td>Shell object (populated when type == "shell")</td></tr>
+<tr><td>computer</td><td>computer</td><td>Computer object</td></tr>
+<tr><td>file</td><td>file</td><td>Working directory file object</td></tr>
+<tr><td>user</td><td>string</td><td>Resolved username</td></tr>
+<tr><td>currentPath</td><td>string</td><td>Active working path (default "/")</td></tr>
+<tr><td>metax</td><td>metaLib</td><td>Attached metaxploit lib</td></tr>
+<tr><td>crypto</td><td>cryptoLib</td><td>Attached crypto lib</td></tr>
+<tr><td>public / local</td><td>string</td><td>Public and LAN IP strings</td></tr>
+</tbody></table>
+
+<div class="guide-h2">Navigating the Stack</div>
+<div class="code-block"><span class="cb-label">NAVIGATION COMMANDS</span>stack         // display all contexts in the stack
+swap 1        // switch active context to index 1
+swap 0        // return to home context
+stack -c      // clear all non-home stack entries</div>
+
+<div class="guide-h2">Creating Contexts</div>
+<div class="guide-p">New contexts are added automatically by <span class="inline-cmd">hack</span> when an exploit succeeds. You can also create one manually from any shell/computer/file object using the registered extension:</div>
+<div class="code-block"><span class="cb-label">CREATE CONTEXT</span>ctx = someShellObject.createContext("overflow")
+ctx = someComputerObject.createContext("bounce")
+newIdx = g.stack.add(ctx, 1)   // add; returns new index string</div>
+
+<div class="guide-h2">Validation Helpers</div>
+<div class="code-block"><span class="cb-label">VALIDATION</span>g.func.checkShell(idx)     // returns 1 if g.stack[idx].shell is valid
+g.func.checkMetax(idx)     // returns 1 if metax lib is still valid
+g.func.checkMetax(idx, 1)  // silent check (no error print)</div>
+
+<div class="tip-box"><div class="tip-label">BUILT-IN EXTENSIONS</div>
+HEX registers helper methods on built-in types at startup. Any shell, computer, or file object gains: <span class="inline-cmd">.getUser()</span>, <span class="inline-cmd">.getType()</span>, <span class="inline-cmd">.getPublic()</span>, <span class="inline-cmd">.getLocal()</span>, <span class="inline-cmd">.createContext(source)</span>. Calling <span class="inline-cmd">getType()</span> on a home computer returns <span class="inline-cmd">"home"</span> (detected via Xorg process).
+</div>
+</div>
+</div>
+
+<!-- HEX GUIDE: EXPLOIT WORKFLOW -->
+<div class="view" id="hx-view-guide-exploit">
+<div class="guide-wrap">
+<div class="guide-h1">Exploit Workflow</div>
+<div class="guide-divider"></div>
+
+<div class="guide-h2">Standard Flow</div>
+<div class="flow-chain">
+  <div class="flow-node">scan [ip] [port]</div><div class="flow-arrow">→</div>
+  <div class="flow-node">hack [ip] [port]</div><div class="flow-arrow">→</div>
+  <div class="flow-node">swap [n]</div><div class="flow-arrow">→</div>
+  <div class="flow-node">decipher</div><div class="flow-arrow">→</div>
+  <div class="flow-node">log -a</div>
+</div>
+
+<div class="guide-h2">scan</div>
+<div class="guide-p"><span class="inline-cmd">scan</span> opens a net session on the target port, dumps the running lib, scans all memory addresses, and caches exploitable vulnerabilities into <span class="inline-cmd">g.database</span>. Results are grouped by lib/address and displayed with color-coded access levels.</div>
+<div class="code-block"><span class="cb-label">SCAN</span>scan 1.2.3.4 22     // scan specific port
+scan 1.2.3.4        // scan all open ports
+scan init.so        // scan a local lib by filename</div>
+
+<div class="guide-h2">hack</div>
+<div class="guide-p"><span class="inline-cmd">hack</span> fires all cached exploits from <span class="inline-cmd">g.database</span> against the target. Each successful overflow wraps the result in a <span class="inline-cmd">g.Target</span> and pushes it onto the stack. Use <span class="inline-cmd">swap</span> to navigate to the new context.</div>
+<div class="code-block"><span class="cb-label">HACK</span>hack 1.2.3.4 22     // exploit port; add results to stack
+hack 1.2.3.4        // exploit all ports
+hack -l init.so     // exploit a local lib
+hack -l 192.168.1.1 // LAN bounce via local IP (requires poison first)</div>
+
+<div class="guide-h2">decipher</div>
+<div class="guide-p">Decrypts credentials on the current context's computer. Operates on <span class="inline-cmd">/etc/passwd</span> hashes and optionally on bank/mail credential files:</div>
+<div class="code-block"><span class="cb-label">DECIPHER</span>decipher          // crack /etc/passwd hashes on current context
+decipher all      // crack passwd + bank + mail files
+decipher bank     // crack bank password only
+decipher mail     // crack mail password only
+decipher hash     // interactive: enter hash manually</div>
+
+<div class="guide-h2">Vulnerability Database</div>
+<div class="guide-p">Scan results are cached in <span class="inline-cmd">g.database</span> so <span class="inline-cmd">hack</span> can fire without a repeat scan. Cache persists across sessions via <span class="inline-cmd">get_custom_object</span>:</div>
+<div class="code-block"><span class="cb-label">DATABASE STRUCTURE</span>g.database[libName][version][address][value] = resultType
+// resultType: "shell" | "computer" | "file" | "" (untested yet)</div>
+
+<div class="tip-box"><div class="tip-label">LAN BOUNCE</div>
+When attacking a router (port 0), use <span class="inline-cmd">hack -l [lanIP]</span> to exploit via LAN bounce using the insecure lib at <span class="inline-cmd">g.const.insecureComp</span>. Requires <span class="inline-cmd">poison</span> to first upload the insecure lib to target's <span class="inline-cmd">/lib/</span>.
+</div>
+<div class="warn-box"><div class="warn-label">VERSION MISMATCH</div>
+The constants at <span class="inline-cmd">g.const.insecureComp</span> / <span class="inline-cmd">g.const.insecureShell</span> are version-specific. After any Grey Hack update, re-verify these values before running <span class="inline-cmd">poison</span> or <span class="inline-cmd">net</span>.
+</div>
+</div>
+</div>
+
+<!-- HEX GUIDE: PROXY CHAIN -->
+<div class="view" id="hx-view-guide-proxy">
+<div class="guide-wrap">
+<div class="guide-h1">Proxy Chain</div>
+<div class="guide-divider"></div>
+
+<div class="guide-h2">Overview</div>
+<div class="guide-p">HEX supports multi-hop proxy chains via SSH. When a proxy is active, <span class="inline-cmd">scan</span> and <span class="inline-cmd">hack</span> automatically route all non-LAN operations through it, keeping your home IP out of target logs.</div>
+
+<div class="guide-h2">Loading Proxies</div>
+<table class="spec-table"><thead><tr><th>SOURCE</th><th>FORMAT</th><th>LOAD TIME</th></tr></thead><tbody>
+<tr><td>$proxies env var</td><td>JSON list: [ip, port, user, pass][]</td><td>At startup</td></tr>
+<tr><td>Map.conf files</td><td>Scanned from current filesystem</td><td>During proxy initialization (g.func.getMap)</td></tr>
+</tbody></table>
+
+<div class="guide-h2">proxy Command</div>
+<div class="code-block"><span class="cb-label">PROXY</span>proxy help    // show command usage
+proxy 1        // activate stack index 1 as the proxy hop
+proxy -s       // connect through all configured $proxies in sequence
+proxy -c       // corrupt logs on all active proxy hops
+proxy -d       // disconnect all proxies and remove from stack</div>
+
+<div class="guide-h2">Proxy Chain Flow</div>
+<div class="flow-chain">
+  <div class="flow-node">home</div><div class="flow-arrow">→</div>
+  <div class="flow-node">proxy hop 1</div><div class="flow-arrow">→</div>
+  <div class="flow-node">proxy hop 2</div><div class="flow-arrow">→</div>
+  <div class="flow-node">target</div>
+</div>
+
+<div class="guide-h2">Manual Proxy Setup</div>
+<div class="code-block"><span class="cb-label">INTERNAL API</span>// Add a hop manually (connects via SSH, optionally activates metaxploit)
+g.func.add_proxy("1.2.3.4", 22, "user", "pass", 1)
+// final=1 → activates metaxploit on this hop and sets as g.proxy
+
+// Promote an existing stack entry to proxy role
+g.func.set_proxy("2")   // stack index "2" becomes the active proxy</div>
+
+<div class="tip-box"><div class="tip-label">CLEANUP ORDER</div>
+Always run <span class="inline-cmd">proxy -c</span> before <span class="inline-cmd">proxy -d</span> to corrupt logs on all proxy hops before disconnecting. Or use <span class="inline-cmd">g.func.clean_proxies(1)</span> to do both in one call.
+</div>
+</div>
+</div>
+
+<!-- HEX GUIDE: NUKE OPERATIONS -->
+<div class="view" id="hx-view-guide-nuke">
+<div class="guide-wrap">
+<div class="guide-h1">Nuke Operations</div>
+<div class="guide-divider"></div>
+
+<div class="warn-box"><div class="warn-label">DESTRUCTIVE — IRREVERSIBLE</div>
+Nuke operations cannot be undone in-game. A hard nuke renders a target system permanently unbootable. Always verify the active context before running any nuke command.
+</div>
+
+<div class="guide-h2">Nuke Levels</div>
+<table class="spec-table"><thead><tr><th>LEVEL</th><th>FUNCTION</th><th>EFFECT</th></tr></thead><tbody>
+<tr><td>Hard Nuke</td><td>g.func.nuke_hard(file)</td><td>Delete /lib, /sys, /boot — system unbootable</td></tr>
+<tr><td>Soft Nuke</td><td>g.func.nuke_soft(file)</td><td>Prepend "_" to all files — binaries unexecutable</td></tr>
+<tr><td>Mail Nuke</td><td>g.func.nuke_mail(file)</td><td>Clear Mail.txt, Bank.txt, passwd files</td></tr>
+</tbody></table>
+
+<div class="guide-h2">net Command — Network-Wide Operations</div>
+<div class="guide-p">The <span class="inline-cmd">net</span> command coordinates operations across multiple targets simultaneously:</div>
+<div class="code-block"><span class="cb-label">NET</span>net -a      // map entire network (build computer list)
+net -b      // full sweep: scan + hack all reachable hosts
+net -l      // list all discovered network computers
+net -m      // multi-decipher on all context stack entries
+net -n      // nuke all stack entries (hard nuke)
+net -nm     // nuke + mail wipe on all stack entries
+net -p      // poison all stack entries (upload insecure libs)
+net -s      // sniffer capture then stop
+net -z      // corrupt logs on all stack entries</div>
+
+<div class="guide-h2">Log Cleanup</div>
+<div class="guide-p">After any operation, corrupt logs to remove your traces. The <span class="inline-cmd">log</span> command operates on the current context:</div>
+<div class="code-block"><span class="cb-label">LOG</span>log       // corrupt log on current context
+log -a    // corrupt logs on ALL stack entries
+log -d    // delete (not just corrupt) log on current context</div>
+
+<div class="tip-box"><div class="tip-label">LOCKDOWN</div>
+<span class="inline-cmd">lockdown</span> is the defensive counterpart to nuke — it secures the current context by removing world/group write permissions on critical files and deleting guest credentials. Use on your home system or on captured targets you intend to hold.
+</div>
+</div>
+</div>
+
+<p style="width:fit-content; margin: 1.5rem auto 0.5rem; color:var(--label-grey); font-size:0.75rem; letter-spacing:0.08em;"><span style="color:var(--tool-hex)">HEX</span> Tool Created By: @REDIT0</p>
+<p style="width:fit-content; margin: 0.5rem auto 1.5rem; color:var(--label-grey); font-size:0.75rem; letter-spacing:0.08em;">Hacktool Documentation Portal</p>
+
+</main>
+</div><!-- /layout -->
+</div><!-- /toolspace-hex -->
+
+
+
+<!-- ─── VIPER TOOLSPACE ──────────────────────────────────────── -->
+<div id="toolspace-viper" class="toolspace">
+
+<header class="header">
+  <div style="display:flex;align-items:center;gap:16px;">
+    <button class="hub-back" onclick="showHub()">◁ HUB</button>
+    <div>
+      <div class="logo"><span style="color:var(--tool-viper);text-shadow:0 0 12px rgba(200,134,10,0.4)">VIPER</span> - <span><span class="gh-link" onclick="openGHModal()">Grey Hack</span> Hacktool // Command Reference</span></div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="header-badge"><span class="dot" style="background:#c8860a;box-shadow:0 0 8px rgba(200,134,10,0.8)"></span> LEGACY</div>
+    <div class="header-badge"><span class="dot sec"></span> <span class="gh-link" style="text-decoration-color:var(--text-dim)" onclick="openGHModal()">GREY HACK</span></div>
+  </div>
+</header>
+
+<div class="layout">
+
+<div class="sidebar">
+  <div class="sidebar-top">
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input type="text" id="vp-searchInput" placeholder="search commands...">
+    </div>
+    <div class="cat-count">
+      <span id="vp-cmdCount">0 commands</span>
+      <span id="vp-filteredCount"></span>
+    </div>
+    <div style="padding:4px 0 0;"><span style="color:var(--tool-viper);font-size:0.7rem;letter-spacing:0.08em">⚠ DEPRECATED TOOL</span></div>
+  </div>
+  <nav class="sidebar-nav" id="vp-sidebarNav"></nav>
+</div>
+
+<main class="content" id="vp-mainContent">
+
+<!-- VIPER HOME -->
+<div class="view active" id="vp-view-home">
+  <div class="warn-box" style="margin-bottom:28px;">
+    <div class="warn-label">⚠ DEPRECATED — ARCHIVE REFERENCE ONLY</div>
+    <strong>Viper 3.0 is no longer actively maintained.</strong> This documentation is preserved as an architectural reference for the ExtensionMediator (Architecture A) pattern. Do not use Viper 3.0 as a foundation for new hacktools — consider 5hell (Architecture B) or HEX (Architecture C) instead.
+  </div>
+
+  <div class="home-hero">
+    <div class="hero-title" style="color:#c8860a;text-shadow:0 0 12px rgba(200,134,10,0.5),0 0 24px rgba(200,134,10,0.2)">VIPER</div>
+    <div class="hero-sub"><span class="gh-link" style="text-decoration-color:var(--text-dim)" onclick="openGHModal()">GREY HACK</span> HACKTOOL — ARCHITECTURE REFERENCE</div>
+    <div class="hero-divider" style="background:linear-gradient(90deg,transparent,#c8860a,transparent)"></div>
+    <div class="guide-p" style="max-width:600px;margin:0 auto;text-align:center;">
+      Viper 3.0 by @cantemizyurek. Architecture A — ExtensionMediator dependency injection framework with typed sessions, structured commands, parameter validation, UI/theme layer, and macro system.
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card" style="border-color:#c8860a44"><div class="stat-n" id="vp-totalCmds" style="color:#c8860a">0</div><div class="stat-l">COMMANDS</div></div>
+    <div class="stat-card" style="border-color:#c8860a44"><div class="stat-n" style="color:#c8860a">5</div><div class="stat-l">CATEGORIES</div></div>
+    <div class="stat-card" style="border-color:#c8860a44"><div class="stat-n" style="color:#c8860a">4</div><div class="stat-l">GUIDE SECTIONS</div></div>
+    <div class="stat-card" style="border-color:#c8860a44"><div class="stat-n" style="color:#c8860a">⚠</div><div class="stat-l">DEPRECATED</div></div>
+  </div>
+
+  <div class="sec-title">REFERENCE</div>
+  <div class="quick-grid">
+    <div class="quick-card" onclick="showCategoryViper('all')">
+      <div class="quick-card-title">▶ ALL COMMANDS</div>
+      <div class="quick-card-desc">Browse all Viper 3.0 commands across filesystem, network, exploit, session, and system categories.</div>
+    </div>
+    <div class="quick-card" onclick="showViewViper('vp-view-guide-overview')">
+      <div class="quick-card-title">▶ OVERVIEW &amp; ARCHITECTURE</div>
+      <div class="quick-card-desc">ExtensionMediator DI pattern, project structure, manager wiring.</div>
+    </div>
+    <div class="quick-card" onclick="showViewViper('vp-view-guide-session')">
+      <div class="quick-card-title">▶ SESSION SYSTEM</div>
+      <div class="quick-card-desc">Session types, session manager, navigation, handler interface.</div>
+    </div>
+    <div class="quick-card" onclick="showViewViper('vp-view-guide-commands')">
+      <div class="quick-card-title">▶ COMMAND SYSTEM</div>
+      <div class="quick-card-desc">Command registration, parameter types, permission levels.</div>
+    </div>
+    <div class="quick-card" onclick="showViewViper('vp-view-guide-ui')">
+      <div class="quick-card-title">▶ UI &amp; THEME</div>
+      <div class="quick-card-desc">ThemeManager, colorText(), macro system, config persistence.</div>
+    </div>
+  </div>
+</div>
+
+<!-- VIPER CMDS VIEW -->
+<div class="view" id="vp-view-cmds">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+    <div class="sec-title" id="vp-cmdViewTitle" style="margin:0">COMMANDS</div>
+    <span id="vp-cmdViewCount" style="color:var(--text-dim);font-size:0.8rem"></span>
+  </div>
+  <div id="vp-cmdGrid"></div>
+</div>
+
+<!-- VIPER GUIDE: OVERVIEW -->
+<div class="view" id="vp-view-guide-overview">
+<div class="guide-wrap">
+<div class="guide-h1">Overview &amp; Architecture</div>
+<div class="guide-divider"></div>
+
+<div class="warn-box" style="margin-bottom:24px;"><div class="warn-label">DEPRECATED</div>
+Documented for historical reference. Viper 3.0 is no longer actively maintained.
+</div>
+
+<div class="guide-h2">Architecture A: ExtensionMediator</div>
+<div class="guide-p">Viper uses a dependency injection bus called <span class="inline-cmd">ExtensionMediator</span>. All managers are registered on a single mediator object and communicate exclusively through it — no direct manager-to-manager references.</div>
+<div class="code-block"><span class="cb-label">MEDIATOR WIRING</span>mediator = ExtensionMediator.New()
+mediator.addExtension("commandManager",  CommandManager.New())
+mediator.addExtension("sessionManager",  SessionManager.New())
+mediator.addExtension("themeManager",    ThemeManager.New())
+mediator.addExtension("macroManager",    MacroManager.New())
+mediator.addExtension("configManager",   ConfigManager.New())
+mediator.addExtension("libManager",      LibManager.New())
+
+// Access from any manager:
+sessionMgr = self.mediator.getExtension("sessionManager")</div>
+
+<div class="guide-h2">Project Structure</div>
+<table class="spec-table"><thead><tr><th>FILE / FOLDER</th><th>PURPOSE</th></tr></thead><tbody>
+<tr><td>main.src</td><td>Entry point: imports, init(), main loop</td></tr>
+<tr><td>mediator.src</td><td>ExtensionMediator (DI bus)</td></tr>
+<tr><td>commands.src</td><td>All Command registrations</td></tr>
+<tr><td>managers/command/</td><td>CommandManager, Command, Parameter type definitions</td></tr>
+<tr><td>managers/session/</td><td>SessionManager, Session factory, handler types</td></tr>
+<tr><td>managers/ui/</td><td>UI print/display logic (tables, prompt, splash)</td></tr>
+<tr><td>managers/theme/</td><td>ThemeManager — hex color map, colorText() helper</td></tr>
+<tr><td>managers/macro/</td><td>MacroManager — load and execute macros from files</td></tr>
+<tr><td>managers/config/</td><td>ConfigManager — load/save JSON config to disk</td></tr>
+<tr><td>managers/lib/</td><td>LibManager — cache metaxploit/crypto lib handles</td></tr>
+<tr><td>libs/error.src</td><td>Error object — never use raw strings for errors</td></tr>
+</tbody></table>
+
+<div class="guide-h2">Error Object Pattern</div>
+<div class="guide-p">Never propagate errors as raw strings. Always use the <span class="inline-cmd">Error</span> object and check with <span class="inline-cmd">isa Error</span>:</div>
+<div class="code-block"><span class="cb-label">ERROR PATTERN</span>result = someManager.doThing(params)
+if result isa Error then
+    print result.message
+    return
+end if
+// success — use result</div>
+
+<div class="guide-h2">Singleton Pattern</div>
+<div class="guide-p">All managers use a singleton guard to prevent duplicate instantiation:</div>
+<div class="code-block"><span class="cb-label">SINGLETON</span>MyManager = {}
+MyManager.singleton = null
+MyManager.New = function()
+    if MyManager.singleton != null then return MyManager.singleton
+    result = new MyManager
+    MyManager.singleton = result
+    return result
+end function</div>
+</div>
+</div>
+
+<!-- VIPER GUIDE: SESSION SYSTEM -->
+<div class="view" id="vp-view-guide-session">
+<div class="guide-wrap">
+<div class="guide-h1">Session System</div>
+<div class="guide-divider"></div>
+
+<div class="guide-h2">Session Types</div>
+<div class="guide-p">Sessions wrap raw Grey Hack handler objects in a normalized interface so commands don't need to care which underlying type they're operating on:</div>
+<table class="spec-table"><thead><tr><th>TYPE</th><th>SOURCE</th><th>COVERS</th></tr></thead><tbody>
+<tr><td>ShellSession</td><td>get_shell() / SSH connect</td><td>shell + computer access</td></tr>
+<tr><td>ComputerSession</td><td>shell.host_computer</td><td>computer-level access only</td></tr>
+<tr><td>FileSession</td><td>computer.File(path)</td><td>file/folder operations only</td></tr>
+</tbody></table>
+
+<div class="guide-h2">Session Manager API</div>
+<div class="code-block"><span class="cb-label">SESSION MANAGER</span>// Add a session — type is auto-detected
+sessionManager.addSession(get_shell())         // ShellSession
+sessionManager.addSession(someComputer)        // ComputerSession
+
+// Navigate
+sessionManager.setCurrentSession(0)
+sessionManager.goBack()                        // pop session chain
+
+// Access current session handler
+handler = sessionManager.currentSession.handler
+handler.type()       // "shell" | "computer" | "file"
+handler.privilege()  // "root" | "user" | "guest"
+handler.user         // username string</div>
+
+<div class="guide-h2">Handler Interface</div>
+<div class="guide-p">Every session handler exposes a consistent interface regardless of the underlying object type:</div>
+<div class="code-block"><span class="cb-label">HANDLER METHODS</span>handler.getFile(path)            // → file facade or Error
+handler.getFiles(path)           // → list of file facades or Error
+handler.createFile(path, name)   // → file or Error
+handler.createFolder(path, name) // → 1 or Error
+handler.deleteFile(path)         // → 1 or Error
+handler.runBinary(path, params)  // → output or Error</div>
+
+<div class="tip-box"><div class="tip-label">PERMISSION SYSTEM</div>
+The <span class="inline-cmd">privilege()</span> method on a handler returns <span class="inline-cmd">"root"</span>, <span class="inline-cmd">"user"</span>, or <span class="inline-cmd">"guest"</span>. Commands declare their required privilege in their permission definition, and the CommandManager enforces this before the callback is called.
+</div>
+</div>
+</div>
+
+<!-- VIPER GUIDE: COMMAND SYSTEM -->
+<div class="view" id="vp-view-guide-commands">
+<div class="guide-wrap">
+<div class="guide-h1">Command System</div>
+<div class="guide-divider"></div>
+
+<div class="guide-h2">Defining a Command</div>
+<div class="guide-p">Commands are registered on the <span class="inline-cmd">CommandManager</span> using the <span class="inline-cmd">Command.New()</span> factory. Each command declares its name, description, typed parameters, required permissions, and a callback function.</div>
+<div class="code-block"><span class="cb-label">COMMAND DEFINITION</span>myCmd = Command.New({
+    "name": "ls",
+    "description": "List files in current directory",
+    "parameters": [
+        Parameter.New({
+            "name":     "path",
+            "required": false,
+            "type":     PARAMETER_TYPES.STRING,
+            "default":  "."
+        })
+    ],
+    "permissions": { "object": "file", "privilege": "guest" },
+    "callback": function(params, mediator)
+        sessionManager = mediator.getExtension("sessionManager")
+        // ... use params.path
+    end function
+})
+commandManager.registerCommand(myCmd)</div>
+
+<div class="guide-h2">Parameter Types</div>
+<table class="spec-table"><thead><tr><th>CONSTANT</th><th>BEHAVIOR</th></tr></thead><tbody>
+<tr><td>PARAMETER_TYPES.STRING</td><td>Any string value; passed through as-is</td></tr>
+<tr><td>PARAMETER_TYPES.NUMBER</td><td>Converts via to_int(); errors if non-numeric</td></tr>
+<tr><td>PARAMETER_TYPES.BOOLEAN</td><td>Accepts "true" / "false" strings</td></tr>
+<tr><td>PARAMETER_TYPES.FLAG</td><td>Present = true, absent = false</td></tr>
+<tr><td>PARAMETER_TYPES.OPTIONS</td><td>Must match a key from a declared options map</td></tr>
+<tr><td>PARAMETER_TYPES.REST</td><td>Consumes all remaining args as a single string</td></tr>
+</tbody></table>
+
+<div class="guide-h2">Permission Levels</div>
+<div class="guide-h3">Object Level (most → least permissive)</div>
+<table class="spec-table"><thead><tr><th>LEVEL</th><th>COVERS</th></tr></thead><tbody>
+<tr><td>"file"</td><td>Any session type — file, computer, or shell</td></tr>
+<tr><td>"computer"</td><td>Computer sessions and shell sessions</td></tr>
+<tr><td>"shell"</td><td>Shell sessions only</td></tr>
+</tbody></table>
+
+<div class="guide-h3" style="margin-top:16px;">Privilege Level (most → least permissive)</div>
+<table class="spec-table"><thead><tr><th>LEVEL</th><th>COVERS</th></tr></thead><tbody>
+<tr><td>"guest"</td><td>guest, user, and root users</td></tr>
+<tr><td>"user"</td><td>user and root users</td></tr>
+<tr><td>"root"</td><td>root only</td></tr>
+</tbody></table>
+</div>
+</div>
+
+<!-- VIPER GUIDE: UI & THEME -->
+<div class="view" id="vp-view-guide-ui">
+<div class="guide-wrap">
+<div class="guide-h1">UI &amp; Theme</div>
+<div class="guide-divider"></div>
+
+<div class="guide-h2">ThemeManager</div>
+<div class="guide-p">All output text is colored through the <span class="inline-cmd">ThemeManager</span>. Never hardcode color strings — always call <span class="inline-cmd">colorText()</span> with a theme color constant.</div>
+<div class="code-block"><span class="cb-label">THEME COLORS</span>themeManager = mediator.getExtension("themeManager")
+
+colored = themeManager.colorText(THEME_COLORS.INFO,    "some text")
+error   = themeManager.colorText(THEME_COLORS.ERROR,   "failed!")
+success = themeManager.colorText(THEME_COLORS.SUCCESS, "done")</div>
+
+<div class="guide-h2">Macro System</div>
+<div class="guide-p">Macros are plain text files stored in <span class="inline-cmd">Config/Macros/</span>, one command per line. The <span class="inline-cmd">MacroManager</span> loads and executes them through the command pipeline, applying the same parameter parsing and permission checks as interactive input.</div>
+<div class="code-block"><span class="cb-label">MACRO FILE (Config/Macros/mymacro.txt)</span>ls /root
+cd /root
+ls
+
+// Execute from the tool prompt:
+@mymacro</div>
+
+<div class="guide-h2">Config Persistence</div>
+<div class="guide-p">The <span class="inline-cmd">ConfigManager</span> loads and saves settings as JSON at <span class="inline-cmd">Config/&lt;toolname&gt;-config.json</span> in the user's home directory. Config is loaded once at startup and saved explicitly on write.</div>
+<div class="code-block"><span class="cb-label">CONFIG</span>configManager = mediator.getExtension("configManager")
+
+value = configManager.get("mySetting")
+configManager.set("mySetting", "newValue")
+configManager.save()   // serialize and write to disk</div>
+
+<div class="guide-h2">Library Manager</div>
+<div class="guide-p">The <span class="inline-cmd">LibManager</span> caches metaxploit and crypto lib handles for the current session, so commands don't need to call <span class="inline-cmd">include_lib</span> themselves.</div>
+<div class="code-block"><span class="cb-label">LIB MANAGER</span>libManager = mediator.getExtension("libManager")
+
+mx     = libManager.getMetaxploit()   // → metaxploit lib or null
+crypto = libManager.getCrypto()       // → crypto lib or null</div>
+
+<div class="tip-box"><div class="tip-label">OOP PATTERN</div>
+GreyScript has no <span class="inline-cmd">class</span> keyword. Architecture A uses map-based prototype objects with <span class="inline-cmd">.New()</span> factories and inherits via <span class="inline-cmd">new BaseType</span>. The <span class="inline-cmd">isa</span> operator checks prototype ancestry for type guards.
+</div>
+</div>
+</div>
+
+<p style="width:fit-content; margin: 1.5rem auto 0.5rem; color:var(--label-grey); font-size:0.75rem; letter-spacing:0.08em;"><span style="color:var(--tool-viper)">VIPER 3.0</span> Created By: @cantemizyurek</p>
+<p style="width:fit-content; margin: 0.5rem auto 1.5rem; color:var(--label-grey); font-size:0.75rem; letter-spacing:0.08em;">Hacktool Documentation Portal</p>
+
+</main>
+</div><!-- /layout -->
+</div><!-- /toolspace-viper -->
+
+
+<!-- ─── 5HELL TOOLSPACE ────────────────────────────────────────── -->
+<div id="toolspace-5hell" class="toolspace">
+
+<header class="header">
+  <div style="display:flex;align-items:center;gap:16px;">
+    <button class="hub-back" onclick="showHub()">◁ HUB</button>
+    <div>
+      <div class="logo"><span style="color:var(--tool-5hell);text-shadow:0 0 12px rgba(35,130,255,0.4)">5SHELL</span> - <span><span class="gh-link" onclick="openGHModal()">Grey Hack</span> Hacktool // Command Reference</span></div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="header-badge"><span class="dot"></span> ONLINE</div>
+    <div class="header-badge"><span class="dot sec"></span> <span class="gh-link" style="text-decoration-color:var(--text-dim)" onclick="openGHModal()">GREY HACK</span></div>
+  </div>
+</header>
+
+<div class="layout">
+
+<div class="sidebar">
+  <div class="sidebar-top">
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input type="text" id="sh-searchInput" placeholder="search commands...">
+    </div>
+    <div class="cat-count">
+      <span id="sh-cmdCount">0 commands</span>
+      <span id="sh-filteredCount"></span>
+    </div>
+  </div>
+  <nav class="sidebar-nav" id="sh-sidebarNav"></nav>
+</div>
+
+<main class="content" id="sh-mainContent">
+
+<div class="view active" id="sh-view-home">
+  <div class="home-hero">
+    <div class="hero-title" style="color:var(--tool-5hell);text-shadow:0 0 12px rgba(35,130,255,0.5),0 0 24px rgba(35,130,255,0.2)">5HELL</div>
+    <div class="hero-sub"><span class="gh-link" style="text-decoration-color:var(--text-dim)" onclick="openGHModal()">GREY HACK</span> HACKTOOL — COMMAND REFERENCE</div>
+    <div class="hero-divider"></div>
+    <div class="guide-p" style="max-width:600px;margin:0 auto;text-align:center;">
+      A comprehensive reference for all 5SHELL commands and features. Use the sidebar to browse commands by category or search for specific commands. Navigate guides for in-depth tutorials.
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-n" id="sh-totalCmds">100+</div><div class="stat-l">COMMANDS</div></div>
+    <div class="stat-card"><div class="stat-n">8</div><div class="stat-l">CATEGORIES</div></div>
+    <div class="stat-card"><div class="stat-n">6</div><div class="stat-l">GUIDE SECTIONS</div></div>
+    <div class="stat-card"><div class="stat-n">LOCAL</div><div class="stat-l">SOURCE AVAILABLE</div></div>
+  </div>
+</div>
+
+<div class="view" id="sh-view-cmds">
+  <div class="sec-title" id="sh-cmdViewTitle">COMMANDS</div>
+  <div class="cmd-grid" id="sh-cmdGrid"></div>
+</div>
+
+</main>
+</div><!-- /layout -->
+</div><!-- /toolspace-5hell -->
+
+
+<!-- ─── HEX TOOLSPACE ──────────────────────────────────────────── -->
+<div id="toolspace-hex" class="toolspace">
+
+<header class="header">
+  <div style="display:flex;align-items:center;gap:16px;">
+    <button class="hub-back" onclick="showHub()">◁ HUB</button>
+    <div>
+      <div class="logo"><span style="color:var(--tool-hex);text-shadow:0 0 12px rgba(22,207,240,0.4)">HEX</span> - <span><span class="gh-link" onclick="openGHModal()">Grey Hack</span> Hacktool // Command Reference</span></div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="header-badge"><span class="dot"></span> ONLINE</div>
+    <div class="header-badge"><span class="dot sec"></span> <span class="gh-link" style="text-decoration-color:var(--text-dim)" onclick="openGHModal()">GREY HACK</span></div>
+  </div>
+</header>
+
+<div class="layout">
+
+<div class="sidebar">
+  <div class="sidebar-top">
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input type="text" id="hx-searchInput" placeholder="search commands...">
+    </div>
+    <div class="cat-count">
+      <span id="hx-cmdCount">0 commands</span>
+      <span id="hx-filteredCount"></span>
+    </div>
+  </div>
+  <nav class="sidebar-nav" id="hx-sidebarNav"></nav>
+</div>
+
+<main class="content" id="hx-mainContent">
+
+<div class="view active" id="hx-view-home">
+  <div class="home-hero">
+    <div class="hero-title" style="color:var(--tool-hex);text-shadow:0 0 12px rgba(22,207,240,0.5),0 0 24px rgba(22,207,240,0.2)">HEX</div>
+    <div class="hero-sub"><span class="gh-link" style="text-decoration-color:var(--text-dim)" onclick="openGHModal()">GREY HACK</span> HACKTOOL — COMMAND REFERENCE</div>
+    <div class="hero-divider"></div>
+    <div class="guide-p" style="max-width:600px;margin:0 auto;text-align:center;">
+      A comprehensive reference for all HEX commands and features. Use the sidebar to browse commands by category or search for specific commands. Navigate guides for in-depth tutorials.
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-n" id="hx-totalCmds">20+</div><div class="stat-l">COMMANDS</div></div>
+    <div class="stat-card"><div class="stat-n">3</div><div class="stat-l">CATEGORIES</div></div>
+    <div class="stat-card"><div class="stat-n">6</div><div class="stat-l">GUIDE SECTIONS</div></div>
+    <div class="stat-card"><div class="stat-n">LOCAL</div><div class="stat-l">SOURCE AVAILABLE</div></div>
+  </div>
+</div>
+
+<div class="view" id="hx-view-cmds">
+  <div class="sec-title" id="hx-cmdViewTitle">COMMANDS</div>
+  <div class="cmd-grid" id="hx-cmdGrid"></div>
+</div>
+
+</main>
+</div><!-- /layout -->
+</div><!-- /toolspace-hex -->
+
+
+<!-- ─── VIPER TOOLSPACE ────────────────────────────────────────── -->
+<div id="toolspace-viper" class="toolspace">
+
+<header class="header">
+  <div style="display:flex;align-items:center;gap:16px;">
+    <button class="hub-back" onclick="showHub()">◁ HUB</button>
+    <div>
+      <div class="logo"><span style="color:var(--tool-viper);text-shadow:0 0 12px rgba(200,134,10,0.4)">VIPER</span> - <span><span class="gh-link" onclick="openGHModal()">Grey Hack</span> Hacktool // Command Reference</span></div>
+    </div>
+  </div>
+  <div style="padding:4px 0 0;"><span style="color:var(--tool-viper);font-size:0.7rem;letter-spacing:0.08em">⚠ DEPRECATED TOOL</span></div>
+  <div class="header-right">
+    <div class="header-badge"><span class="dot"></span> ONLINE</div>
+    <div class="header-badge"><span class="dot sec"></span> <span class="gh-link" style="text-decoration-color:var(--text-dim)" onclick="openGHModal()">GREY HACK</span></div>
+  </div>
+</header>
+
+<div class="layout">
+
+<div class="sidebar">
+  <div class="sidebar-top">
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input type="text" id="vp-searchInput" placeholder="search commands...">
+    </div>
+    <div class="cat-count">
+      <span id="vp-cmdCount">0 commands</span>
+      <span id="vp-filteredCount"></span>
+    </div>
+  </div>
+  <nav class="sidebar-nav" id="vp-sidebarNav"></nav>
+</div>
+
+<main class="content" id="vp-mainContent">
+
+<div class="view active" id="vp-view-home">
+  <div class="home-hero">
+    <div class="hero-title" style="color:var(--tool-viper);text-shadow:0 0 12px rgba(200,134,10,0.5),0 0 24px rgba(200,134,10,0.2)">VIPER</div>
+    <div style="padding:4px 0 0;"><span style="color:var(--tool-viper);font-size:0.7rem;letter-spacing:0.08em">⚠ DEPRECATED TOOL</span></div>
+    <div class="hero-sub"><span class="gh-link" style="text-decoration-color:var(--text-dim)" onclick="openGHModal()">GREY HACK</span> HACKTOOL — COMMAND REFERENCE</div>
+    <div class="hero-divider"></div>
+    <div class="guide-p" style="max-width:600px;margin:0 auto;text-align:center;">
+      Architecture reference for the ExtensionMediator pattern. VIPER is deprecated and no longer maintained — provided for reference only.
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card" style="border-color:var(--tool-viper)44"><div class="stat-n" id="vp-totalCmds" style="color:var(--tool-viper)">0</div><div class="stat-l">COMMANDS</div></div>
+    <div class="stat-card" style="border-color:var(--tool-viper)44"><div class="stat-n" style="color:var(--tool-viper)">5</div><div class="stat-l">CATEGORIES</div></div>
+    <div class="stat-card" style="border-color:var(--tool-viper)44"><div class="stat-n" style="color:var(--tool-viper)">4</div><div class="stat-l">GUIDE SECTIONS</div></div>
+    <div class="stat-card" style="border-color:var(--tool-viper)44"><div class="stat-n" style="color:var(--tool-viper)">⚠</div><div class="stat-l">DEPRECATED</div></div>
+  </div>
+</div>
+
+<div class="view" id="vp-view-cmds">
+  <div class="sec-title" id="vp-cmdViewTitle">COMMANDS</div>
+  <div class="cmd-grid" id="vp-cmdGrid"></div>
+</div>
+
+</main>
+</div><!-- /layout -->
+</div><!-- /toolspace-viper -->
+
+
+
+<!-- ─── GREYSCRIPT TOOLSPACE ──────────────────────────────────── -->
+<div id="toolspace-greyscript" class="toolspace">
+
+<header class="header">
+  <div style="display:flex;align-items:center;gap:16px;">
+    <button class="hub-back" onclick="showHub()">◁ HUB</button>
+    <div>
+      <div class="logo"><span style="color:var(--primary);text-shadow:var(--glow-sm)">GREYSCRIPT</span> - <span><span class="gh-link" onclick="openGHModal()">Grey Hack</span> Language Reference</span></div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="header-badge"><span class="dot"></span> ONLINE</div>
+    <div class="header-badge"><span class="dot sec"></span> <span class="gh-link" style="text-decoration-color:var(--text-dim)" onclick="openGHModal()">GREY HACK</span></div>
+    <div class="header-badge" style="color:var(--primary)">MINISCRIPT FORK</div>
+  </div>
+</header>
+
+<div class="layout">
+
+<div class="sidebar">
+  <div class="sidebar-top">
+    <div class="cat-count" style="padding:12px 0 0;">
+      <span style="color:var(--text-dim)">LANGUAGE REFERENCE</span>
+    </div>
+  </div>
+  <nav class="sidebar-nav" id="gs-sidebarNav"></nav>
+</div>
+
+<main class="content" id="gs-mainContent">
+
+<!-- GREYSCRIPT HOME -->
+<div class="view active" id="gs-view-home">
+  <div class="home-hero">
+    <div class="hero-title" style="color:var(--primary);text-shadow:var(--glow)">GREYSCRIPT</div>
+    <div class="hero-sub">THE <span class="gh-link" style="text-decoration-color:var(--text-dim)" onclick="openGHModal()">GREY HACK</span> SCRIPTING LANGUAGE — FULL REFERENCE</div>
+    <div class="hero-divider"></div>
+    <div class="guide-p" style="max-width:640px;margin:0 auto;text-align:center;">
+      GreyScript is a fork of <a href="https://miniscript.org" target="_blank" style="color:var(--secondary);text-decoration:underline;text-decoration-color:var(--text-dim)">MiniScript</a> with a full in-game API for shells, computers, networks, files, and services. Scripts run as compiled Grey Hack binaries or as interactive commands in hacktools. File size limit: <span class="inline-cmd">160,000 characters</span>.
+    </div>
+  </div>
+
+  <div class="sec-title">REFERENCE SECTIONS</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:32px;">
+    <div class="quick-card" onclick="showViewGs('gs-view-guide-lang')">
+      <div class="quick-card-title" style="color:var(--primary)">LANGUAGE BASICS</div>
+      <div class="quick-card-desc">Types, operators, variables, string ops, type checking.</div>
+    </div>
+    <div class="quick-card" onclick="showViewGs('gs-view-guide-flow')">
+      <div class="quick-card-title" style="color:var(--primary)">CONTROL FLOW</div>
+      <div class="quick-card-desc">if/else, while, for, break, continue, functions, scopes.</div>
+    </div>
+    <div class="quick-card" onclick="showViewGs('gs-view-guide-oop')">
+      <div class="quick-card-title" style="color:var(--primary)">OOP PATTERNS</div>
+      <div class="quick-card-desc">Map-based classes, New() factory, inheritance, isa.</div>
+    </div>
+    <div class="quick-card" onclick="showViewGs('gs-view-guide-intrinsics')">
+      <div class="quick-card-title" style="color:var(--primary)">BUILT-IN INTRINSICS</div>
+      <div class="quick-card-desc">Global functions: math, string, list, map, I/O, time.</div>
+    </div>
+    <div class="quick-card" onclick="showViewGs('gs-view-guide-shell')">
+      <div class="quick-card-title" style="color:var(--secondary)">SHELL &amp; COMPUTER API</div>
+      <div class="quick-card-desc">shell, computer, file objects — full method reference.</div>
+    </div>
+    <div class="quick-card" onclick="showViewGs('gs-view-guide-network')">
+      <div class="quick-card-title" style="color:var(--secondary)">NETWORK &amp; PORTS</div>
+      <div class="quick-card-desc">router, port, netSession, nslookup, whois.</div>
+    </div>
+    <div class="quick-card" onclick="showViewGs('gs-view-guide-meta')">
+      <div class="quick-card-title" style="color:var(--accent)">METAXPLOIT</div>
+      <div class="quick-card-desc">metaxploit, metaLib, debugLibrary — exploit reference.</div>
+    </div>
+    <div class="quick-card" onclick="showViewGs('gs-view-guide-blockchain')">
+      <div class="quick-card-title" style="color:var(--warn)">BLOCKCHAIN &amp; CRYPTO</div>
+      <div class="quick-card-desc">blockchain, wallet, coin, subwallet, crypto library.</div>
+    </div>
+    <div class="quick-card" onclick="showViewGs('gs-view-guide-patterns')">
+      <div class="quick-card-title" style="color:var(--primary)">COMMON PATTERNS</div>
+      <div class="quick-card-desc">Error handling, SSH connect, file ops, exploitation loop.</div>
+    </div>
+  </div>
+
+  <div class="sec-title">KEY LANGUAGE NOTES</div>
+  <div class="tip-box" style="margin-bottom:12px;"><div class="tip-label">IMPORTANT GOTCHAS</div>
+  <strong>All numerics are doubles.</strong> Booleans are <span class="inline-cmd">1</span> (true) and <span class="inline-cmd">0</span> (false). <strong>No try/catch</strong> — check return values explicitly. <strong>No <span class="inline-cmd">class</span> keyword</strong> — use map-based prototypes with <span class="inline-cmd">.New()</span> factories. Functions are <strong>always called</strong> without parentheses — use <span class="inline-cmd">@</span> to get a reference without calling.
+  </div>
+  <div class="code-block"><span class="cb-label">QUICK REFERENCE</span>typeof myVar              // "number" | "string" | "list" | "map" | "function" | "null"
+myVar isa string          // 1 or 0
+@myFunc                   // reference without calling
+get_custom_object         // persistent state across shell.launch calls
+active_user               // current username string
+params                    // list of CLI args when running as a command</div>
+</div>
+
+<!-- GS GUIDE: LANGUAGE BASICS -->
+<div class="view" id="gs-view-guide-lang">
+<div class="guide-wrap">
+<div class="guide-h1">Language Basics</div>
+<div class="guide-divider"></div>
+
+<div class="guide-h2">Data Types</div>
+<table class="spec-table"><thead><tr><th>TYPE</th><th>NOTES</th><th>EXAMPLE</th></tr></thead><tbody>
+<tr><td>number</td><td>All numerics are doubles. Booleans are 1/0.</td><td>42, 3.14, 1, 0</td></tr>
+<tr><td>string</td><td>Unicode, double quotes only.</td><td>"hello world"</td></tr>
+<tr><td>list</td><td>Ordered, zero-indexed.</td><td>["a", "b", "c"]</td></tr>
+<tr><td>map</td><td>Key-value pairs (dictionary).</td><td>{"key": "value"}</td></tr>
+<tr><td>function</td><td>First-class values.</td><td>function(x) ... end function</td></tr>
+<tr><td>null</td><td>Absence of a value.</td><td>null</td></tr>
+</tbody></table>
+
+<div class="guide-h2">Operators</div>
+<div class="guide-h3">Numbers</div>
+<div class="code-block">2 ^ 4     // 16 (power)
+7 % 3     // 1 (modulo)
+a and b   // logical AND → 1 or 0
+a or b    // logical OR  → 1 or 0
+not a     // logical NOT → 1 or 0
+a == b    // equality
+a != b    // inequality</div>
+
+<div class="guide-h3">Strings</div>
+<div class="code-block">"hello" + " world"   // concatenation → "hello world"
+"test" - "est"       // removal → "t"
+"ab" * 3             // repeat → "ababab"
+"hello"[1:4]         // slice → "ell"
+"hello"[0]           // index → "h"</div>
+
+<div class="guide-h3">Lists</div>
+<div class="code-block">["a"] + ["b"]         // concat → ["a","b"]
+["x"] * 2            // repeat → ["x","x"]
+myList[0]            // index
+myList[1:3]          // slice</div>
+
+<div class="guide-h2">String Methods</div>
+<div class="code-block">s.len                 // length
+s.lower / s.upper    // case conversion
+s.trim               // strip whitespace
+s.split(", ")        // → list
+s.replace("a","b")   // regex replace
+s.indexOf("x")       // → number or null
+s.is_match("^Hello") // regex match → 1 or 0
+s.val                // parse as number
+s.to_int             // truncate to integer</div>
+
+<div class="guide-h2">List Methods</div>
+<div class="code-block">myList.push("item")   // append
+myList.pop            // remove + return last
+myList.pull           // remove + return first
+myList.insert(1, "x") // insert at index
+myList.remove("val")  // remove by value
+myList.sort           // sort in-place
+myList.indexOf("x")   // → index or null
+myList.len            // length
+myList.join(", ")     // → string</div>
+
+<div class="guide-h2">Map Methods</div>
+<div class="code-block">myMap.hasIndex("key") // → 1 or 0
+myMap.indexes         // list of keys
+myMap.values          // list of values
+myMap.remove("key")   // delete entry
+myMap.len             // number of entries</div>
+
+<div class="guide-h2">Rich Text Output</div>
+<div class="guide-p">GreyScript's terminal supports TextMeshPro rich text tags in any printed string:</div>
+<div class="code-block">"&lt;color=#00FF00FF&gt;&lt;b&gt;green bold&lt;/b&gt;&lt;/color&gt;"
+"&lt;color=red&gt;error!&lt;/color&gt;"
+"&lt;size=75%&gt;smaller text&lt;/size&gt;"
+"&lt;u&gt;underlined&lt;/u&gt;"
+"&lt;mark=yellow&gt;highlighted&lt;/mark&gt;"
+"&lt;noparse&gt;raw text&lt;/noparse&gt;"</div>
+</div>
+</div>
+
+<!-- GS GUIDE: CONTROL FLOW -->
+<div class="view" id="gs-view-guide-flow">
+<div class="guide-wrap">
+<div class="guide-h1">Control Flow</div>
+<div class="guide-divider"></div>
+
+<div class="guide-h2">If / Else</div>
+<div class="code-block">if x &gt; 0 then
+    print "positive"
+else if x &lt; 0 then
+    print "negative"
+else
+    print "zero"
+end if
+
+// Single-line form:
+if x &gt; 0 then print "positive"</div>
+
+<div class="guide-h2">While Loop</div>
+<div class="code-block">i = 0
+while i &lt; 10
+    print i
+    i += 1
+end while</div>
+
+<div class="guide-h2">For Loop</div>
+<div class="code-block">for i in range(0, 9)
+    print i
+end for
+
+for item in myList
+    print item
+end for
+
+for key in myMap.indexes
+    print key + ": " + myMap[key]
+end for</div>
+
+<div class="guide-h2">Break &amp; Continue</div>
+<div class="code-block">for i in range(0, 10)
+    if i == 5 then break     // exit loop
+    if i == 3 then continue  // skip to next iteration
+    print i
+end for</div>
+
+<div class="guide-h2">Functions</div>
+<div class="code-block">myFunc = function(a, b = "default")
+    return a + b
+end function
+
+myFunc("hello")          // "hellodefault"
+myFunc("hello", " world") // "hello world"
+
+// @ operator — reference without calling
+ref = @myFunc
+ref("test")              // calls myFunc("test")</div>
+
+<div class="guide-h2">Scopes</div>
+<div class="code-block">// Each function has its own local scope
+globals.x = 42          // write to global scope from anywhere
+outer.x   = 42          // write to enclosing function's scope
+locals.x  = 42          // explicitly target local scope
+
+// Example: closure with outer
+factory = function
+    locals.count = 0
+    inc = function
+        outer.count += 1
+        return outer.count
+    end function
+    return @inc
+end function</div>
+
+<div class="guide-h2">exit &amp; print</div>
+<div class="code-block">print "message"           // output to terminal
+print("message")          // also valid (with parens)
+exit "error message"      // terminate with message
+exit                      // terminate with no message
+print(output, 1)          // 1 = clear screen before printing (live dashboards)</div>
+</div>
+</div>
+
+<!-- GS GUIDE: OOP PATTERNS -->
+<div class="view" id="gs-view-guide-oop">
+<div class="guide-wrap">
+<div class="guide-h1">OOP Patterns</div>
+<div class="guide-divider"></div>
+
+<div class="guide-h2">Map-Based Class</div>
+<div class="guide-p">GreyScript has no <span class="inline-cmd">class</span> keyword. Define a prototype map and use a <span class="inline-cmd">New()</span> factory:</div>
+<div class="code-block">MyClass = {
+    "classID": "myClass",
+    "counter": 0
+}
+
+MyClass.init = function(startVal)
+    self.counter = startVal
+end function
+
+MyClass.inc = function
+    self.counter += 1
+    return self
+end function
+
+// Instantiate
+instance = new MyClass
+instance.init(10)
+instance.inc.inc          // chaining
+print instance.counter    // 12</div>
+
+<div class="guide-h2">New() Factory Pattern</div>
+<div class="code-block">MyClass.New = function(startVal)
+    result = new MyClass
+    result.counter = startVal
+    return result
+end function
+
+obj = MyClass.New(5)</div>
+
+<div class="guide-h2">Inheritance</div>
+<div class="code-block">MySubClass = new MyClass
+MySubClass.classID = "mySubClass"
+
+MySubClass.describe = function
+    return "Counter: " + super.counter
+end function
+
+sub = new MySubClass
+print sub isa MyClass     // 1 — true
+print sub isa MySubClass  // 1</div>
+
+<div class="guide-h2">Extending Built-In Types</div>
+<div class="guide-p">Register methods directly on <span class="inline-cmd">map</span>, <span class="inline-cmd">string</span>, or <span class="inline-cmd">list</span> — they become available on every instance of that type, including all Grey Hack game objects:</div>
+<div class="code-block">// Add a method to all strings
+string.trimEnd = function(text)
+    if self[-1*text.len:] == text then return self[:-1*text.len]
+    return self
+end function
+
+// Add a method to all maps (works on shell, computer, file objects too)
+map.getPublicIP = function
+    if typeof(self) == "shell" then return self.host_computer.public_ip
+    if typeof(self) == "computer" then return self.public_ip
+    return null
+end function
+
+// Add a method to all lists
+list.distinct = function
+    seen = {}
+    i = 0
+    while i &lt; self.len
+        key = str(self[i])
+        if seen.hasIndex(key) then
+            self.remove(i)
+        else
+            seen[key] = 1
+            i += 1
+        end if
+    end while
+    return self
+end function</div>
+
+<div class="tip-box"><div class="tip-label">REGISTER EARLY</div>
+Always register built-in type extensions once at startup before any code uses them. Extensions are available globally for the rest of the session once registered.
+</div>
+</div>
+</div>
+
+<!-- GS GUIDE: INTRINSICS -->
+<div class="view" id="gs-view-guide-intrinsics">
+<div class="guide-wrap">
+<div class="guide-h1">Built-in Intrinsics</div>
+<div class="guide-divider"></div>
+
+<div class="guide-h2">I/O &amp; Control</div>
+<table class="spec-table"><thead><tr><th>FUNCTION</th><th>RETURNS</th></tr></thead><tbody>
+<tr><td>print(value)</td><td>Output to terminal</td></tr>
+<tr><td>print(value, 1)</td><td>Clear screen then print (live mode)</td></tr>
+<tr><td>clear_screen</td><td>Clear terminal</td></tr>
+<tr><td>user_input(prompt, secure, multiLine, newTerminal)</td><td>string — read user input</td></tr>
+<tr><td>exit(code)</td><td>Terminate script</td></tr>
+<tr><td>wait(seconds)</td><td>Pause execution</td></tr>
+<tr><td>yield</td><td>Co-op multitasking yield</td></tr>
+</tbody></table>
+
+<div class="guide-h2">Type &amp; Conversion</div>
+<table class="spec-table"><thead><tr><th>FUNCTION</th><th>RETURNS</th></tr></thead><tbody>
+<tr><td>typeof(value)</td><td>"number" | "string" | "list" | "map" | "function" | "null"</td></tr>
+<tr><td>str(value)</td><td>Convert to string</td></tr>
+<tr><td>val(str)</td><td>Parse string to number</td></tr>
+<tr><td>char(code)</td><td>Char from ASCII/Unicode code</td></tr>
+<tr><td>code(char)</td><td>ASCII/Unicode code of first char</td></tr>
+</tbody></table>
+
+<div class="guide-h2">Math</div>
+<table class="spec-table"><thead><tr><th>FUNCTION</th><th>RETURNS</th></tr></thead><tbody>
+<tr><td>abs(n)</td><td>Absolute value</td></tr>
+<tr><td>ceil(n) / floor(n)</td><td>Round up / down</td></tr>
+<tr><td>round(n, decimals)</td><td>Round to N decimal places</td></tr>
+<tr><td>sqrt(n)</td><td>Square root</td></tr>
+<tr><td>rnd(n)</td><td>Random number 0–n</td></tr>
+<tr><td>sin/cos/tan(n)</td><td>Trig (radians)</td></tr>
+<tr><td>log(n, base)</td><td>Logarithm</td></tr>
+<tr><td>sum(list)</td><td>Sum of list elements</td></tr>
+<tr><td>range(from, to, step)</td><td>Generate number list</td></tr>
+</tbody></table>
+
+<div class="guide-h2">Environment &amp; Paths</div>
+<table class="spec-table"><thead><tr><th>EXPRESSION</th><th>RETURNS</th></tr></thead><tbody>
+<tr><td>active_user</td><td>Current username string</td></tr>
+<tr><td>home_dir</td><td>Current user's home directory</td></tr>
+<tr><td>current_path</td><td>Current working directory</td></tr>
+<tr><td>program_path</td><td>Path to running script</td></tr>
+<tr><td>params</td><td>List of CLI args when script runs as a command</td></tr>
+<tr><td>get_abs_path(path)</td><td>Convert relative path to absolute</td></tr>
+<tr><td>parent_path(path)</td><td>Parent directory of path</td></tr>
+<tr><td>time</td><td>Unix timestamp (number)</td></tr>
+<tr><td>current_date</td><td>Formatted date string</td></tr>
+</tbody></table>
+
+<div class="guide-h2">Network Utilities</div>
+<table class="spec-table"><thead><tr><th>FUNCTION</th><th>RETURNS</th></tr></thead><tbody>
+<tr><td>nslookup(domain)</td><td>Resolve domain → IP string</td></tr>
+<tr><td>whois(ip)</td><td>Whois lookup → string</td></tr>
+<tr><td>is_valid_ip(ip)</td><td>1 or 0</td></tr>
+<tr><td>is_lan_ip(ip)</td><td>1 or 0</td></tr>
+<tr><td>get_router(ip)</td><td>Router object</td></tr>
+<tr><td>get_switch(ip)</td><td>Switch object</td></tr>
+</tbody></table>
+
+<div class="guide-h2">Persistence</div>
+<table class="spec-table"><thead><tr><th>FUNCTION</th><th>RETURNS</th></tr></thead><tbody>
+<tr><td>get_custom_object</td><td>Persistent map — survives nested shell.launch calls</td></tr>
+<tr><td>include_lib(path)</td><td>Load a .so shared library → object or null</td></tr>
+<tr><td>get_shell(user, pass)</td><td>Get local (or authenticated) shell object</td></tr>
+<tr><td>md5(str)</td><td>MD5 hash → string</td></tr>
+<tr><td>format_columns(list)</td><td>Format list as aligned columns → string</td></tr>
+</tbody></table>
+</div>
+</div>
+
+<!-- GS GUIDE: SHELL & COMPUTER API -->
+<div class="view" id="gs-view-guide-shell">
+<div class="guide-wrap">
+<div class="guide-h1">Shell &amp; Computer API</div>
+<div class="guide-divider"></div>
+
+<div class="guide-h2">shell Object</div>
+<div class="guide-p">Obtained via <span class="inline-cmd">get_shell</span> or <span class="inline-cmd">shell.connect_service</span>:</div>
+<div class="code-block">s = get_shell
+s.host_computer                              // → computer
+s.ping(ip)                                   // → 1 or 0
+s.build(srcPath, binPath, allowImport)       // compile .src → binary
+s.connect_service(ip, port, user, pass)      // → shell / ftpShell / string / null
+s.launch(program, params)                    // run binary → number / string
+s.scp(file, folder, remoteShell, isUpload)   // file transfer → 1 or error
+s.start_terminal                             // open terminal (local only)</div>
+
+<div class="guide-h2">computer Object</div>
+<div class="guide-p">Obtained via <span class="inline-cmd">shell.host_computer</span>:</div>
+<div class="code-block">c = get_shell.host_computer
+c.get_ports                   // → list&lt;port&gt;
+c.get_name                    // → string (hostname)
+c.local_ip                    // → string
+c.public_ip                   // → string
+c.File(path)                  // → file or null
+c.create_folder(path, name)   // → 1 or error string
+c.touch(path, fileName)       // create file → 1 or error string
+c.show_procs                  // → string (process list)
+c.change_password(user, pass) // → 1 or error string
+c.create_user(user, pass)     // → 1 or error string
+c.delete_user(user, removeHome) // → 1 or error string
+c.close_program(pid)          // → 1, 0, or error string
+c.reboot(safeMode)            // → 1 or error string</div>
+
+<div class="guide-h2">file Object</div>
+<div class="guide-p">Obtained via <span class="inline-cmd">computer.File(path)</span> or directory methods:</div>
+<div class="code-block">f = c.File("/home/user/file.txt")
+f.name                        // → string
+f.path                        // → string
+f.parent                      // → file (directory) or null
+f.is_folder                   // → 1 or 0
+f.is_binary                   // → 1 or 0
+f.size                        // → string
+f.owner / f.group             // → string
+f.permissions                 // → "drwxr-xr-x" style string
+f.has_permission(perms)       // → 1 or 0
+f.get_content                 // → string or null (local only)
+f.set_content(text)           // → 1 or error (local only)
+f.get_files                   // → list&lt;file&gt; or null (folder only)
+f.get_folders                 // → list&lt;file&gt; or null (folder only)
+f.chmod(perms, recursive)     // → string or error
+f.copy(path, name)            // → 1 or error
+f.move(path, fileName)        // → 1 or error
+f.rename(name)                // → string or 0
+f.delete                      // → string (error) or void
+f.set_owner(owner, recursive) // → string or null</div>
+
+<div class="warn-box"><div class="warn-label">SSH INCOMPATIBLE METHODS</div>
+These methods only work on a <strong>local shell</strong> — they cannot be called over an SSH session: <span class="inline-cmd">computer.touch</span>, <span class="inline-cmd">computer.show_procs</span>, <span class="inline-cmd">file.get_content</span>, <span class="inline-cmd">file.set_content</span>, <span class="inline-cmd">file.copy</span>, <span class="inline-cmd">shell.connect_service</span>, <span class="inline-cmd">metaxploit.net_use</span>. Use <span class="inline-cmd">scp</span> to copy files first if needed.
+</div>
+</div>
+</div>
+
+<!-- GS GUIDE: NETWORK & PORTS -->
+<div class="view" id="gs-view-guide-network">
+<div class="guide-wrap">
+<div class="guide-h1">Network &amp; Ports</div>
+<div class="guide-divider"></div>
+
+<div class="guide-h2">router Object</div>
+<div class="code-block">r = get_router("1.2.3.4")
+r.public_ip               // → string
+r.local_ip                // → string
+r.bssid_name              // → string
+r.kernel_version          // → string
+r.used_ports              // → list&lt;port&gt;
+r.devices_lan_ip          // → list&lt;string&gt;
+r.firewall_rules          // → list&lt;string&gt;
+r.device_ports(ip)        // → list&lt;port&gt; or string or null
+r.ping_port(portNum)      // → port or null
+r.port_info(port)         // → string or null</div>
+
+<div class="guide-h2">port Object</div>
+<div class="code-block">p = router.used_ports[0]
+p.port_number             // → number
+p.get_lan_ip              // → string (LAN IP this port points to)
+p.is_closed               // → 1 if closed, 0 if open</div>
+
+<div class="guide-h2">Default Port Numbers</div>
+<table class="spec-table"><thead><tr><th>PORT</th><th>SERVICE</th></tr></thead><tbody>
+<tr><td>21</td><td>FTP</td></tr>
+<tr><td>22</td><td>SSH</td></tr>
+<tr><td>25</td><td>SMTP</td></tr>
+<tr><td>80 / 8080</td><td>HTTP</td></tr>
+<tr><td>1222</td><td>RShell</td></tr>
+<tr><td>1542</td><td>Repository / Hackshop</td></tr>
+<tr><td>6667</td><td>Chat</td></tr>
+</tbody></table>
+
+<div class="guide-h2">SSH Connection</div>
+<div class="code-block">remoteShell = get_shell.connect_service("1.2.3.4", 22, "user", "pass")
+if typeof(remoteShell) != "shell" then exit "Failed: " + remoteShell
+remoteComputer = remoteShell.host_computer
+print "Connected: " + remoteComputer.get_name</div>
+
+<div class="guide-h2">netSession Object</div>
+<div class="guide-p">Obtained via <span class="inline-cmd">metaxploit.net_use(ip, port)</span>. Port <span class="inline-cmd">0</span> returns a kernel router session.</div>
+<div class="code-block">session = mx.net_use("1.2.3.4", 22)
+session.dump_lib                // → metaLib (running lib on that port)
+session.get_num_users           // → number of user accounts
+session.is_any_active_user      // → 1 or 0
+session.is_root_active_user     // → 1 or 0
+session.flood_connection        // initiate DDoS (requires 4x calls from different IPs)</div>
+</div>
+</div>
+
+<!-- GS GUIDE: METAXPLOIT -->
+<div class="view" id="gs-view-guide-meta">
+<div class="guide-wrap">
+<div class="guide-h1">Metaxploit</div>
+<div class="guide-divider"></div>
+
+<div class="guide-h2">metaxploit Object</div>
+<div class="code-block">mx = include_lib("/lib/metaxploit.so")
+mx.net_use(ip, port)              // → netSession or null
+mx.load(path)                     // → metaLib or null
+mx.scan(metaLib)                  // → list&lt;string&gt; memory addresses or null
+mx.scan_address(metaLib, address) // → vulnerability details string or null
+mx.sniffer(saveEncSource)         // → captured packet string or null
+mx.rshell_client(ip, port, name)  // → 1 or error
+mx.rshell_server                  // → list&lt;shell&gt; or error</div>
+
+<div class="guide-h2">metaLib Object</div>
+<div class="code-block">lib = mx.net_use("1.2.3.4", 22).dump_lib
+lib.lib_name                      // → "init.so"
+lib.version                       // → "1.0.0"
+lib.is_patched(getDate)           // → 1 or error or null
+lib.overflow(address, value)      // → shell / computer / file / string / null
+lib.debug_tools(user, pass)       // → debugLibrary or null</div>
+
+<div class="guide-h2">Exploit Loop</div>
+<div class="guide-p">The standard pattern: get net session → dump lib → scan addresses → fire overflows on vulnerabilities with no requirements (<span class="inline-cmd">*</span>):</div>
+<div class="code-block"><span class="cb-label">EXPLOIT LOOP</span>mx  = include_lib("/lib/metaxploit.so")
+ses = mx.net_use(targetIP, portNumber)
+if ses == null then exit "no session"
+
+lib  = ses.dump_lib
+addrs = mx.scan(lib)
+if addrs == null then exit "nothing found"
+
+for addr in addrs
+    details = mx.scan_address(lib, addr)
+    for seg in details.split("Unsafe check: ")
+        hasReq = seg.indexOf("*") != null
+        if not hasReq then
+            exploit = seg[seg.indexOf("&lt;b&gt;") + 3 : seg.indexOf("&lt;/b&gt;")]
+            result  = lib.overflow(addr, exploit)
+            if typeof(result) != "string" and result != null then
+                print "Got: " + typeof(result)
+            end if
+        end if
+    end for
+end for</div>
+
+<div class="guide-h2">debugLibrary Object</div>
+<div class="code-block">dbg = lib.debug_tools("user", "pass")
+dbg.scan                          // → vulnerability report string
+dbg.unit_testing(errorLines)      // → string or null (errorLines: list&lt;number&gt;)
+dbg.apply_patch(path)             // → string or null
+dbg.payload(memZone, pathFile)    // → list&lt;map&gt; or string or null</div>
+
+<div class="tip-box"><div class="tip-label">SCAN_ADDRESS FORMAT</div>
+<span class="inline-cmd">scan_address</span> returns a string with segments split by <span class="inline-cmd">"Unsafe check: "</span>. Each segment contains the vulnerability name in <span class="inline-cmd">&lt;b&gt;tags&lt;/b&gt;</span>. A <span class="inline-cmd">*</span> in the segment means a requirement must be injected as the optional 3rd arg to <span class="inline-cmd">overflow</span>.
+</div>
+</div>
+</div>
+
+<!-- GS GUIDE: BLOCKCHAIN & CRYPTO -->
+<div class="view" id="gs-view-guide-blockchain">
+<div class="guide-wrap">
+<div class="guide-h1">Blockchain &amp; Crypto</div>
+<div class="guide-divider"></div>
+
+<div class="guide-h2">crypto Library</div>
+<div class="code-block">crypto = include_lib("/lib/crypto.so")
+
+// Password cracking
+crypto.decipher(encPass)             // crack MD5 → plaintext or null
+
+// File encryption
+crypto.encrypt(filePath, password)   // → 1 or error
+crypto.decrypt(filePath, password)   // → 1 or error
+crypto.is_encrypted(filePath)        // → 1, 0, or error
+
+// WiFi cracking
+crypto.airmon("start", "wlan0")      // enable monitor mode
+crypto.aireplay(bssid, essid, maxAcks) // capture handshake → .cap path or null
+crypto.aircrack(capFilePath)         // crack cap file → password or null
+
+// SMTP recon
+crypto.smtp_user_list(ip, port)      // → list&lt;string&gt; of usernames or null</div>
+
+<div class="guide-h2">blockchain / wallet / coin / subwallet</div>
+<div class="code-block">blockchain = include_lib("/lib/blockchain.so")
+
+// Login or create wallet
+wallet = blockchain.login_wallet("user", "pass")
+if typeof(wallet) == "string" then
+    wallet = blockchain.create_wallet("user", "pass")
+end if
+
+// Get a coin
+coin = blockchain.get_coin("MyCoin", "coinUser", "coinPass")
+
+// Get or create subwallet
+sw = coin.get_subwallet("myWallet")
+if typeof(sw) == "string" then
+    pin = wallet.get_pin
+    coin.create_subwallet("user", pin, "myWallet", "pass")
+    sw = coin.get_subwallet("myWallet")
+end if
+
+// Mine
+sw.mining                // mine one reward cycle → 1 or error
+sw.get_balance           // → number
+sw.last_transaction      // → [dest, amount, direction, date]
+
+// Trade
+wallet.buy_coin("MyCoin", 10, unitPrice, subwalletUser)
+coin.transaction(origSW, destSW, amount)</div>
+
+<div class="guide-h2">WiFi Crack Pattern</div>
+<div class="code-block">crypto = include_lib("/lib/crypto.so")
+networks = get_shell.host_computer.wifi_networks("wlan0")
+parts = networks[0].split(" ")
+bssid = parts[0]
+pwr   = parts[1][:-1].to_int
+essid = parts[2]
+crypto.aireplay(bssid, essid, 300000 / pwr)
+password = crypto.aircrack(home_dir + "/file.cap")
+print password</div>
+</div>
+</div>
+
+<!-- GS GUIDE: COMMON PATTERNS -->
+<div class="view" id="gs-view-guide-patterns">
+<div class="guide-wrap">
+<div class="guide-h1">Common Patterns</div>
+<div class="guide-divider"></div>
+
+<div class="guide-h2">Error Handling</div>
+<div class="guide-p">GreyScript has no try/catch. Check return values explicitly:</div>
+<div class="code-block">result = someGHApiCall(args)
+if typeof(result) == "string" then
+    print "Error: " + result
+    return
+end if
+if result == null then
+    print "Returned null"
+    return
+end if
+// success — use result</div>
+
+<div class="guide-h2">SSH Connect</div>
+<div class="code-block">remoteShell = get_shell.connect_service("1.2.3.4", 22, "user", "pass")
+if typeof(remoteShell) != "shell" then exit "Failed: " + remoteShell
+c = remoteShell.host_computer</div>
+
+<div class="guide-h2">Root Check</div>
+<div class="code-block">if active_user != "root" then exit "&lt;color=red&gt;Run As Root!&lt;/color&gt;"</div>
+
+<div class="guide-h2">Read &amp; Write a File</div>
+<div class="code-block">c = get_shell.host_computer
+f = c.File("/home/user/notes.txt")
+if f != null then
+    content = f.get_content
+    f.set_content(content + char(10) + "New line")
+end if</div>
+
+<div class="guide-h2">Create a File</div>
+<div class="code-block">c = get_shell.host_computer
+result = c.touch("/home/user", "newfile.txt")
+if result == 1 then
+    c.File("/home/user/newfile.txt").set_content("Hello!")
+end if</div>
+
+<div class="guide-h2">Recursive File Search</div>
+<div class="code-block">findFile = function(folder, name)
+    for f in folder.get_files
+        if f.name == name then return f
+    end for
+    for d in folder.get_folders
+        result = findFile(d, name)
+        if result then return result
+    end for
+    return null
+end function
+
+root  = get_shell.host_computer.File("/")
+found = findFile(root, "metaxploit.so")</div>
+
+<div class="guide-h2">Iterate a Directory</div>
+<div class="code-block">folder = get_shell.host_computer.File("/home/user")
+if folder != null and folder.is_folder then
+    for f in folder.get_files
+        print f.name + "  " + f.size
+    end for
+end if</div>
+
+<div class="guide-h2">params-Based CLI Command</div>
+<div class="code-block">if params.len &lt; 1 or params[0] == "-h" then
+    exit command_info("usage_string")
+end if
+
+target = params[0]
+path   = get_abs_path(params.len &gt; 1 ? params[1] : ".")</div>
+
+<div class="guide-h2">Live-Updating Display</div>
+<div class="code-block">while true
+    output = buildDisplay()
+    print(output, 1)   // 1 = clear_screen before print
+    wait(0.5)
+end while</div>
+
+<div class="guide-h2">Detect Home Computer</div>
+<div class="code-block">// Home computers run Xorg — detect via show_procs
+procs = shell.host_computer.show_procs.split(char(10))
+isHome = 0
+for proc in procs
+    if proc.split(" ").len &gt; 4 and proc.split(" ")[4] == "Xorg" then
+        isHome = 1
+        break
+    end if
+end for</div>
+
+<div class="guide-h2">get_custom_object Persistence</div>
+<div class="code-block">g = get_custom_object
+
+// Guard against missing keys
+if not g.hasIndex("myData") then g.myData = {}
+
+// Write
+g.myData.key = "value"
+
+// Read
+val = g.myData.key
+
+// Survives across nested shell.launch calls</div>
+
+<div class="tip-box"><div class="tip-label">DEVELOPMENT TOOLS</div>
+<strong>greybel-vs</strong> — VSCode extension with syntax highlighting, autocomplete, build, and debug.<br>
+<strong>greybel-js</strong> — CLI transpiler, bundler, minifier, and interpreter.<br>
+<strong>editor.greyscript.org</strong> — Browser-based online editor and interpreter.
+</div>
+</div>
+</div>
+
+<p style="width:fit-content; margin: 1.5rem auto 0.5rem; color:#727272; font-size:0.75rem; letter-spacing:0.08em;">Hacktool Documentation Portal</p>
+
+</main>
+</div><!-- /layout -->
+</div><!-- /toolspace-greyscript -->
+
 
 <script>
 const CMDS = {
@@ -2590,7 +4331,17 @@ document.getElementById("searchInput").addEventListener("input", function(){
 function openTool(id){
   document.getElementById('hub').classList.add('hidden');
   if (id === '5hell'){
-    document.getElementById('toolspace-5hell').classList.add('active');
+    const el = document.getElementById('toolspace-5hell');
+    if (el) el.classList.add('active');
+  } else if (id === 'hex'){
+    const el = document.getElementById('toolspace-hex');
+    if (el) el.classList.add('active');
+  } else if (id === 'viper'){
+    const el = document.getElementById('toolspace-viper');
+    if (el) el.classList.add('active');
+  } else if (id === 'greyscript'){
+    const el = document.getElementById('toolspace-greyscript');
+    if (el) el.classList.add('active');
   } else {
     document.getElementById('toolspace').classList.add('active');
   }
@@ -2600,6 +4351,9 @@ function showHub(){
   document.getElementById('hub').classList.remove('hidden');
   document.getElementById('toolspace').classList.remove('active');
   document.getElementById('toolspace-5hell').classList.remove('active');
+  document.getElementById('toolspace-hex').classList.remove('active');
+  document.getElementById('toolspace-viper').classList.remove('active');
+  document.getElementById('toolspace-greyscript').classList.remove('active');
 }
 
 buildSidebar();
@@ -2945,6 +4699,600 @@ function show5hellCmd(cmd) {
 })();
 
 build5hellSidebar();
+
+// ═══════════════════════════════════════════════════════════════════════
+// HEX TOOL
+// ═══════════════════════════════════════════════════════════════════════
+
+const CATS_HEX = {
+  "hx-exploit": {label:"EXPLOIT OPS", color:"#ff003c"},
+  "hx-util":    {label:"UTILITIES",   color:"#00d4ff"},
+  "hx-fs":      {label:"FILESYSTEM",  color:"#ffb700"}
+};
+
+const GUIDES_HEX = [
+  {id:"guide-start",   label:"Getting Started"},
+  {id:"guide-arch",    label:"Architecture"},
+  {id:"guide-stack",   label:"Session Stack"},
+  {id:"guide-exploit", label:"Exploit Workflow"},
+  {id:"guide-proxy",   label:"Proxy Chain"},
+  {id:"guide-nuke",    label:"Nuke Operations"}
+];
+
+const CMDS_HEX = {
+"scan":{cat:"hx-exploit",short:"Scan a port or lib for exploitable addresses",usage:[["scan [ip] [port]","Scan remote port — open net session, dump lib, scan addresses"],["scan [ip]","Scan all open ports on target"],["scan [lib.so]","Scan a local lib by filename"]],opts:[["RESULT","Caches exploits in g.database keyed by lib/version/address"]],detail:"Opens a net_use session, dumps the lib running on the port, calls metaxploit.scan, and caches all exploitable vulnerabilities in g.database. Results are grouped by lib and address.",examples:["scan 1.2.3.4 22","scan 1.2.3.4","scan init.so"]},
+"nmap":{cat:"hx-exploit",short:"Network info for a target IP",usage:[["nmap {ip}","Show open ports and running services for target IP"]],detail:"Runs a port scan and displays service info for each open port. If no IP is given, uses the current context's public IP.",examples:["nmap 1.2.3.4","nmap"]},
+"missions":{cat:"hx-exploit",short:"Automate corrupt data missions",usage:[["missions","Display and manage available mail-based missions"]],detail:"Fetches and displays available missions from the mail system, automating corrupt data tasks where possible.",examples:["missions"]},
+"hack":{cat:"hx-exploit",short:"Fire all cached exploits — add results to context stack",usage:[["hack [ip] [port]","Exploit all cached vulns on port; push results to stack"],["hack [ip]","Exploit all open ports"],["hack -l [lib.so]","Exploit a local lib"],["hack -l [lanIP]","LAN bounce via local IP (requires poison first)"]],opts:[["STACK","Each successful overflow becomes a new g.Target on g.stack"]],detail:"Fires all exploits in g.database against the target. Each success wraps the result in a g.Target and pushes it to the stack. Use swap to navigate to new contexts.",examples:["hack 1.2.3.4 22","hack 1.2.3.4","hack -l init.so","hack -l 192.168.1.1"]},
+"decipher":{cat:"hx-exploit",short:"Decrypt credentials on current context",usage:[["decipher","Crack /etc/passwd hashes on current context"],["decipher all","Crack passwd + bank + mail files"],["decipher bank","Crack bank password only"],["decipher mail","Crack mail password only"],["decipher hash","Interactive: enter hash manually"]],detail:"Uses crypto.so to decipher MD5 hashes from /etc/passwd and optionally from bank/mail credential files. Requires crypto lib attached to current context.",examples:["decipher","decipher all","decipher bank","decipher hash"]},
+"rshell":{cat:"hx-exploit",short:"Reverse shell lifecycle management",usage:[["rshell init","Initialize rshell service on current context"],["rshell infect","Install rshell on target (via SSH or exploit)"],["rshell info","Show rshell server status"],["rshell start","Start rshell listener (requires /root/SecureLibs/librshell.so)"],["rshell stop","Stop rshell listener"],["rshell -r","Retrieve a connected rshell"],["rshell -c","Clean up rshell files"]],detail:"Manages the full reverse shell lifecycle — from installing the service on a target to listening for callbacks and retrieving shell objects.",examples:["rshell start","rshell infect","rshell info","rshell -r"]},
+"poison":{cat:"hx-exploit",short:"Upload insecure libs to target /lib",usage:[["poison","Upload g.const.insecureComp lib to current target's /lib/"]],opts:[["g.const.insecureComp","[libPath, version, address, overflow_value] — version-specific"]],detail:"Copies the insecure lib from /root/InsecureLibs/ to the target's /lib/ directory. Required before running LAN bounce exploits via hack -l.",examples:["poison"]},
+"net":{cat:"hx-exploit",short:"Network-wide operations across multiple targets",usage:[["net -a","Map entire network — build computer list"],["net -b","Full sweep: scan + hack all reachable hosts"],["net -l","List all discovered network computers"],["net -m","Multi-decipher on all stack entries"],["net -n","Hard nuke all stack entries"],["net -nm","Nuke + mail wipe all stack entries"],["net -p","Poison all stack entries"],["net -s","Sniffer capture then stop"],["net -z","Corrupt logs on all stack entries"]],detail:"Coordinates operations across the entire discovered network or all contexts on the stack simultaneously.",examples:["net -a","net -b","net -n","net -z"]},
+"sniffer":{cat:"hx-exploit",short:"Capture network traffic",usage:[["sniffer","Run metaxploit.sniffer and display captured packets"],["sniffer -n","Run sniffer silently (no output)"]],opts:[["RESULT","Returns captured packet data string"]],detail:"Calls metaxploit.sniffer to capture network traffic. Captured data may contain credentials transmitted in plaintext.",examples:["sniffer","sniffer -n"]},
+"stack":{cat:"hx-util",short:"View or clear the context stack",usage:[["stack","Display all contexts on the stack with index, type, user, IP"],["stack -c","Clear all non-home stack entries"]],detail:"Shows the current g.stack contents. Each entry shows index, session type (shell/computer/file), resolved username, and public/local IP.",examples:["stack","stack -c"]},
+"swap":{cat:"hx-util",short:"Switch active context by stack index",usage:[["swap [index]","Switch active context to g.stack[index]"],["swap 0","Return to home context"]],detail:"Changes g.context.index to the specified stack entry and updates the prompt. Use stack to see available indices.",examples:["swap 1","swap 0","swap 3"]},
+"jump":{cat:"hx-util",short:"SCP libs to current context",usage:[["jump","Copy metaxploit.so and crypto.so to current context"],["jump apt","Copy aptclient.so to current context"],["jump crypto","Copy only crypto.so to current context"]],detail:"Transfers essential libraries from home to the current context using SCP. Required when running decipher or other lib-dependent commands on a remote context.",examples:["jump","jump apt","jump crypto"]},
+"proxy":{cat:"hx-util",short:"Manage proxy chain",usage:[["proxy help","Show proxy command usage"],["proxy [#]","Activate stack index # as the proxy"],["proxy -s","Connect through all configured $proxies"],["proxy -c","Corrupt logs on all proxy hops"],["proxy -d","Disconnect and remove all proxies from stack"]],detail:"Manages the multi-hop SSH proxy chain. When a proxy is active, scan and hack route all non-LAN traffic through it. With no args, displays help text.",examples:["proxy help","proxy 1","proxy -s","proxy -c","proxy -d"]},
+"log":{cat:"hx-util",short:"Corrupt logs on current or all contexts",usage:[["log","Corrupt system log on current context"],["log -a","Corrupt logs on ALL stack entries"],["log -d","Delete (not just corrupt) log on current context"]],detail:"Corrupts or deletes system logs to remove traces. log -a is the quickest way to clean up after a multi-target operation.",examples:["log","log -a","log -d"]},
+"tree":{cat:"hx-util",short:"Color-coded filesystem tree",usage:[["tree {path}","Print filesystem tree from path (default: current path)"]],detail:"Prints the filesystem tree from the specified path with color-coded output: binaries, scripts, folders, and hidden files are shown in distinct colors.",examples:["tree","tree /root","tree /home"]},
+"terminal":{cat:"hx-util",short:"Open native terminal on current context",usage:[["terminal","Open the native Grey Hack terminal for the current context shell"]],detail:"Launches the built-in Grey Hack terminal for the current context's shell object. Allows running standard Grey Hack terminal commands alongside HEX.",examples:["terminal"]},
+"lockdown":{cat:"hx-util",short:"Secure current context system",usage:[["lockdown","Remove world/group write permissions, delete guest credentials"]],detail:"Defensive operation: locks down the current context's computer by restricting file permissions on critical paths and removing guest/user credentials. Use on your home system or on held targets.",examples:["lockdown"]},
+"apt-get":{cat:"hx-util",short:"Manage packages on current context",usage:[["apt-get -i","Install metaxploit.so and crypto.so on current context"],["apt-get -l","Load libs into current context (attach to g.Target)"],["apt-get -s","Search for programs via aptclient"],["apt-get -a","Add a repository"]],detail:"Wraps aptclient operations for the current context. Use -i to install essential libs, -l to attach them to the current context's g.Target.",examples:["apt-get -i","apt-get -l"]},
+"cd":{cat:"hx-fs",short:"Change working directory",usage:[["cd [path]","Change currentPath on current context"],["cd ..","Navigate up one directory"],["cd","Return to root path"]],examples:["cd /root","cd ..","cd /var/log"]},
+"rm":{cat:"hx-fs",short:"Remove a file or folder",usage:[["rm [path]","Delete file or folder on current context"]],detail:"Deletes the specified file or folder. Requires write permission. Will confirm before deleting folders.",examples:["rm /tmp/payload.src","rm /var/system.log"]},
+"ps":{cat:"hx-fs",short:"Show running processes",usage:[["ps","List all running processes on current context"]],detail:"Calls host_computer.show_procs() and displays the process table with PID, user, CPU, memory, and process name.",examples:["ps"]},
+"kill":{cat:"hx-fs",short:"Kill a process by PID",usage:[["kill [pid]","Terminate process with the given PID on current context"]],examples:["kill 1234","kill 567"]},
+"reboot":{cat:"hx-fs",short:"Reboot current context system",usage:[["reboot","Reboot the current context's computer"]],detail:"Calls host_computer.reboot(). After reboot, the current context's shell will be invalidated — use stack -c to clean up.",examples:["reboot"]},
+"userdel":{cat:"hx-fs",short:"Delete a user account on current context",usage:[["userdel [user]","Remove the specified user from the current context's computer"]],opts:[["PERMISSIONS","Root privilege and computer or shell session required"]],examples:["userdel guest","userdel backdoor"]},
+"clear":{cat:"hx-util",short:"Clear the terminal output",usage:[["clear","Clear all printed output from the HEX terminal"]],examples:["clear"]},
+"quit":{cat:"hx-util",short:"Exit HEX",usage:[["quit","Exit HEX and return to the system shell"]],examples:["quit"]},
+"help":{cat:"hx-util",short:"Show command help and usage",usage:[["help","List all available HEX commands with descriptions and usage"]],detail:"Renders the full HEX help menu grouped by dispatch map (g.tools, g.util, g.fs). Each command shows its name, short description, and usage.",examples:["help"]},
+"ip":{cat:"hx-util",short:"Generate a random valid public IP address",usage:[["ip","Print a random non-LAN public IP address"]],detail:"Uses g.func.getRandomIp to generate and display a random valid public IPv4 address. Useful for quickly getting a scan target.",examples:["ip"]},
+"htop":{cat:"hx-util",short:"Live process and resource monitor",usage:[["htop","Run a continuous CPU/RAM/process monitor for current context"]],detail:"Turns HEX into a live-updating process monitor. Displays CPU and RAM usage bars, user count, admin-online warning, and a per-process table refreshed every 0.5 seconds. Exit with Ctrl-C. Requires computer or shell context.",examples:["htop"]},
+"sudo":{cat:"hx-util",short:"Get root or user shell on current context",usage:[["sudo","Brute-force root password using rainbow table"],["sudo [password]","Get a root shell with the supplied password"],["sudo [username] [password]","Get a shell as the specified user with given credentials"]],detail:"Obtains a new shell on the current context using credentials. With no args, brute-forces root using the built-in rainbow table (g.rt). On success the new shell is pushed to the stack.",examples:["sudo","sudo password123","sudo admin mypass"]},
+"hackshop":{cat:"hx-util",short:"Find a hackshop IP address",usage:[["hackshop","Scan nearby routers to find and print a hackshop IP"]],detail:"Calls g.func.getHackshop to scan random routers for port 1542 (Grey Hack in-game hackshop). Prints the discovered IP.",examples:["hackshop"]},
+"download":{cat:"hx-util",short:"Download files from current context to home",usage:[["download [path]","Download file at exact path from current context"],["download [filename]","Find and download all files matching name (supports * wildcard)"]],detail:"Searches the current context's filesystem for matching files and transfers them to ~/targets/{publicIP}/{localIP}/ on the home computer using g.func.transfer.",examples:["download /etc/passwd","download *.so","download init.so"]},
+"upload":{cat:"hx-util",short:"Upload a file from home to current context",usage:[["upload [path]","Upload file at path from home to current context"]],detail:"Transfers a file from the home computer to the current context's filesystem. Complements download for two-way file transfer.",examples:["upload /root/payload.src","upload /root/InsecureLibs/init.so"]},
+"restore":{cat:"hx-util",short:"Restore system files or state on current context",usage:[["restore","Restore modified or nuked files on current context"]],detail:"Attempts to restore the filesystem state on the current context. Used to recover from a soft nuke or to undo accidental file modifications.",examples:["restore"]},
+"rtgen":{cat:"hx-util",short:"Generate rainbow tables for password cracking",usage:[["rtgen","Generate rainbow tables using Markov chain algorithm"]],detail:"Generates rainbow tables for use when brute-forcing or deciphering passwords. Uses a Markov generator with common password patterns to build lookup tables for faster password cracking.",examples:["rtgen"]}
+};
+
+function buildHexSidebar() {
+  const nav = document.getElementById('hx-sidebarNav');
+  nav.innerHTML = '';
+
+  const total = Object.keys(CMDS_HEX).length;
+  const tc = document.getElementById('hx-totalCmds');
+  if (tc) tc.textContent = total;
+  const cc = document.getElementById('hx-cmdCount');
+  if (cc) cc.textContent = total + ' commands';
+
+  const homeEl = document.createElement('div');
+  homeEl.className = 'nav-item active';
+  homeEl.textContent = '⌂  Overview';
+  homeEl.dataset.view = 'home';
+  homeEl.onclick = () => showViewHex('hx-view-home');
+  nav.appendChild(homeEl);
+
+  const guideLabel = document.createElement('div');
+  guideLabel.className = 'cat-label';
+  guideLabel.textContent = 'GUIDES';
+  nav.appendChild(guideLabel);
+
+  GUIDES_HEX.forEach(g => {
+    const el = document.createElement('div');
+    el.className = 'nav-item nav-item-guide';
+    el.textContent = g.label;
+    el.dataset.view = 'hx-view-' + g.id;
+    el.onclick = () => showViewHex('hx-view-' + g.id);
+    nav.appendChild(el);
+  });
+
+  Object.keys(CATS_HEX).forEach(cat => {
+    const cmds = Object.keys(CMDS_HEX).sort().filter(k => CMDS_HEX[k].cat === cat);
+    if (!cmds.length) return;
+
+    const lbl = document.createElement('div');
+    lbl.className = 'cat-label';
+    lbl.textContent = CATS_HEX[cat].label;
+    nav.appendChild(lbl);
+
+    cmds.forEach(cmd => {
+      const el = document.createElement('div');
+      el.className = 'nav-item';
+      el.textContent = cmd;
+      el.dataset.cmd = cmd;
+      el.onclick = () => showHexCmd(cmd);
+      nav.appendChild(el);
+    });
+  });
+}
+
+function buildCmdHexCard(cmd) {
+  const d = CMDS_HEX[cmd];
+  const card = document.createElement('div');
+  card.className = 'cmd-card';
+  card.id = 'hx-card-' + cmd;
+
+  const hdr = document.createElement('div');
+  hdr.className = 'cmd-header';
+  hdr.innerHTML = `<span class="cmd-name">${cmd}</span><span class="cmd-short">${d.short||''}</span><span class="cmd-chevron">›</span>`;
+  hdr.onclick = () => card.classList.toggle('open');
+
+  const body = document.createElement('div');
+  body.className = 'cmd-body';
+
+  let html = '<div class="usage-label">USAGE</div><table class="usage-table">';
+  (d.usage||[]).forEach(u => {
+    html += `<tr><td><code>${u[0]}</code></td><td>${u[1]||''}</td></tr>`;
+  });
+  html += '</table>';
+
+  if (d.opts && d.opts.length) {
+    html += '<div class="opt-section-label">PARAMETERS &amp; RETURNS</div><ul class="opt-list">';
+    d.opts.forEach(o => {
+      html += `<li><span class="opt-k">${o[0]}</span><span class="opt-v">${o[1]}</span></li>`;
+    });
+    html += '</ul>';
+  }
+
+  if (d.detail) {
+    html += '<div class="details-section-label">DETAILS</div>';
+    html += `<div class="detail-text">${d.detail}</div>`;
+  }
+
+  if (d.examples && d.examples.length) {
+    html += '<div class="ex-section-label">EXAMPLES</div><ul class="ex-list ex-list-5hell">';
+    d.examples.forEach(e => { html += `<li>${e}</li>`; });
+    html += '</ul>';
+  }
+
+  body.innerHTML = html;
+  card.appendChild(hdr);
+  card.appendChild(body);
+  return card;
+}
+
+function showViewHex(viewId) {
+  document.querySelectorAll('#hx-mainContent .view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('#hx-sidebarNav .nav-item').forEach(n => n.classList.remove('active'));
+
+  if (viewId === 'hx-view-home') {
+    document.getElementById('hx-view-home').classList.add('active');
+    const ni = document.querySelector('#hx-sidebarNav .nav-item[data-view="home"]');
+    if (ni) ni.classList.add('active');
+  } else {
+    const el = document.getElementById(viewId);
+    if (el) el.classList.add('active');
+    const ni = document.querySelector(`#hx-sidebarNav .nav-item[data-view="${viewId}"]`);
+    if (ni) ni.classList.add('active');
+  }
+}
+
+function showCategoryHex(cat) {
+  document.querySelectorAll('#hx-mainContent .view').forEach(v => v.classList.remove('active'));
+  document.getElementById('hx-view-cmds').classList.add('active');
+
+  const grid  = document.getElementById('hx-cmdGrid');
+  const title = document.getElementById('hx-cmdViewTitle');
+  const filtCount = document.getElementById('hx-cmdViewCount');
+
+  let cmds = Object.keys(CMDS_HEX).sort();
+  if (cat !== 'all') cmds = cmds.filter(k => CMDS_HEX[k].cat === cat);
+
+  if (title) title.textContent = cat === 'all'
+    ? 'ALL COMMANDS'
+    : (CATS_HEX[cat]?.label || cat) + ' COMMANDS';
+  if (filtCount) filtCount.textContent = cmds.length + ' found';
+
+  grid.innerHTML = '';
+  cmds.forEach(cmd => grid.appendChild(buildCmdHexCard(cmd)));
+}
+
+function showHexCmd(cmd) {
+  const d = CMDS_HEX[cmd];
+  if (!d) return;
+  showCategoryHex(d.cat);
+  document.querySelectorAll('#hx-sidebarNav .nav-item').forEach(n => n.classList.remove('active'));
+  const ni = document.querySelector(`#hx-sidebarNav .nav-item[data-cmd="${cmd}"]`);
+  if (ni) ni.classList.add('active');
+  setTimeout(() => {
+    const card = document.getElementById('hx-card-' + cmd);
+    if (card) { card.classList.add('open'); card.scrollIntoView({behavior:'smooth',block:'start'}); }
+  }, 50);
+}
+
+(function(){
+  const inp = document.getElementById('hx-searchInput');
+  if (!inp) return;
+  inp.addEventListener('input', function(){
+    const q = this.value.toLowerCase().trim();
+    const nav = document.getElementById('hx-sidebarNav');
+    const items = nav.querySelectorAll('.nav-item[data-cmd]');
+
+    if (!q) {
+      items.forEach(i => { i.style.display = ''; });
+      nav.querySelectorAll('.cat-label').forEach(c => { c.style.display = ''; });
+      const fc = document.getElementById('hx-filteredCount');
+      if (fc) fc.textContent = '';
+      return;
+    }
+
+    let count = 0;
+    items.forEach(i => {
+      const cmd = i.dataset.cmd;
+      const match = cmd.includes(q) ||
+        (CMDS_HEX[cmd]?.short && CMDS_HEX[cmd].short.toLowerCase().includes(q));
+      i.style.display = match ? '' : 'none';
+      if (match) count++;
+    });
+
+    const fc = document.getElementById('hx-filteredCount');
+    if (fc) fc.textContent = count + ' found';
+
+    nav.querySelectorAll('.cat-label').forEach(lbl => {
+      let next = lbl.nextElementSibling;
+      let hasVisible = false;
+      while (next && !next.classList.contains('cat-label')) {
+        if (next.dataset.cmd && next.style.display !== 'none') hasVisible = true;
+        next = next.nextElementSibling;
+      }
+      lbl.style.display = hasVisible ? '' : 'none';
+    });
+
+    if (q.length >= 2) {
+      const matched = Object.keys(CMDS_HEX).sort().filter(k =>
+        k.includes(q) ||
+        (CMDS_HEX[k].short && CMDS_HEX[k].short.toLowerCase().includes(q)) ||
+        (CMDS_HEX[k].detail && CMDS_HEX[k].detail.toLowerCase().includes(q))
+      );
+      if (matched.length > 0) {
+        document.querySelectorAll('#hx-mainContent .view').forEach(v => v.classList.remove('active'));
+        const grid  = document.getElementById('hx-cmdGrid');
+        const title = document.getElementById('hx-cmdViewTitle');
+        grid.innerHTML = '';
+        title.textContent = 'SEARCH: ' + q.toUpperCase();
+        matched.forEach(cmd => grid.appendChild(buildCmdHexCard(cmd)));
+        document.getElementById('hx-view-cmds').classList.add('active');
+      }
+    }
+  });
+})();
+
+buildHexSidebar();
+
+// ═══════════════════════════════════════════════════════════════════════
+// VIPER TOOL
+// ═══════════════════════════════════════════════════════════════════════
+
+const CATS_VIPER = {
+  "vp-fs":      {label:"FILESYSTEM",  color:"#ffb700"},
+  "vp-network": {label:"NETWORK",     color:"#00ff9c"},
+  "vp-exploit": {label:"EXPLOIT",     color:"#ff003c"},
+  "vp-session": {label:"SESSION",     color:"#00d4ff"},
+  "vp-system":  {label:"SYSTEM",      color:"#b84fff"}
+};
+
+const GUIDES_VIPER = [
+  {id:"guide-overview",  label:"Overview & Architecture"},
+  {id:"guide-session",   label:"Session System"},
+  {id:"guide-commands",  label:"Command System"},
+  {id:"guide-ui",        label:"UI & Theme"}
+];
+
+const CMDS_VIPER = {
+"addalias":{cat:"vp-system",short:"Add a command alias",usage:[["addalias [alias] [command]","Create a shorthand alias for a command string"]],examples:["addalias ll ls","addalias cl clear"]},
+"addlib":{cat:"vp-exploit",short:"Add an external library to the lib manager",usage:[["addlib [path]","Load the .so at path into libManager"],["addlib [path] [jumpfilePath]","Load lib via jump file for remote session contexts"]],opts:[["jumpfilePath","Required when loading libs from a remote session context"]],detail:"Registers an external library so commands can use it via libManager. The jump file is required when adding libs across session context boundaries.",examples:["addlib /lib/metaxploit.so","addlib /lib/metaxploit.so /tmp/jump.src"]},
+"adduser":{cat:"vp-system",short:"Add a new user account",usage:[["adduser [user] [password]","Create a new user on the current computer"]],opts:[["PERMISSIONS","Root privilege and computer session required"]],examples:["adduser backdoor pass123"]},
+"back":{cat:"vp-session",short:"Go back N steps in the session chain",usage:[["back","Return to the previous session"],["back [n]","Go back n sessions in the chain"]],examples:["back","back 2"]},
+"cat":{cat:"vp-fs",short:"Display contents of a file",usage:[["cat [path]","Print the contents of the file to the terminal"]],examples:["cat /etc/passwd","cat /root/notes.txt"]},
+"cd":{cat:"vp-fs",short:"Change working directory",usage:[["cd [path]","Change to specified path"],["cd ..","Navigate up one directory"]],detail:"Changes the working directory on the current session. Affects relative path resolution for subsequent commands.",examples:["cd /root","cd ..","cd /home/guest"]},
+"chgrp":{cat:"vp-fs",short:"Change file group",usage:[["chgrp [group] [path]","Set group of file or directory"],["chgrp -R [group] [path]","Recursively set group"]],opts:[["-R","Apply recursively to all files and subdirectories"]],examples:["chgrp root /bin/tool","chgrp -R guest /home"]},
+"chmod":{cat:"vp-fs",short:"Change file permissions",usage:[["chmod [perms] [path]","Set permissions on file or directory"],["chmod -R [perms] [path]","Recursively set permissions on directory tree"]],opts:[["-R","Apply permissions recursively to all files and subdirectories"]],examples:["chmod 755 /bin/tool","chmod -R 644 /root/data"]},
+"chown":{cat:"vp-fs",short:"Change file owner",usage:[["chown [user] [path]","Set owner of file or directory"],["chown -R [user] [path]","Recursively set owner"]],opts:[["-R","Apply recursively"]],examples:["chown root /bin/tool","chown -R guest /home/guest"]},
+"clear":{cat:"vp-system",short:"Clear the terminal screen",usage:[["clear","Clear all output from the Viper terminal"]],examples:["clear"]},
+"corruptlogs":{cat:"vp-exploit",short:"Corrupt system logs to remove traces",usage:[["corruptlogs","Corrupt /var/system.log on current session"]],opts:[["PERMISSIONS","Root privilege and computer-type session required"]],detail:"Overwrites the system log to remove evidence of intrusion. Requires root privilege and a computer or shell session.",examples:["corruptlogs"]},
+"cp":{cat:"vp-fs",short:"Copy a file or directory",usage:[["cp [from] [to]","Copy source to destination path"]],examples:["cp /root/tool.src /tmp/tool.src"]},
+"crack":{cat:"vp-exploit",short:"Crack an MD5 hash",usage:[["crack [hash]","Look up hash in dictionary and return plaintext password"]],detail:"Uses dictionaryManager to reverse an MD5 hash. Requires crypto.so to be loaded in the current session.",examples:["crack 5f4dcc3b5aa765d61d8327deb882cf99"]},
+"deluser":{cat:"vp-system",short:"Delete a user account",usage:[["deluser [user]","Remove the specified user from the current computer"]],opts:[["PERMISSIONS","Root privilege and computer session required"]],examples:["deluser guest","deluser backdoor"]},
+"deltarget":{cat:"vp-session",short:"Delete a target session",usage:[["deltarget [index]","Remove session at index from session list"],["deltarget [index] [count]","Remove count sessions starting at index"]],examples:["deltarget 1","deltarget 2 3"]},
+"echo":{cat:"vp-system",short:"Print text to the terminal",usage:[["echo [text]","Print the text string to the terminal"]],examples:["echo hello world","echo test complete"]},
+"execute":{cat:"vp-session",short:"Execute a binary on the current session",usage:[["execute [path]","Run the binary at path on the current session"]],detail:"Calls shell.launch() on the specified binary path in the current session context.",examples:["execute /root/mytool","execute /tmp/payload"]},
+"exit":{cat:"vp-system",short:"Exit Viper",usage:[["exit","Close Viper and return to the system shell"]],examples:["exit"]},
+"exploitscan":{cat:"vp-exploit",short:"Scan an address or port for exploitable vulnerabilities",usage:[["exploitscan [address] [port]","Scan the lib running on port for vulnerabilities at address"]],detail:"Uses libManager's metaxploit handle to scan a memory address for overflow vulnerabilities. Returns exploit values that can be used to call lib.overflow.",examples:["exploitscan 0x32E65B93 22"]},
+"findlib":{cat:"vp-network",short:"Find a library by type and version on the network",usage:[["findlib [type] [version]","Scan random IPs for a matching service type and version"]],opts:[["type","One of: kernel_router, ssh, ftp, http, rshell, smtp, employees, cam, repository"],["version","Version string to match (e.g. '1.0.0')"]],detail:"Scans random routers until it finds a host running the specified library type and version. Useful for locating specific exploit targets.",examples:["findlib ssh 1.0.0","findlib http 1.3.0"]},
+"fs":{cat:"vp-fs",short:"Display filesystem information",usage:[["fs","Show filesystem info for the current session"]],detail:"Displays storage usage and filesystem metadata for the current session's host computer.",examples:["fs"]},
+"get":{cat:"vp-session",short:"Download a file from the pivot session",usage:[["get [remotePath] [localPath]","Copy file from pivot session to current session"]],detail:"Transfers a file from the pivot (parent) session to the current session using the SCP/jump file pattern.",examples:["get /root/tool.src /tmp/tool.src"]},
+"getpass":{cat:"vp-system",short:"Retrieve a user's password hash",usage:[["getpass [user]","Get the password hash for the specified user on current computer"]],opts:[["PERMISSIONS","Computer or shell session with root privilege"]],detail:"Reads the password hash from the system for the specified user. Useful for offline password cracking with the crack command.",examples:["getpass root","getpass admin"]},
+"mailhack":{cat:"vp-exploit",short:"Retrieve emails from target mail server",usage:[["mailhack [ip] [port]","Connect to mail server and retrieve all emails"]],detail:"Connects to an SMTP or mail server and retrieves stored emails. Useful for information gathering on a target.",examples:["mailhack 1.2.3.4 25"]},
+"help":{cat:"vp-system",short:"Show command help",usage:[["help","List all available commands with descriptions"],["help [command]","Show detailed help for a specific command"]],examples:["help","help ssh","help nmap"]},
+"history":{cat:"vp-system",short:"Show command history",usage:[["history","Display the list of previously run commands"],["history [id]","Re-execute a command from history by id"]],examples:["history","history 3"]},
+"jumpfile":{cat:"vp-exploit",short:"Set a jump file path for cross-session lib loading",usage:[["jumpfile [path]","Register a jump file location for use with addlib and sudo"]],detail:"The jump file is a temporary GreyScript source used to load libraries across session contexts where include_lib scoping prevents direct access.",examples:["jumpfile /tmp/jump.src"]},
+"kill":{cat:"vp-system",short:"Kill a process by PID",usage:[["kill [pid]","Terminate process with the specified PID"],["kill all","Terminate all non-essential processes"]],examples:["kill 1234","kill all"]},
+"libs":{cat:"vp-session",short:"List all loaded libraries",usage:[["libs","Show all libs registered in libManager with their paths"]],examples:["libs"]},
+"ls":{cat:"vp-fs",short:"List files in current directory",usage:[["ls","List files and folders in current directory"],["ls [path]","List files at specified path"]],detail:"Displays files and directories in the current session context. Output is colored by type.",examples:["ls","ls /root","ls /home/guest"]},
+"mkdir":{cat:"vp-fs",short:"Create a directory",usage:[["mkdir [path]","Create a new directory at the specified path"]],examples:["mkdir /root/tools","mkdir /tmp/work"]},
+"msfconsole":{cat:"vp-exploit",short:"Listen for incoming reverse shell connections",usage:[["msfconsole","Start listener; waits for rshell callback and adds session"]],detail:"Starts a reverse shell listener. When a target executes the msfvenom payload it calls back to your machine. On success the shell is added to the session list.",examples:["msfconsole"]},
+"msfvenom":{cat:"vp-exploit",short:"Generate a reverse shell payload",usage:[["msfvenom [ip] [port]","Build a reverse shell binary targeting ip:port"]],detail:"Generates an rshell payload saved to /root/viper-rshell. Used in conjunction with msfconsole to establish reverse shell connections.",examples:["msfvenom 1.2.3.4 4444"]},
+"mv":{cat:"vp-fs",short:"Move or rename a file or directory",usage:[["mv [from] [to]","Move or rename source to destination path"]],examples:["mv /tmp/tool.src /root/tool.src","mv /root/old.txt /root/new.txt"]},
+"nmap":{cat:"vp-network",short:"Scan target for open ports and services",usage:[["nmap [ip]","Scan target IP — show open ports and service versions"],["nmap random","Scan a random public IP"]],detail:"Runs a port scan on the target. Displays each open port with service type and version. Results can be used with exploitscan to find vulnerabilities.",examples:["nmap 1.2.3.4","nmap random"]},
+"nslookup":{cat:"vp-network",short:"Look up an IP or hostname",usage:[["nslookup [address]","Resolve hostname to IP or look up IP details"]],examples:["nslookup viper.net","nslookup 1.2.3.4"]},
+"nuke":{cat:"vp-exploit",short:"Delete all files from / on current session",usage:[["nuke","Recursively delete all files starting from / on current session"]],opts:[["PERMISSIONS","Root privilege required"]],detail:"Permanently removes all accessible files from the root of the current session's filesystem. Irreversible.",examples:["nuke"]},
+"passwd":{cat:"vp-system",short:"Change a user's password",usage:[["passwd [user] [password]","Set a new password for the specified user"]],opts:[["PERMISSIONS","Root privilege required"]],examples:["passwd root newpass123","passwd guest guestpass"]},
+"ps":{cat:"vp-system",short:"List running processes",usage:[["ps","Show all running processes on the current session"]],detail:"Calls host_computer.show_procs() and displays the process table with PID, user, CPU, memory, and binary name.",examples:["ps"]},
+"put":{cat:"vp-session",short:"Upload a file to the pivot session",usage:[["put [localPath] [remotePath]","Copy file from current session to pivot session"]],examples:["put /tmp/payload.src /root/payload.src"]},
+"return":{cat:"vp-session",short:"Return to the pivot/parent session",usage:[["return","Jump directly to the pivot (root parent) session"]],detail:"Navigates directly to the original pivot session regardless of how deep in the session chain you are.",examples:["return"]},
+"rm":{cat:"vp-fs",short:"Delete a file or directory",usage:[["rm [path]","Delete the specified file or directory"]],detail:"Requires write permission on the target. Permanent — no recovery.",examples:["rm /tmp/payload.src","rm /var/system.log"]},
+"secure":{cat:"vp-exploit",short:"Secure a system by locking down permissions",usage:[["secure home","Secure your home computer"],["secure server","Secure a target server session"]],detail:"Removes world-writable permissions on critical paths and deletes guest/user credentials to prevent unauthorized access.",examples:["secure home","secure server"]},
+"ssh":{cat:"vp-network",short:"Connect to a remote computer via SSH",usage:[["ssh [ip] [user] [pass]","Connect to SSH on the default port"],["ssh [ip] [user] [pass] [port] [service]","Connect to a specific port/service"]],detail:"Opens an SSH connection to the target and adds the resulting shell session to the session list. On success the new session becomes the current session.",examples:["ssh 1.2.3.4 root password123","ssh 1.2.3.4 admin pass 22 ssh"]},
+"sudo":{cat:"vp-exploit",short:"Escalate privileges using password or dictionary",usage:[["sudo [user] [password]","Get a shell as the specified user with given password"],["sudo [user] [dictPath] [jumpfilePath]","Brute-force user password using dictionary file"]],opts:[["jumpfilePath","Optional jump file path for remote dictionary loading"]],detail:"Attempts to obtain a shell as the specified user. With a dictionary file it brute-forces using dictionaryManager. On success the new shell is added to the session list.",examples:["sudo root password123","sudo root /root/dict.txt /tmp/jump.src"]},
+"targets":{cat:"vp-session",short:"List all active sessions",usage:[["targets","Display all sessions with index, type, user, and IP"]],detail:"Shows a numbered list of all sessions in the sessionManager. Each entry shows index, session type, username, and remote IP.",examples:["targets"]},
+"term":{cat:"vp-system",short:"Activate current shell in native terminal",usage:[["term","Open the native Grey Hack terminal for the current session shell"]],detail:"Launches the built-in Grey Hack terminal for the current session's shell object. Allows running standard terminal commands alongside Viper.",examples:["term"]},
+"touch":{cat:"vp-fs",short:"Create an empty file",usage:[["touch [path]","Create an empty file at the specified path"]],examples:["touch /tmp/payload.src","touch /root/notes.txt"]},
+"use":{cat:"vp-session",short:"Switch to a different session by index",usage:[["use [index]","Set session at index as the current session"]],detail:"Changes the active session. All subsequent commands will run in the context of the selected session.",examples:["use 0","use 2"]},
+"uselib":{cat:"vp-exploit",short:"Set the active library for exploit operations",usage:[["uselib [index]","Activate library at index from the libs list"]],detail:"Switches the active metaxploit lib used by exploitscan and related commands. Use libs to see the current list.",examples:["uselib 0","uselib 2"]},
+"usepivotlib":{cat:"vp-exploit",short:"Use a library from the pivot session",usage:[["usepivotlib [index]","Activate library at index from pivot session's lib list"]],detail:"Loads a library from a pivot session into the current exploit context. Useful for multi-hop attacks.",examples:["usepivotlib 0"]},
+"whois":{cat:"vp-network",short:"Get public information about a target IP",usage:[["whois [ip]","Show public info for the target IP"]],detail:"Queries the Grey Hack network for public information about the target address.",examples:["whois 1.2.3.4"]},
+"write":{cat:"vp-fs",short:"Write text to a file",usage:[["write [text] > [path]","Overwrite file with text"],["write [text] >> [path]","Append text to file"]],detail:"Writes plain text to a file. Use > to overwrite, >> to append.",examples:["write hello > /root/test.txt","write world >> /root/test.txt"]}
+};
+
+function buildViperSidebar() {
+  const nav = document.getElementById('vp-sidebarNav');
+  nav.innerHTML = '';
+
+  const total = Object.keys(CMDS_VIPER).length;
+  const tc = document.getElementById('vp-totalCmds');
+  if (tc) tc.textContent = total;
+  const cc = document.getElementById('vp-cmdCount');
+  if (cc) cc.textContent = total + ' commands';
+
+  const homeEl = document.createElement('div');
+  homeEl.className = 'nav-item active';
+  homeEl.textContent = '\u2302  Overview';
+  homeEl.dataset.view = 'home';
+  homeEl.onclick = () => showViewViper('vp-view-home');
+  nav.appendChild(homeEl);
+
+  const guideLabel = document.createElement('div');
+  guideLabel.className = 'cat-label';
+  guideLabel.textContent = 'GUIDES';
+  nav.appendChild(guideLabel);
+
+  GUIDES_VIPER.forEach(g => {
+    const el = document.createElement('div');
+    el.className = 'nav-item nav-item-guide';
+    el.textContent = g.label;
+    el.dataset.view = 'vp-view-' + g.id;
+    el.onclick = () => showViewViper('vp-view-' + g.id);
+    nav.appendChild(el);
+  });
+
+  Object.keys(CATS_VIPER).forEach(cat => {
+    const cmds = Object.keys(CMDS_VIPER).sort().filter(k => CMDS_VIPER[k].cat === cat);
+    if (!cmds.length) return;
+
+    const lbl = document.createElement('div');
+    lbl.className = 'cat-label';
+    lbl.textContent = CATS_VIPER[cat].label;
+    nav.appendChild(lbl);
+
+    cmds.forEach(cmd => {
+      const el = document.createElement('div');
+      el.className = 'nav-item';
+      el.textContent = cmd;
+      el.dataset.cmd = cmd;
+      el.onclick = () => showViperCmd(cmd);
+      nav.appendChild(el);
+    });
+  });
+}
+
+function buildCmdViperCard(cmd) {
+  const d = CMDS_VIPER[cmd];
+  const card = document.createElement('div');
+  card.className = 'cmd-card';
+  card.id = 'vp-card-' + cmd;
+
+  const hdr = document.createElement('div');
+  hdr.className = 'cmd-header';
+  hdr.innerHTML = '<span class="cmd-name">' + cmd + '</span><span class="cmd-short">' + (d.short||'') + '</span><span class="cmd-chevron">\u203a</span>';
+  hdr.onclick = () => card.classList.toggle('open');
+
+  const body = document.createElement('div');
+  body.className = 'cmd-body';
+
+  let html = '<div class="usage-label">USAGE</div><table class="usage-table">';
+  (d.usage||[]).forEach(u => {
+    html += '<tr><td><code>' + u[0] + '</code></td><td>' + (u[1]||'') + '</td></tr>';
+  });
+  html += '</table>';
+
+  if (d.opts && d.opts.length) {
+    html += '<div class="opt-section-label">PARAMETERS &amp; RETURNS</div><ul class="opt-list">';
+    d.opts.forEach(o => {
+      html += '<li><span class="opt-k">' + o[0] + '</span><span class="opt-v">' + o[1] + '</span></li>';
+    });
+    html += '</ul>';
+  }
+
+  if (d.detail) {
+    html += '<div class="details-section-label">DETAILS</div>';
+    html += '<div class="detail-text">' + d.detail + '</div>';
+  }
+
+  if (d.examples && d.examples.length) {
+    html += '<div class="ex-section-label">EXAMPLES</div><ul class="ex-list ex-list-5hell">';
+    d.examples.forEach(e => { html += '<li>' + e + '</li>'; });
+    html += '</ul>';
+  }
+
+  body.innerHTML = html;
+  card.appendChild(hdr);
+  card.appendChild(body);
+  return card;
+}
+
+function showViewViper(viewId) {
+  document.querySelectorAll('#vp-mainContent .view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('#vp-sidebarNav .nav-item').forEach(n => n.classList.remove('active'));
+
+  if (viewId === 'vp-view-home') {
+    document.getElementById('vp-view-home').classList.add('active');
+    const ni = document.querySelector('#vp-sidebarNav .nav-item[data-view="home"]');
+    if (ni) ni.classList.add('active');
+  } else {
+    const el = document.getElementById(viewId);
+    if (el) el.classList.add('active');
+    const ni = document.querySelector('#vp-sidebarNav .nav-item[data-view="' + viewId + '"]');
+    if (ni) ni.classList.add('active');
+  }
+}
+
+function showCategoryViper(cat) {
+  document.querySelectorAll('#vp-mainContent .view').forEach(v => v.classList.remove('active'));
+  document.getElementById('vp-view-cmds').classList.add('active');
+
+  const grid  = document.getElementById('vp-cmdGrid');
+  const title = document.getElementById('vp-cmdViewTitle');
+  const filtCount = document.getElementById('vp-cmdViewCount');
+
+  let cmds = Object.keys(CMDS_VIPER).sort();
+  if (cat !== 'all') cmds = cmds.filter(k => CMDS_VIPER[k].cat === cat);
+
+  if (title) title.textContent = cat === 'all'
+    ? 'ALL COMMANDS'
+    : (CATS_VIPER[cat] ? CATS_VIPER[cat].label : cat) + ' COMMANDS';
+  if (filtCount) filtCount.textContent = cmds.length + ' found';
+
+  grid.innerHTML = '';
+  cmds.forEach(cmd => grid.appendChild(buildCmdViperCard(cmd)));
+}
+
+function showViperCmd(cmd) {
+  const d = CMDS_VIPER[cmd];
+  if (!d) return;
+  showCategoryViper(d.cat);
+  document.querySelectorAll('#vp-sidebarNav .nav-item').forEach(n => n.classList.remove('active'));
+  const ni = document.querySelector('#vp-sidebarNav .nav-item[data-cmd="' + cmd + '"]');
+  if (ni) ni.classList.add('active');
+  setTimeout(() => {
+    const card = document.getElementById('vp-card-' + cmd);
+    if (card) { card.classList.add('open'); card.scrollIntoView({behavior:'smooth',block:'start'}); }
+  }, 50);
+}
+
+(function(){
+  const inp = document.getElementById('vp-searchInput');
+  if (!inp) return;
+  inp.addEventListener('input', function(){
+    const q = this.value.toLowerCase().trim();
+    const nav = document.getElementById('vp-sidebarNav');
+    const items = nav.querySelectorAll('.nav-item[data-cmd]');
+
+    if (!q) {
+      items.forEach(i => { i.style.display = ''; });
+      nav.querySelectorAll('.cat-label').forEach(c => { c.style.display = ''; });
+      const fc = document.getElementById('vp-filteredCount');
+      if (fc) fc.textContent = '';
+      return;
+    }
+
+    let count = 0;
+    items.forEach(i => {
+      const cmd = i.dataset.cmd;
+      const match = cmd.includes(q) ||
+        (CMDS_VIPER[cmd] && CMDS_VIPER[cmd].short && CMDS_VIPER[cmd].short.toLowerCase().includes(q));
+      i.style.display = match ? '' : 'none';
+      if (match) count++;
+    });
+
+    const fc = document.getElementById('vp-filteredCount');
+    if (fc) fc.textContent = count + ' found';
+
+    nav.querySelectorAll('.cat-label').forEach(lbl => {
+      let next = lbl.nextElementSibling;
+      let hasVisible = false;
+      while (next && !next.classList.contains('cat-label')) {
+        if (next.dataset.cmd && next.style.display !== 'none') hasVisible = true;
+        next = next.nextElementSibling;
+      }
+      lbl.style.display = hasVisible ? '' : 'none';
+    });
+
+    if (q.length >= 2) {
+      const matched = Object.keys(CMDS_VIPER).sort().filter(k =>
+        k.includes(q) ||
+        (CMDS_VIPER[k].short && CMDS_VIPER[k].short.toLowerCase().includes(q)) ||
+        (CMDS_VIPER[k].detail && CMDS_VIPER[k].detail.toLowerCase().includes(q))
+      );
+      if (matched.length > 0) {
+        document.querySelectorAll('#vp-mainContent .view').forEach(v => v.classList.remove('active'));
+        const grid  = document.getElementById('vp-cmdGrid');
+        const title = document.getElementById('vp-cmdViewTitle');
+        grid.innerHTML = '';
+        title.textContent = 'SEARCH: ' + q.toUpperCase();
+        matched.forEach(cmd => grid.appendChild(buildCmdViperCard(cmd)));
+        document.getElementById('vp-view-cmds').classList.add('active');
+      }
+    }
+  });
+})();
+
+buildViperSidebar();
+
+// ═══════════════════════════════════════════════════════════════════════
+// GREYSCRIPT TOOL
+// ═══════════════════════════════════════════════════════════════════════
+
+const GUIDES_GS = [
+  {id:"guide-lang",       label:"Language Basics"},
+  {id:"guide-flow",       label:"Control Flow"},
+  {id:"guide-oop",        label:"OOP Patterns"},
+  {id:"guide-intrinsics", label:"Built-in Intrinsics"},
+  {id:"guide-shell",      label:"Shell & Computer API"},
+  {id:"guide-network",    label:"Network & Ports"},
+  {id:"guide-meta",       label:"Metaxploit"},
+  {id:"guide-blockchain", label:"Blockchain & Crypto"},
+  {id:"guide-patterns",   label:"Common Patterns"}
+];
+
+function buildGsSidebar() {
+  const nav = document.getElementById('gs-sidebarNav');
+  nav.innerHTML = '';
+
+  const homeEl = document.createElement('div');
+  homeEl.className = 'nav-item active';
+  homeEl.textContent = '⌂  Overview';
+  homeEl.dataset.view = 'home';
+  homeEl.onclick = () => showViewGs('gs-view-home');
+  nav.appendChild(homeEl);
+
+  const guideLabel = document.createElement('div');
+  guideLabel.className = 'cat-label';
+  guideLabel.textContent = 'REFERENCE';
+  nav.appendChild(guideLabel);
+
+  GUIDES_GS.forEach(g => {
+    const el = document.createElement('div');
+    el.className = 'nav-item nav-item-guide';
+    el.textContent = g.label;
+    el.dataset.view = 'gs-view-' + g.id;
+    el.onclick = () => showViewGs('gs-view-' + g.id);
+    nav.appendChild(el);
+  });
+}
+
+function showViewGs(viewId) {
+  document.querySelectorAll('#gs-mainContent .view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('#gs-sidebarNav .nav-item').forEach(n => n.classList.remove('active'));
+
+  const el = document.getElementById(viewId);
+  if (el) el.classList.add('active');
+  const ni = document.querySelector(`#gs-sidebarNav .nav-item[data-view="${viewId === 'gs-view-home' ? 'home' : viewId}"]`);
+  if (ni) ni.classList.add('active');
+}
+
+buildGsSidebar();
 
 
 function openGHModal(){
