@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DOOM — Hacktool Documentation</title>
+<title>Hacktool Docs — Grey Hack Community Tools</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap');
@@ -442,6 +442,7 @@ border:1px solid var(--border);
 margin-bottom:4px;
 line-height:1.5;
 }
+.ex-list-5hell li::before{content:'|> ';color:var(--text-muted);font-family:'Share Tech Mono',monospace;}
 .ex-list li::before{content:'$ ';color:var(--text-muted);}
 
 /* ── GUIDE SECTIONS ──────────────────────────────────────── */
@@ -595,6 +596,261 @@ transition:text-shadow 0.15s;
 }
 .gh-link:hover{text-shadow:var(--glow-sm);}
 
+/* ── HUB / TOOLSPACE LAYERS ─────────────────────────────── */
+.hub{flex:1;display:flex;flex-direction:column;overflow:hidden;min-height:0;}
+.hub.hidden{display:none;}
+.toolspace{flex:1;display:none;flex-direction:column;min-height:0;}
+.toolspace.active{display:flex;}
+
+/* Hub header */
+.hub-header{
+background:rgba(3,12,9,0.98);
+border-bottom:1px solid var(--border);
+padding:0 24px;
+height:58px;
+display:flex;align-items:center;
+justify-content:space-between;
+position:relative;
+z-index:100;
+flex-shrink:0;
+}
+.hub-header::after{
+content:'';
+position:absolute;
+bottom:-1px;left:0;right:0;height:1px;
+background:linear-gradient(90deg,transparent 0%,var(--primary) 40%,var(--secondary) 60%,transparent 100%);
+opacity:0.6;
+}
+
+/* Hub body */
+.hub-body{
+flex:1;
+overflow-y:auto;
+display:flex;
+flex-direction:column;
+align-items:center;
+padding:52px 24px 60px;
+min-height:0;
+}
+.hub-body::-webkit-scrollbar{width:5px;}
+.hub-body::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+
+/* Hub hero */
+.hub-hero{text-align:center;margin-bottom:52px;}
+.hub-eyebrow{
+font-size:0.63rem;
+color:var(--text-dim);
+letter-spacing:6px;
+text-transform:uppercase;
+margin-bottom:20px;
+}
+.hub-main-title{
+font-family:'Orbitron',monospace;
+font-size:3.2rem;
+font-weight:900;
+letter-spacing:4px;
+line-height:1;
+color:var(--primary);
+text-shadow:var(--glow);
+}
+.hub-main-title .ht-docs{
+color:var(--secondary);
+text-shadow:var(--glow-sec);
+}
+.hub-tagline{
+font-size:0.72rem;
+color:var(--text-dim);
+letter-spacing:4px;
+margin-top:16px;
+}
+.hub-divider{
+width:420px;
+max-width:90vw;
+height:1px;
+background:linear-gradient(90deg,transparent,var(--primary),var(--secondary),transparent);
+margin:22px auto;
+opacity:0.35;
+}
+
+/* Tools section */
+.tools-section-label{
+font-size:0.6rem;
+color:var(--text-dim);
+letter-spacing:4px;
+text-transform:uppercase;
+margin-bottom:20px;
+display:flex;
+align-items:center;
+gap:14px;
+width:100%;
+max-width:980px;
+}
+.tools-section-label::before,.tools-section-label::after{
+content:'';
+flex:1;
+height:1px;
+background:var(--border);
+}
+.tools-grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+gap:14px;
+width:100%;
+max-width:980px;
+}
+
+/* Tool card */
+.tool-card{
+background:var(--surface);
+border:1px solid var(--border);
+padding:22px;
+position:relative;
+transition:border-color 0.18s,background 0.18s,box-shadow 0.18s;
+display:flex;
+flex-direction:column;
+gap:12px;
+overflow:hidden;
+}
+.tool-card::before{
+content:'';
+position:absolute;
+top:0;left:0;right:0;height:2px;
+background:var(--border);
+}
+.tool-card.live{cursor:pointer;}
+.tool-card.live:hover{
+border-color:var(--primary-dim);
+background:var(--surface2);
+box-shadow:0 0 24px rgba(0,255,156,0.07);
+}
+.tool-card.live::before{
+background:linear-gradient(90deg,var(--primary),var(--primary-dim));
+box-shadow:0 1px 8px rgba(0,255,156,0.3);
+}
+.tool-card.soon{opacity:0.42;cursor:default;}
+
+/* Decorative background glyph */
+.tool-card::after{
+content:attr(data-glyph);
+position:absolute;
+right:14px;
+bottom:-6px;
+font-family:'Orbitron',monospace;
+font-size:4.5rem;
+font-weight:900;
+color:rgba(0,255,156,0.03);
+pointer-events:none;
+user-select:none;
+line-height:1;
+letter-spacing:-2px;
+}
+
+/* tc = tool card sub-elements */
+.tc-head{
+display:flex;
+align-items:flex-start;
+justify-content:space-between;
+gap:12px;
+}
+.tc-name{
+font-family:'Orbitron',monospace;
+font-size:1.05rem;
+font-weight:700;
+color:var(--text-muted);
+letter-spacing:3px;
+line-height:1;
+}
+.tool-card.live .tc-name{
+color:var(--primary);
+text-shadow:0 0 12px rgba(0,255,156,0.25);
+}
+.tc-status{
+font-size:0.58rem;
+letter-spacing:2px;
+padding:3px 9px;
+border:1px solid var(--border);
+color:var(--text-muted);
+text-transform:uppercase;
+white-space:nowrap;
+flex-shrink:0;
+}
+.tc-status.live{
+color:var(--primary);
+border-color:rgba(0,255,156,0.3);
+background:rgba(0,255,156,0.06);
+box-shadow:0 0 8px rgba(0,255,156,0.15);
+}
+.tc-status.soon{
+color:var(--warn);
+border-color:rgba(255,183,0,0.2);
+background:rgba(255,183,0,0.04);
+}
+.tc-divider{height:1px;background:var(--border);}
+.tc-desc{
+font-size:0.73rem;
+color:var(--text-dim);
+line-height:1.65;
+flex:1;
+}
+.tc-meta{display:flex;gap:7px;flex-wrap:wrap;}
+.tc-tag{
+font-size:0.59rem;
+letter-spacing:1px;
+padding:2px 7px;
+background:rgba(0,255,156,0.05);
+border:1px solid rgba(0,255,156,0.12);
+color:var(--primary-dim);
+}
+.tool-card.soon .tc-tag{
+background:rgba(255,255,255,0.02);
+border-color:var(--border);
+color:var(--text-muted);
+}
+.tc-action{
+font-size:0.67rem;
+color:var(--primary);
+letter-spacing:2px;
+display:flex;
+align-items:center;
+gap:6px;
+margin-top:2px;
+}
+.tc-action::before{content:'›';font-size:1.1rem;line-height:1;}
+
+/* Hub footer */
+.hub-footer{
+padding:14px 24px;
+text-align:center;
+font-size:0.62rem;
+color:var(--text-muted);
+letter-spacing:2px;
+border-top:1px solid var(--border);
+flex-shrink:0;
+line-height:2;
+}
+
+/* Back-to-hub button (in tool header) */
+.hub-back{
+display:flex;
+align-items:center;
+gap:8px;
+color:var(--text-dim);
+font-size:0.67rem;
+letter-spacing:2px;
+cursor:pointer;
+border:1px solid var(--border);
+padding:5px 12px;
+background:transparent;
+font-family:'Share Tech Mono',monospace;
+transition:all 0.15s;
+flex-shrink:0;
+}
+.hub-back:hover{
+color:var(--primary);
+border-color:var(--primary-dim);
+background:rgba(0,255,156,0.04);
+}
+
 /* ── GH MODAL ────────────────────────────────────────────── */
 #ghModalOverlay{
 display:none;
@@ -684,9 +940,130 @@ line-height:1;
 </hea
 <body>
 
-<header class="header">
+<!-- ─── HUB LAYER ─────────────────────────────────────────── -->
+<div id="hub" class="hub">
+
+<div class="hub-header">
   <div>
-    <div class="logo">DOOM - <span><span class="gh-link" onclick="openGHModal()">Grey Hack</span> Hacktool // Command Reference</span></div>
+    <div class="logo">HACKTOOL <span style="color:var(--secondary);text-shadow:var(--glow-sec)">DOCS</span></div>
+    <span class="logo-sub">GREY HACK · COMMUNITY TOOLS REFERENCE PORTAL</span>
+  </div>
+  <div class="header-right">
+    <div class="header-badge"><span class="dot"></span> ONLINE</div>
+    <div class="header-badge"><span class="dot sec"></span> <span class="gh-link" style="text-decoration-color:var(--text-dim)" onclick="openGHModal()">GREY HACK</span></div>
+  </div>
+</div>
+
+<div class="hub-body">
+  <div class="hub-hero">
+    <div class="hub-eyebrow">// GREY HACK · COMMUNITY TOOLS //</div>
+    <div class="hub-main-title">HACKTOOL<span class="ht-docs"> DOCS</span></div>
+    <div class="hub-tagline">SELECT A TOOL TO BROWSE ITS DOCUMENTATION</div>
+    <div class="hub-divider"></div>
+  </div>
+
+  <div class="tools-section-label">AVAILABLE TOOLS</div>
+
+  <div class="tools-grid">
+
+    <!-- DOOM -->
+    <div class="tool-card live" data-glyph="D" onclick="openTool('doom')">
+      <div class="tc-head">
+        <div class="tc-name">DOOM</div>
+        <div class="tc-status live">● LIVE</div>
+      </div>
+      <div class="tc-divider"></div>
+      <div class="tc-desc">Full-featured Grey Hack hacking suite. Exploit engine, session manager, proxy chaining, macro system, and network recon — all in one tool.</div>
+      <div class="tc-meta">
+        <span class="tc-tag">90+ COMMANDS</span>
+        <span class="tc-tag">8 CATEGORIES</span>
+        <span class="tc-tag">7 GUIDES</span>
+        <span class="tc-tag">MULTIPLAYER</span>
+      </div>
+      <div class="tc-action">OPEN DOCUMENTATION</div>
+    </div>
+
+    <!-- 5HELL -->
+    <div class="tool-card live" data-glyph="$" onclick="openTool('5hell')">
+      <div class="tc-head">
+        <div class="tc-name">5HELL</div>
+        <div class="tc-status live">● LIVE</div>
+      </div>
+      <div class="tc-divider"></div>
+      <div class="tc-desc">Pipe-driven shell exploitation framework. Flat command architecture with a built-in macro engine, GLASSPOOL session mirroring, and .5pk package system.</div>
+      <div class="tc-meta">
+        <span class="tc-tag">100 COMMANDS</span>
+        <span class="tc-tag">8 CATEGORIES</span>
+        <span class="tc-tag">6 GUIDES</span>
+        <span class="tc-tag">LOCAL SOURCE</span>
+      </div>
+      <div class="tc-action">OPEN DOCUMENTATION</div>
+    </div>
+
+    <!-- HEX -->
+    <div class="tool-card soon" data-glyph="H">
+      <div class="tc-head">
+        <div class="tc-name">HEX</div>
+        <div class="tc-status soon">SOON</div>
+      </div>
+      <div class="tc-divider"></div>
+      <div class="tc-desc">State-persistent exploit toolkit. Session stack navigation, typed Exploit objects, Result wrappers, and structured dispatch maps for systematic attacks.</div>
+      <div class="tc-meta">
+        <span class="tc-tag">SESSION STACK</span>
+        <span class="tc-tag">EXPLOIT OBJECTS</span>
+        <span class="tc-tag">NUKE OPS</span>
+      </div>
+    </div>
+
+    <!-- VIPER -->
+    <div class="tool-card soon" data-glyph="V">
+      <div class="tc-head">
+        <div class="tc-name">VIPER</div>
+        <div class="tc-status soon">SOON</div>
+      </div>
+      <div class="tc-divider"></div>
+      <div class="tc-desc">ExtensionMediator structured hacktool. Typed command system, session manager, theme layer, config, and macro engine built on the Architecture A DI pattern.</div>
+      <div class="tc-meta">
+        <span class="tc-tag">ARCHITECTURE A</span>
+        <span class="tc-tag">SESSION MGR</span>
+        <span class="tc-tag">THEMES</span>
+      </div>
+    </div>
+
+    <!-- GREYSCRIPT -->
+    <div class="tool-card soon" data-glyph="GS">
+      <div class="tc-head">
+        <div class="tc-name">GREYSCRIPT</div>
+        <div class="tc-status soon">SOON</div>
+      </div>
+      <div class="tc-divider"></div>
+      <div class="tc-desc">GreyScript language reference and Grey Hack API guide. Data types, OOP patterns, built-in intrinsics, and the complete game object API documentation.</div>
+      <div class="tc-meta">
+        <span class="tc-tag">LANGUAGE REF</span>
+        <span class="tc-tag">GH API</span>
+        <span class="tc-tag">PATTERNS</span>
+        <span class="tc-tag">INTRINSICS</span>
+      </div>
+    </div>
+
+  </div><!-- /tools-grid -->
+</div><!-- /hub-body -->
+
+<div class="hub-footer">
+  <span style="color:var(--accent)">DOOM</span> TOOL BY @GSQ &nbsp;·&nbsp; <span style="color:#2382ff">5HELL</span> TOOL BY @PLU70 &nbsp;·&nbsp; <span style="color:#16cff0">Hex</span> TOOL BY @redit0 &nbsp;·&nbsp; SITE BY @CHAOTICCRUMB &nbsp;·&nbsp; ALL TOOLS FOR <span class="gh-link" style="color:var(--text-dim);text-decoration-color:var(--border2)" onclick="openGHModal()">GREY HACK</span>
+</div>
+
+</div><!-- /hub -->
+
+<!-- ─── TOOL LAYER ─────────────────────────────────────────── -->
+<div id="toolspace" class="toolspace">
+
+<header class="header">
+  <div style="display:flex;align-items:center;gap:16px;">
+    <button class="hub-back" onclick="showHub()">◁ HUB</button>
+    <div>
+      <div class="logo">DOOM - <span><span class="gh-link" onclick="openGHModal()">Grey Hack</span> Hacktool // Command Reference</span></div>
+    </div>
   </div>
   <div class="header-right">
     <div class="header-badge"><span class="dot"></span> ONLINE</div>
@@ -1203,6 +1580,641 @@ rcache -s           // list currently connected sessions</div>
   
 </main>
 </div>
+</div><!-- /toolspace -->
+
+<!-- ─── 5HELL TOOLSPACE ──────────────────────────────────────── -->
+<div id="toolspace-5hell" class="toolspace">
+
+<header class="header">
+  <div style="display:flex;align-items:center;gap:16px;">
+    <button class="hub-back" onclick="showHub()">◁ HUB</button>
+    <div>
+      <div class="logo"><span style="color:#2382ff;text-shadow:0 0 12px rgba(35,130,255,0.4)">5HELL</span> - <span><span class="gh-link" onclick="openGHModal()">Grey Hack</span> Hacktool // Command Reference</span></div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="header-badge"><span class="dot"></span> ONLINE</div>
+    <div class="header-badge"><span class="dot sec"></span> <span class="gh-link" style="text-decoration-color:var(--text-dim)" onclick="openGHModal()">GREY HACK</span></div>
+    <div class="header-badge"><span class="dot warn"></span> v4.3.6</div>
+  </div>
+</header>
+
+<div class="layout">
+
+<div class="sidebar">
+  <div class="sidebar-top">
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input type="text" id="sh-searchInput" placeholder="search commands...">
+    </div>
+    <div class="cat-count">
+      <span id="sh-cmdCount">0 commands</span>
+      <span id="sh-filteredCount"></span>
+    </div>
+  </div>
+  <nav class="sidebar-nav" id="sh-sidebarNav"></nav>
+</div>
+
+<main class="content" id="sh-mainContent">
+
+<!-- 5HELL HOME VIEW -->
+<div class="view active" id="sh-view-home">
+  <div class="home-hero">
+    <div class="hero-title" style="color:#2382ff;text-shadow:0 0 12px rgba(35,130,255,0.5),0 0 24px rgba(35,130,255,0.2)">5HELL</div>
+    <div class="hero-sub"><span class="gh-link" style="text-decoration-color:var(--text-dim)" onclick="openGHModal()">GREY HACK</span> HACKTOOL — COMMAND REFERENCE</div>
+    <div class="hero-divider" style="background:linear-gradient(90deg,transparent,#2382ff,transparent)"></div>
+    <div class="guide-p" style="max-width:600px;margin:0 auto;text-align:center;">
+      5hell v4.3.6 "falling_skies" by Plu70. A pipe-driven exploitation framework with flat command dispatch, GLASSPOOL session mirroring, persistent macro engine, and full .5pk package system.
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-n" id="sh-totalCmds">75+</div><div class="stat-l">COMMANDS</div></div>
+    <div class="stat-card"><div class="stat-n">8</div><div class="stat-l">CATEGORIES</div></div>
+    <div class="stat-card"><div class="stat-n">6</div><div class="stat-l">GUIDE SECTIONS</div></div>
+    <div class="stat-card"><div class="stat-n">L</div><div class="stat-l">LOCAL SOURCE</div></div>
+  </div>
+
+  <div class="sec-title">QUICK ACCESS</div>
+  <div class="quick-grid">
+    <div class="quick-card" onclick="showView5hell('sh-view-guide-install')">
+      <div class="quick-card-title">▶ GETTING STARTED</div>
+      <div class="quick-card-desc">Install, rkit setup, do.rc config, file structure.</div>
+    </div>
+    <div class="quick-card" onclick="showView5hell('sh-view-guide-shell')">
+      <div class="quick-card-title">▶ SHELL &amp; PIPING</div>
+      <div class="quick-card-desc">Pipe engine, GLASSPOOL mirroring, EZ_CLIP tokens.</div>
+    </div>
+    <div class="quick-card" onclick="showView5hell('sh-view-guide-clip')">
+      <div class="quick-card-title">▶ CLIP &amp; BUFFER</div>
+      <div class="quick-card-desc">Clipboard slots, Memory Alpha BUFFER, malp object handling.</div>
+    </div>
+    <div class="quick-card" onclick="showView5hell('sh-view-guide-macros')">
+      <div class="quick-card-title">▶ MACROS &amp; SCRIPTS</div>
+      <div class="quick-card-desc">Persistent macros, do scripts, bat alias, SAFEWORD, do.rc.</div>
+    </div>
+    <div class="quick-card" onclick="showView5hell('sh-view-guide-exploit')">
+      <div class="quick-card-title">▶ EXPLOIT WORKFLOW</div>
+      <div class="quick-card-desc">probe → meta → zap/db/roil, 5phinx TUI, hashim cracking.</div>
+    </div>
+    <div class="quick-card" onclick="showView5hell('sh-view-guide-cob')">
+      <div class="quick-card-title">▶ CUSTOM OBJECT / cob</div>
+      <div class="quick-card-desc">Persistent key-value store, @home config, session exports.</div>
+    </div>
+  </div>
+
+  <div class="sec-title" style="margin-top:28px;">EXPLOIT CHAIN</div>
+  <div class="flow-chain">
+    <div class="flow-node">probe [ip]</div><div class="flow-arrow">→</div>
+    <div class="flow-node">meta link [ip] [port]</div><div class="flow-arrow">→</div>
+    <div class="flow-node">meta scan</div><div class="flow-arrow">→</div>
+    <div class="flow-node">roil</div><div class="flow-arrow">→</div>
+    <div class="flow-node">malp</div><div class="flow-arrow">→</div>
+    <div class="flow-node">glasspool</div><div class="flow-arrow">→</div>
+    <div class="flow-node">silentclean</div>
+  </div>
+</div>
+
+<!-- 5HELL COMMAND VIEW -->
+<div class="view" id="sh-view-cmds">
+  <div class="sec-title" id="sh-cmdViewTitle">COMMANDS</div>
+  <div class="cmd-grid" id="sh-cmdGrid"></div>
+</div>
+
+<!-- ─── GUIDE: GETTING STARTED ───────────────────────────────── -->
+<div class="view" id="sh-view-guide-install">
+<div class="guide-wrap">
+<div class="guide-h1">GETTING STARTED</div>
+<div class="guide-divider"></div>
+<div class="guide-p">5hell is a pipe-driven exploitation framework for <span class="gh-link" onclick="openGHModal()">Grey Hack</span> <b>multiplayer</b>. It runs as a compiled GreyScript binary using a flat command dispatch map, full pipe engine, persistent macros, and modular .5pk packages.</div>
+
+<div class="guide-h2">1. OBTAIN 5HELL</div>
+<div class="guide-p">The full 5hell source is available on GitHub. Clone or download the repository to get all <code>.5pk.src</code> files:</div>
+<div class="code-block"><span class="cb-label">GITHUB</span>https://github.com/jhook777/5hell-for-Grey-Hack-the-Game</div>
+
+<div class="guide-h2">2. REQUIRED LIBRARIES</div>
+<div class="guide-p">5hell uses <b>metaxploit.so</b>, <b>crypto.so</b>, and <b>aptclient.so</b>. At startup, <span class="inline-cmd">super_import</span> automatically scans the filesystem for the highest-version copies and loads them. Ensure they exist:</div>
+<div class="code-block">apt-get addrepo [HACKSHOP_IP]
+apt-get update
+apt-get install metaxploit /lib
+apt-get install crypto /lib</div>
+
+<div class="guide-h2">3. COMPILE AND RUN</div>
+<div class="guide-p">5hell ships as source files and must be compiled before first use. You have two options:</div>
+<div class="guide-h3">OPTION A — IN-GAME BUILD COMMAND</div>
+<div class="guide-p">Copy all <code>.src</code> files from the repository into <code>/root/src</code> on your in-game machine. You can do this manually by pasting them into the Grey Hack script editor</div>
+<div class="guide-p">From a root terminal inside Grey Hack, navigate to your source folder and compile:</div>
+<div class="code-block">cd /root/src
+build 5hell.src /root/rkit/</div>
+<div class="guide-h3">OPTION B — GREYBEL VS CODE EXTENSION</div>
+<div class="guide-p">Use the <b>Greybel</b> VS Code extension to transpile and bundle the source outside of the game. Open <code>5hell.src</code> in VS Code, then use the Greybel build command to produce compiled output installer.src files you can paste into the in-game editor.</div>
+<div class="tip-box"><div class="tip-label">GREYBEL</div>The Greybel extension handles <code>import_code()</code> directives at transpile time, bundling all <code>.5pk.src</code> modules into a few output installer files. Greybel also supports direct file import/compile using a bepinex extension. Learn more and install the greybel extension from the VS Code Marketplace: search <b>greybel-vs</b>.</div>
+<div class="guide-p">Once compiled, launch 5hell from the output directory:</div>
+<div class="code-block">cd /root/rkit
+5hell</div>
+
+<div class="guide-h2">4. BUILD THE RKIT</div>
+<div class="guide-p">Once running, set up the operational environment using <span class="inline-cmd">kore -r</span>. This creates the <code>~/rkit</code> directory with 5hell, its libraries, and your database file:</div>
+<div class="code-block">|> kore -r</div>
+<div class="tip-box"><div class="tip-label">RKIT CONTENTS</div>
+<b>~/rkit/</b> — compiled 5hell binary + metaxploit.so + crypto.so + database.csv<br>
+<b>~/rkit/tables/</b> — rainbow tables (t5, tp) for hash cracking<br>
+<b>~/Config/do.rc</b> — auto-executed on every 5hell startup
+</div>
+
+<div class="guide-h2">5. FILE STRUCTURE</div>
+<div class="code-block">/root/
+  src/
+    5hell.src          ← entry point (user-editable)
+    5hell.5pk.src      ← core: globals, CLIP, BUFFER, ls/cd/rm/ps...
+    5phinx.5pk.src     ← print override, get_file, GLASSPOOL, switch engine
+    kore.5pk.src       ← kore command, DaemonManager, startup RC
+    dtools.5pk.src     ← macro, grep, tree, cob, code, glosure...
+    contrib.5pk.src    ← pwgen, DaemonManager class, dm
+    net.5pk.src        ← probe, db, zap, ssh, rsi, air, scpm...
+    help.5pk.src       ← help command + summary
+  rkit/
+    5hell              ← compiled binary
+    database.csv       ← lib scan results (grows over time)
+    do.rc              ← startup resource config (auto-executed)
+    tables/t5          ← rainbow table
+    tables/tp          ← rainbow table (passwords)
+  Config/
+    do.rc              ← startup config (checked first before rkit/do.rc)</div>
+
+<div class="guide-h2">6. CONFIGURE do.rc</div>
+<div class="guide-p">The <code>do.rc</code> file runs automatically on every 5hell startup. Create it at <code>~/Config/do.rc</code> (priority) or <code>~/rkit/do.rc</code>. Each line is a 5hell command:</div>
+<div class="code-block"># do.rc example
+kore --silent               # suppress startup output
+target 1.2.3.4 22           # set default target
+macro set autoexp "probe @pipe | sphinx"
+kore --override colorDefault &lt;#FFFFFFFF&gt;   # override terminal color
+kore --silent               # re-enable output</div>
+<div class="tip-box"><div class="tip-label">TIP</div>Wrap your do.rc with <span class="inline-cmd">kore --silent</span> at the start and end to suppress output during the initialization sequence. Lines beginning with <code>#</code> are comments and are skipped.</div>
+
+<div class="guide-h2">7. SECURITY: kore -s</div>
+<div class="guide-p">After deployment on any machine, run the security sweep to harden it:</div>
+<div class="code-block">|> kore -s</div>
+<div class="guide-p">This performs: chown root on all files, removes <code>/etc/passwd</code>, clears Bank/Mail data, runs silentclean, and locks file permissions. Use <span class="inline-cmd">kore -sc</span> for the same sweep using silentclean instead of rclean.</div>
+<div class="warn-box"><div class="warn-label">WARNING — kore -S</div>The paranoid mode (<span class="inline-cmd">kore -S</span>) also removes <code>/home</code>, <code>/bin</code>, and <code>/usr</code>. Use ONLY on rented servers, never on your home machine.</div>
+</div>
+</div>
+
+<!-- ─── GUIDE: SHELL & PIPING ─────────────────────────────────── -->
+<div class="view" id="sh-view-guide-shell">
+<div class="guide-wrap">
+<div class="guide-h1">SHELL &amp; PIPING</div>
+<div class="guide-divider"></div>
+<div class="guide-p">5hell's core input loop processes commands with full pipe support, EZ_CLIP token substitution, macro expansion, and GLASSPOOL session mirroring. Understanding these mechanics is key to scripting effective workflows.</div>
+
+<div class="guide-h2">THE PROMPT</div>
+<div class="guide-p">The default prompt is <code>|&gt;</code>. When GLASSPOOL is active, the prompt turns <b style="color:#2382ff">blue</b> — a visual indicator that file operations are targeting a remote machine. Toggle the full decorated prompt with:</div>
+<div class="code-block">|> prompt    // toggles full prompt with IP/user/path display on/off</div>
+
+<div class="guide-h2">SINGLE PIPE ( | )</div>
+<div class="guide-p">The single pipe passes the return value of one command as the last argument of the next. The piped value can be any type — string, object, list.</div>
+<div class="code-block">|> probe 1.2.3.4 | clipa         // stores probe output in clipa
+|> db -r 1.2.3.4 22 | malp       // push obtained shell to BUFFER via malp
+|> rsi -r 0 | glasspool          // mirror rshell[0] via glasspool
+|> cat /etc/passwd | gopher      // crack hashes from file</div>
+
+<div class="guide-h2">DOUBLE PIPE ( || )</div>
+<div class="guide-p">The double pipe chains commands WITHOUT passing output. Both commands execute sequentially but independently.</div>
+<div class="code-block">|> probe 1.2.3.4 || echo done    // probe runs, then echo runs — no piping
+|> meta link 1.2.3.4 22 || meta scan || roil   // three sequential commands</div>
+
+<div class="guide-h2">FLOATING QUOTES</div>
+<div class="guide-p">Tokens wrapped in double quotes are joined into a single argument, allowing spaces inside parameter values:</div>
+<div class="code-block">|> macro set greet "echo Hello @pipe"    // "echo Hello @pipe" is one argument
+|> cob set msg "this is one value"</div>
+
+<div class="guide-h2">EZ_CLIP TOKENS</div>
+<div class="guide-p">Before every command is dispatched, EZ_CLIP substitutes special tokens in the argument list:</div>
+<div class="spec-table">
+<table class="spec-table">
+<thead><tr><th>TOKEN</th><th>REPLACED WITH</th></tr></thead>
+<tbody>
+<tr><td>@a</td><td>Contents of clipboard A (<span class="inline-cmd">clipa</span>)</td></tr>
+<tr><td>@b</td><td>Contents of clipboard B (<span class="inline-cmd">clipb</span>)</td></tr>
+<tr><td>@c</td><td>Contents of clipboard C (<span class="inline-cmd">clipc</span>)</td></tr>
+<tr><td>@B [n]</td><td>BUFFER[n] — e.g., <code>@B 0</code> = first item in BUFFER</td></tr>
+<tr><td>@home</td><td><code>get_custom_object.HOME.ip</code> — your @home server IP</td></tr>
+<tr><td>@tbuf</td><td>Contents of T_BUF (transmission buffer list)</td></tr>
+<tr><td>@o [key]</td><td><code>get_custom_object[key]</code> — any custom_object value</td></tr>
+</tbody>
+</table>
+</div>
+<div class="code-block">|> probe @a              // probe using IP stored in clipa
+|> glasspool @B 1        // GLASSPOOL on BUFFER[1] shell object
+|> ssh root@pass @home   // SSH to @home server
+|> db -m @o myx0         // use metaxploit from custom_object</div>
+
+<div class="guide-h2">GLASSPOOL — SESSION MIRRORING</div>
+<div class="guide-p">GLASSPOOL redirects <code>globals.localmachine</code> to a remote shell's computer, making all GLASSPOOL-aware commands transparently operate on the remote machine.</div>
+<div class="tip-box"><div class="tip-label">GLASSPOOL-AWARE COMMANDS</div>
+<b>ls, cd, cp, mv, rm, mkdir, cat, tree, grep, ps, pwd</b> — all operate on the remote machine when GLASSPOOL is active.
+</div>
+<div class="code-block">|> db -r 1.2.3.4 22      // exploit target, shell → BUFFER[1]
+|> glasspool @B 1         // activate GLASSPOOL on that shell (prompt turns blue)
+|> ls /etc                // lists /etc on the REMOTE machine
+|> cat /etc/passwd        // reads remote /etc/passwd
+|> silentclean            // cleans remote logs
+|> glasspool              // deactivate (or type: exit)</div>
+<div class="warn-box"><div class="warn-label">NOTE</div>Commands that call <code>get_shell</code> directly — <span class="inline-cmd">ifconfig</span>, <span class="inline-cmd">air</span>, <span class="inline-cmd">iwlist</span> — always operate locally and ignore GLASSPOOL.</div>
+
+<div class="guide-h2">BUILT-IN ALIASES</div>
+<div class="spec-table">
+<table class="spec-table">
+<thead><tr><th>ALIAS</th><th>EXPANDS TO</th></tr></thead>
+<tbody>
+<tr><td>gp</td><td>glasspool</td></tr>
+<tr><td>sc</td><td>silentclean</td></tr>
+<tr><td>bat [file]</td><td>do 1 -f [file]</td></tr>
+<tr><td>exit</td><td>quit</td></tr>
+<tr><td>set key val</td><td>cob set key val</td></tr>
+<tr><td>get key</td><td>cob get key</td></tr>
+<tr><td>push key val</td><td>cob push key val</td></tr>
+<tr><td>inspect [key]</td><td>cob inspect [key]</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<!-- ─── GUIDE: CLIP & BUFFER ──────────────────────────────────── -->
+<div class="view" id="sh-view-guide-clip">
+<div class="guide-wrap">
+<div class="guide-h1">CLIP &amp; BUFFER</div>
+<div class="guide-divider"></div>
+<div class="guide-p">5hell has two complementary storage systems: the <b>CLIP</b> clipboard (three named slots for quick scalar/object storage) and the <b>BUFFER</b> (an ordered list for any object type, primarily shells and files obtained during exploitation).</div>
+
+<div class="guide-h2">THE CLIPBOARD — clipa / clipb / clipc</div>
+<div class="guide-p">Three clipboard slots (<b>a</b>, <b>b</b>, <b>c</b>) each store one value of any type. Access slots via EZ_CLIP tokens <code>@a</code>, <code>@b</code>, <code>@c</code> anywhere in a command.</div>
+<div class="code-block"><span class="cb-label">CLIPBOARD</span>
+|> clipa foobar           // store string "foobar" in slot a
+|> echo @a                // prints "foobar"
+|> clipa                  // return current value without changing it
+
+|> zap | clipa            // pipe shell object into clipa
+|> glasspool @a           // use stored object directly
+
+|> clipa @B 1             // store BUFFER[1] into clipa
+|> clipa @tbuf            // store T_BUF list in clipa
+</div>
+
+<div class="guide-h3">ARITHMETIC OPERATIONS</div>
+<div class="guide-p">When the stored value is an integer (or a string that parses to one), you can perform in-place arithmetic:</div>
+<div class="code-block">|> clipa 0
+|> clipa ++               // increment → 1
+|> clipa --               // decrement → 0
+|> clipa += 10            // add 10 → 10
+|> clipa -= 3             // subtract 3 → 7</div>
+
+<div class="guide-h3">SPECIAL VALUES</div>
+<div class="spec-table">
+<table class="spec-table">
+<thead><tr><th>ARGUMENT</th><th>EFFECT</th></tr></thead>
+<tbody>
+<tr><td>-n</td><td>Set slot to null</td></tr>
+<tr><td>-z</td><td>Set slot to integer 0</td></tr>
+<tr><td>@cc</td><td>Store the full command history as a string</td></tr>
+<tr><td>@B [n]</td><td>Store BUFFER[n] in this slot</td></tr>
+<tr><td>@tbuf</td><td>Store the T_BUF list in this slot</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="guide-h2">THE BUFFER — Memory Alpha</div>
+<div class="guide-p">BUFFER (<code>globals.BUFFER</code>) is a list that holds any type. It is seeded at startup with the local shell as <code>BUFFER[0]</code>. Every exploit result — shells, computers, files, strings — is pushed here by commands like <span class="inline-cmd">db</span>, <span class="inline-cmd">zap</span>, <span class="inline-cmd">roil</span>, and <span class="inline-cmd">ssh</span>.</div>
+<div class="code-block"><span class="cb-label">BUFFER ACCESS</span>
+|> malp                   // open the BUFFER management menu
+|> malp @B 1              // open malp on BUFFER[1] specifically
+|> malp -p someObject     // push object to BUFFER without opening menu
+|> malp --export          // return BUFFER contents as a list</div>
+
+<div class="guide-h3">MALP OBJECT HANDLERS</div>
+<div class="guide-p">When you open an object in malp, it detects the type and presents a context menu:</div>
+<div class="spec-table">
+<table class="spec-table">
+<thead><tr><th>OBJECT TYPE</th><th>AVAILABLE ACTIONS</th></tr></thead>
+<tbody>
+<tr><td>shell / pshell / ftpshell</td><td>Infiltrate, SCP, silentclean, glasspool, rclean, rshell</td></tr>
+<tr><td>computer</td><td>File operations, read/write, ps</td></tr>
+<tr><td>file</td><td>Open, edit, cat, SCP, delete</td></tr>
+<tr><td>string</td><td>Echo, store to clip, write to file</td></tr>
+<tr><td>list</td><td>Enumerate, push to BUFFER, store to cob</td></tr>
+<tr><td>map / function</td><td>Decompile with code, p_exe interactive caller</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="guide-h3">BUFFER WITH ENUM</div>
+<div class="code-block">|> tree -r /lib            // returns list of all files in /lib
+|> malp --export | enum -a // push each item in BUFFER individually
+|> db -r 1.2.3.4 *         // exploit all ports, shells go to BUFFER
+|> malp                    // browse results interactively</div>
+
+<div class="tip-box"><div class="tip-label">WORKFLOW TIP</div>
+<b>@B 0</b> is always the local shell. After exploiting, results start at <b>@B 1</b>. Use <span class="inline-cmd">malp</span> to browse, or pipe directly: <code>glasspool @B 1</code> to mirror the first obtained shell.
+</div>
+</div>
+</div>
+
+<!-- ─── GUIDE: MACROS & SCRIPTS ───────────────────────────────── -->
+<div class="view" id="sh-view-guide-macros">
+<div class="guide-wrap">
+<div class="guide-h1">MACROS &amp; SCRIPTS</div>
+<div class="guide-divider"></div>
+<div class="guide-p">5hell macros are named command chains stored persistently in <code>get_custom_object.macros</code>. They survive across sessions and nested launches. Fire a macro simply by typing its name at the prompt.</div>
+
+<div class="guide-h2">DEFINING MACROS</div>
+<div class="code-block"><span class="cb-label">INLINE MACRO</span>
+|> macro set greet "echo Hello @pipe"
+|> echo World | greet             // output: Hello World
+
+|> macro set quickhack "probe @pipe | sphinx"
+|> quickhack 1.2.3.4              // probe 1.2.3.4 then open 5phinx
+
+|> macro set chain "meta link @pipe 22 || meta scan || roil"</div>
+
+<div class="guide-h3">MULTI-LINE MACRO FROM FILE</div>
+<div class="guide-p">Load a <code>.mac</code> file where each line becomes a command in the chain:</div>
+<div class="code-block"><span class="cb-label">MACRO FILE</span>
+// ~/rkit/exploit.mac
+probe @pipe
+meta link @pipe 22
+meta scan
+roil
+malp
+
+// Load it
+|> macro set exploit -f /root/rkit/exploit.mac
+|> exploit 1.2.3.4</div>
+
+<div class="guide-h3">THE @pipe PLACEHOLDER</div>
+<div class="guide-p">Inside a macro body, <code>@pipe</code> is replaced with the argument passed when firing the macro (or the piped input from the previous command):</div>
+<div class="code-block">|> macro set scan "probe @pipe"
+|> scan 1.2.3.4               // @pipe → "1.2.3.4"
+|> echo 1.2.3.4 | scan        // piped input also works as @pipe</div>
+
+<div class="guide-h2">MANAGING MACROS</div>
+<div class="code-block">|> macro list              // list all defined macros
+|> macro -v greet          // verbose: print chain before firing
+|> macro del greet         // delete macro "greet"
+|> macro set greet "echo Hi"  // update existing macro</div>
+
+<div class="tip-box"><div class="tip-label">PRIORITY NOTE</div>
+Macros take priority over commands of the same name. If a macro and a command share a name, the <b>macro wins</b>. Choose names that don't shadow built-in commands unless you intend to override them.
+</div>
+
+<div class="guide-h2">DO SCRIPTS — BATCH EXECUTION</div>
+<div class="guide-p"><span class="inline-cmd">do</span> runs a command or a batch file N times. Each line in a batch file is executed as a full 5hell command with pipe support.</div>
+<div class="code-block"><span class="cb-label">DO COMMAND</span>
+|> do 5 "echo hello"           // run echo 5 times
+|> do 1 -f /root/rkit/setup.mac // run batch file once
+|> bat /root/rkit/setup.mac    // alias: same as do 1 -f</div>
+
+<div class="guide-h3">BATCH FILE FORMAT</div>
+<div class="code-block"><span class="cb-label">BATCH FILE (setup.mac)</span>
+# lines starting with # are comments (also | and -)
+kore --silent
+probe 1.2.3.4
+meta link 1.2.3.4 22
+meta scan
+roil
+@STOP              ← SAFEWORD: breaks the loop immediately if reached
+silentclean
+kore --silent</div>
+
+<div class="spec-table">
+<table class="spec-table">
+<thead><tr><th>FEATURE</th><th>DESCRIPTION</th></tr></thead>
+<tbody>
+<tr><td>@STOP</td><td>SAFEWORD — placing this on any line immediately breaks the do loop</td></tr>
+<tr><td># / - / |</td><td>Comment prefixes — these lines are silently skipped</td></tr>
+<tr><td>Full pipes</td><td>Each batch line supports the full pipe engine: <code>probe @pipe | sphinx</code></td></tr>
+<tr><td>N times</td><td><code>do 10 "zap addr vuln"</code> fires the same exploit 10 times</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="guide-h2">do.rc — AUTO-EXECUTED ON STARTUP</div>
+<div class="guide-p">On every 5hell launch, <code>globals._startup_resource_configuration</code> checks for and executes a <code>do.rc</code> file automatically:</div>
+<div class="guide-p">1. Checks <code>~/Config/do.rc</code> first<br>
+2. Falls back to <code>~/rkit/do.rc</code><br>
+3. Decrypts if the file is binary+encrypted (using <code>HOME.dorc_key</code>)<br>
+4. Executes each non-comment line as a 5hell command</div>
+<div class="code-block"><span class="cb-label">do.rc EXAMPLE</span>
+# startup config
+kore --silent
+target 1.2.3.4 22
+macro set ex "probe @pipe | sphinx"
+kore --override colorDefault &lt;#00FF00FF&gt;
+kore --silent</div>
+
+<div class="guide-h2">MACRO VS COMMAND PRIORITY TABLE</div>
+<div class="spec-table">
+<table class="spec-table">
+<thead><tr><th>ORDER</th><th>MECHANISM</th><th>HOW</th></tr></thead>
+<tbody>
+<tr><td>1st</td><td>Macro expansion</td><td>If prompt[0] is in get_custom_object.macros, expands to macro call</td></tr>
+<tr><td>2nd</td><td>Built-in aliases</td><td>set/get/push/inspect/exit/sc/gp/bat are replaced before dispatch</td></tr>
+<tr><td>3rd</td><td>command map dispatch</td><td>Calls command[name](arg1, arg2, arg3, arg4)</td></tr>
+<tr><td>4th</td><td>shell.launch fallback</td><td>Searches /bin and current path for a matching binary</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<!-- ─── GUIDE: EXPLOIT WORKFLOW ───────────────────────────────── -->
+<div class="view" id="sh-view-guide-exploit">
+<div class="guide-wrap">
+<div class="guide-h1">EXPLOIT WORKFLOW</div>
+<div class="guide-divider"></div>
+<div class="guide-p">5hell's exploit system is built around the Grey Hack metaxploit library model. Libraries on remote ports expose memory/value pairs that overflow to yield shells, computers, or files. The workflow follows a consistent pattern regardless of target.</div>
+
+<div class="guide-h2">STEP 1 — PORT RECONNAISSANCE</div>
+<div class="guide-p">Use <span class="inline-cmd">probe</span> to scan a target and populate the port map. Port colors indicate library status:</div>
+<div class="code-block">|> probe 1.2.3.4</div>
+<div class="tip-box"><div class="tip-label">PORT COLORS</div>
+<b style="color:var(--primary)">Green</b> = open port &nbsp;|&nbsp; <b style="color:#00d4ff">Cyan</b> = known lib in database &nbsp;|&nbsp; <b style="color:var(--warn)">Gold</b> = unknown lib<br>
+<b style="color:var(--accent)">Red</b> = closed/firewalled &nbsp;|&nbsp; <b style="color:#ff8400">Orange</b> = no database found &nbsp;|&nbsp; <b style="color:#71858d">Grey</b> = no response
+</div>
+<div class="guide-p">Set the target globally so subsequent commands don't need the IP:</div>
+<div class="code-block">|> target 1.2.3.4 22</div>
+
+<div class="guide-h2">STEP 2 — LINK THE METALIB</div>
+<div class="guide-p">Link the MetaLib on the target port using <span class="inline-cmd">meta link</span>. This opens a net session, dumps the library, and stores it for exploitation:</div>
+<div class="code-block">|> meta link 1.2.3.4 22     // link a specific port
+|> meta                      // show linked MetaLib info</div>
+
+<div class="guide-h2">STEP 3 — SCAN FOR VULNERABILITIES</div>
+<div class="guide-p">Scan the linked MetaLib to find exploitable addresses. Results are stored in <code>globals.XPLOITS</code>:</div>
+<div class="code-block">|> meta scan                 // scan → populates globals.XPLOITS
+                             // output: list of vulnerable addresses + vuln names</div>
+
+<div class="guide-h2">STEP 4 — EXPLOIT</div>
+<div class="guide-p">Three options for firing exploits:</div>
+<div class="spec-table">
+<table class="spec-table">
+<thead><tr><th>COMMAND</th><th>BEHAVIOR</th></tr></thead>
+<tbody>
+<tr><td>zap [addr] [vuln]</td><td>Fire a single specific exploit. Result pushed to BUFFER.</td></tr>
+<tr><td>roil</td><td>Fire ALL exploits in XPLOITS at once. All results pushed to BUFFER.</td></tr>
+<tr><td>db -r [ip] [port]</td><td>All-in-one: link + scan + exploit + database. Most efficient.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="code-block"><span class="cb-label">MANUAL FLOW</span>
+|> meta link 1.2.3.4 22
+|> meta scan
+|> roil
+|> malp            // browse results in BUFFER
+
+<span class="cb-label">AUTOMATED FLOW</span>
+|> db -r 1.2.3.4 22        // does everything above in one command
+|> db -r 1.2.3.4 *         // scan ALL open ports
+|> db -r * *               // scan ALL ports at targetIP</div>
+
+<div class="guide-h2">BOUNCE EXPLOIT</div>
+<div class="guide-p">Some router library vulnerabilities return a <b>computer</b> object. By passing a LAN IP as an inject value, that computer belongs to a machine inside the network — allowing you to target devices with no open ports:</div>
+<div class="code-block">|> db -r 1.2.3.4 0 -i 192.168.1.2   // bounce to 192.168.1.2
+|> zap 0x00002934 kernel_router.so 192.168.1.2</div>
+
+<div class="guide-h2">5PHINX — THE TUI</div>
+<div class="guide-p">5phinx is a full-screen TUI that wraps the entire exploit cycle in an interactive menu. It's the fastest way to hack when you don't need to script the flow:</div>
+<div class="code-block">|> sphinx 1.2.3.4 22    // launch 5phinx on specific target
+|> sphinx               // use current targetIP:targetPort</div>
+<div class="guide-p">5phinx menu steps: <b>[1]</b> Link MetaLib → <b>[2]</b> Fire all exploits (roil) → <b>[3]</b> View BUFFER results → <b>[4]</b> Interact with obtained objects.</div>
+
+<div class="guide-h2">HASH CRACKING — THE HASHIM WORKFLOW</div>
+<div class="guide-p">After getting access to a target, gather password hashes and transmit them to your @home hashim server for cracking:</div>
+<div class="code-block"><span class="cb-label">ON TARGET (via GLASSPOOL)</span>
+|> glasspool @B 1          // mirror shell
+|> tree / 0 r              // recursive tree: buffer hashes to T_BUF
+|> tdump                   // write T_BUF to ~/pass
+
+<span class="cb-label">TRANSMIT TO @HOME</span>
+|> transmit                // SSH to @home, write hashes to sharedfile
+
+<span class="cb-label">ON @HOME (separate session)</span>
+|> hashim -d               // start hashim daemon
+// hashim monitors sharedfile, cracks hashes with t5/tp tables
+// writes cracked passwords to dump.txt</div>
+
+<div class="guide-h2">DATABASE — db WRITES RESULTS</div>
+<div class="guide-p">The <span class="inline-cmd">db</span> command writes all scan/exploit results to <code>~/rkit/database.csv</code>. Future runs against the same lib version skip the scan entirely. Load saved results without rescanning:</div>
+<div class="code-block">|> linkdb 1.2.3.4 22       // load XPLOITS from database, no net_use needed
+|> roil                    // fire immediately</div>
+</div>
+</div>
+
+<!-- ─── GUIDE: CUSTOM OBJECT / cob ────────────────────────────── -->
+<div class="view" id="sh-view-guide-cob">
+<div class="guide-wrap">
+<div class="guide-h1">CUSTOM OBJECT / cob</div>
+<div class="guide-divider"></div>
+<div class="guide-p"><code>get_custom_object</code> is a Grey Hack built-in that provides a persistent shared-memory map available across all nested <code>shell.launch</code> calls. 5hell stores macros, @home config, rainbow tables, session exports, and password dictionaries here. The <span class="inline-cmd">cob</span> command is the full interface to this store.</div>
+
+<div class="guide-h2">BASIC OPERATIONS</div>
+<div class="code-block"><span class="cb-label">SET / GET</span>
+|> cob set myvar hello       // store string
+|> cob get myvar             // → "hello"
+|> set myvar hello           // alias: same as cob set
+|> get myvar                 // alias: same as cob get
+
+|> cob set count 0           // store string "0"
+|> cob set count @z          // store integer 0 (not string)
+|> cob set nothing @n        // store null
+|> cob set opts {}           // create empty map
+|> cob set targets []        // create empty list</div>
+
+<div class="guide-h3">DOT-SYNTAX FOR NESTED ACCESS</div>
+<div class="guide-p">Dot notation traverses nested maps and lists. The parent key must already exist as a map/list:</div>
+<div class="code-block">|> cob set config {}
+|> cob set config.ip 1.2.3.4
+|> cob set config.port 22
+|> cob get config.ip         // → "1.2.3.4"
+
+|> cob set hosts []
+|> cob push hosts 1.2.3.4   // append to list
+|> cob push hosts 5.6.7.8
+|> cob get hosts.0           // → "1.2.3.4" (list index 0)</div>
+
+<div class="guide-h3">INSPECTION &amp; DELETION</div>
+<div class="code-block">|> cob inspect               // print all keys + truncated values
+|> cob inspect config        // print just the config map
+|> cob indexes               // return all keys as a list
+|> cob del myvar             // delete a key
+|> cob purge                 // ⚠ clear the ENTIRE custom_object
+|> cob validate              // ensure macros/stack_pool/HOME keys exist</div>
+
+<div class="guide-h2">INSTALLING FUNCTIONS AS COMMANDS</div>
+<div class="guide-p">Store a function in cob, then install it as a live command reachable from the prompt:</div>
+<div class="code-block">// In a .5pk or do.rc:
+get_custom_object.myTool = function(arg1, arg2, arg3=0, arg4=0)
+    print "myTool called with: " + arg1
+end function
+
+// In 5hell:
+|> cob install myTool        // now "myTool" works as a command
+|> myTool hello</div>
+
+<div class="guide-h2">@HOME CONFIGURATION</div>
+<div class="guide-p">The <code>HOME</code> map in cob stores your @home hashim server config. Use <code>set HOME.key value</code> to update any field:</div>
+<div class="spec-table">
+<table class="spec-table">
+<thead><tr><th>KEY</th><th>DEFAULT</th><th>PURPOSE</th></tr></thead>
+<tbody>
+<tr><td>HOME.ip</td><td>—</td><td>SSH/rshell server public IP</td></tr>
+<tr><td>HOME.loginport</td><td>22</td><td>SSH port</td></tr>
+<tr><td>HOME.rshellport</td><td>1222</td><td>Reverse shell port</td></tr>
+<tr><td>HOME.user</td><td>root</td><td>SSH username</td></tr>
+<tr><td>HOME.pass</td><td>—</td><td>SSH password</td></tr>
+<tr><td>HOME.sharedfile</td><td>/root/pass</td><td>Hash swap file for hashim</td></tr>
+<tr><td>HOME.database</td><td>/root/rkit/database.csv</td><td>Exploit database path</td></tr>
+<tr><td>HOME.dorc_key</td><td>0</td><td>Decryption key for do.rc (0 = no encryption)</td></tr>
+</tbody>
+</table>
+</div>
+<div class="code-block">|> set HOME.ip 1.2.3.4
+|> set HOME.pass MyPass123
+|> get HOME.ip               // → "1.2.3.4"
+|> echo @home                // @home EZ_CLIP token → HOME.ip value</div>
+
+<div class="guide-h2">SESSION EXPORTS (myx0 / mys0 / myc0)</div>
+<div class="guide-p">On startup and at each nested launch depth, 5hell exports its core objects to cob for access across sessions. The suffix increments with nesting depth (0 = top level, 1 = one launch deep, etc.):</div>
+<div class="spec-table">
+<table class="spec-table">
+<thead><tr><th>KEY</th><th>TYPE</th><th>CONTENT</th></tr></thead>
+<tbody>
+<tr><td>myx0</td><td>MetaxploitLib</td><td>Local metaxploit library</td></tr>
+<tr><td>myc0</td><td>cryptoLib</td><td>Local crypto library</td></tr>
+<tr><td>mys0</td><td>shell</td><td>Local shell object</td></tr>
+<tr><td>myi0</td><td>string</td><td>"pubIP : localIP"</td></tr>
+<tr><td>myx1</td><td>MetaxploitLib</td><td>Nested session 1 metaxploit</td></tr>
+<tr><td>mys1</td><td>shell</td><td>Nested session 1 shell</td></tr>
+</tbody>
+</table>
+</div>
+<div class="code-block">|> db -M                     // use myx0 automatically (no re-import)
+|> clipa @o mys1             // get nested session shell into clipa
+|> glasspool @o mys0         // GLASSPOOL on the cob-stored home shell
+|> db -m @o myx0             // explicit: use myx0 as metaxploit</div>
+
+<div class="tip-box"><div class="tip-label">WHY THIS MATTERS</div>
+When running 5hell inside a compromised target via <span class="inline-cmd">infil</span>, the session exports let you reference your original home shell and metaxploit from the nested context without re-importing or reconnecting.
+</div>
+</div>
+</div>
+
+<p style="width:fit-content; margin: 1.5rem auto 0.5rem; color:#727272; font-size:0.75rem; letter-spacing:0.08em;"><span style="color:#2382ff">5HELL</span> Tool Created By: @PLU70</p>
+<p style="width:fit-content; margin: 0.5rem auto 1.5rem; color:#727272; font-size:0.75rem; letter-spacing:0.08em;">Site Created By: @ChaoticCrumb</p>
+
+</main>
+</div><!-- /layout -->
+</div><!-- /toolspace-5hell -->
 
 <script>
 const CMDS = {
@@ -1569,7 +2581,365 @@ document.getElementById("searchInput").addEventListener("input", function(){
   }
 });
 
+function openTool(id){
+  document.getElementById('hub').classList.add('hidden');
+  if (id === '5hell'){
+    document.getElementById('toolspace-5hell').classList.add('active');
+  } else {
+    document.getElementById('toolspace').classList.add('active');
+  }
+}
+
+function showHub(){
+  document.getElementById('hub').classList.remove('hidden');
+  document.getElementById('toolspace').classList.remove('active');
+  document.getElementById('toolspace-5hell').classList.remove('active');
+}
+
 buildSidebar();
+
+const CMDS_5HELL = {
+"db":{cat:"sh-exploit",short:"Databaser — scan, exploit, and database a lib or port",usage:[["db -r [ip] [port]","Scan remote port, exploit all vulns, store results"],["db -r [ip] *","Scan ALL ports at ip"],["db -r *","Scan ALL ports at targetIP"],["db -l [libname]","Scan local /lib/libname"],["db -l *","Scan all local libs"],["db -m [metaLib]","Scan the currently linked metaLib"],["db -M","Scan using myx0 from custom_object"]],opts:[["-i","Inject value (LAN IP or password) into exploits"],["BUFFER","All obtained shell/computer/file objects pushed to BUFFER"],["database.csv","Scanned lib info written to ~/rkit/database.csv"]],detail:"Core exploitation engine. Scans a lib, fires all safe exploits (no * required), databases results to CSV, and pushes obtained shells/objects to BUFFER. Use db -r * for a full sweep.",examples:["db -r 1.2.3.4 22","db -r 1.2.3.4 *","db -r *","db -l metaxploit.so","db -M"]},
+"dig":{cat:"sh-exploit",short:"Dynamic infiltration gremlin — scriptable auto-hacker",usage:[["dig [ip]","Auto-hack a target using linked exploits"],["dig -f [file]","Run dig using IPs from file"]],"detail":"Automated exploit chain that probes and attacks targets using loaded exploit data.",examples:["dig 1.2.3.4","dig -f /root/iplist.txt"]},
+"liber":{cat:"sh-exploit",short:"Show MetaLib version info and exploit count",usage:[["liber","Display current metaLib info"],["liber [metaLib]","Show info for piped or specified metaLib"]],opts:[["PIPED RESPONSE","Returns metaLib info string"]],examples:["liber","meta link 1.2.3.4 22 | liber"]},
+"linkdb":{cat:"sh-exploit",short:"Load exploits from database without re-linking lib",usage:[["linkdb","Load XPLOITS from ~/rkit/database.csv"],["linkdb [path]","Load from specific database file"]],detail:"Reads exploit data from a previously created database.csv file into globals.XPLOITS, bypassing the need to re-scan a live metaLib.",examples:["linkdb","linkdb /root/rkit/database.csv"]},
+"meta":{cat:"sh-exploit",short:"MetaLib and metaxploit management",usage:[["meta link [ip] [port]","net_use and dump_lib to link remote metaLib"],["meta load [lib_path]","include_lib to load a local metaLib"],["meta scan","metaxploit.scan(metaLib) → loads globals.XPLOITS"],["meta -i [metaLib]","Swap active metaxploitLib"],["meta restore","Restore previous metaxploitLib"],["meta","Show current metaLib info"]],opts:[["globals.XPLOITS","Updated by meta scan — list of exploitable vulnerabilities"],["globals.metaLib","The currently linked MetaLib object"]],detail:"Manages the active MetaLib and metaxploit library. Always run meta link then meta scan before using zap, roil, or sphinx.",examples:["meta link 1.2.3.4 22","meta scan","meta load /lib/metaxploit.so","meta"]},
+"probe":{cat:"sh-exploit",short:"Whois + port scan, sets targetIP/targetPort",usage:[["probe [ip]","Whois + full port map"],["probe [ip] [port]","Probe specific port"],["probe -f [ip]","Full scan (255 machines)"],["probe -q [ip]","Quick scan (2 machines)"],["probe -s","Show current portmap"],["probe -b","Show broadcast string"]],opts:[["globals.PORT_MAP","Updated with scan results"],["globals.targetIP","Set to probed IP"],["Port colors","Red=closed, Green=open, Cyan=known lib, Gold=unknown lib"]],detail:"Runs whois and a port scan on the target IP. Results populate PORT_MAP and set targetIP/targetPort. Use -s to re-display without rescanning.",examples:["probe 1.2.3.4","probe 1.2.3.4 22","probe -s","probe -f 1.2.3.4"]},
+"roil":{cat:"sh-exploit",short:"Fire all loaded exploits at once",usage:[["roil","Fire all globals.XPLOITS against linked metaLib"],["roil -q","Quiet mode — suppress per-exploit output"]],opts:[["BUFFER","All obtained shells/objects pushed to BUFFER"]],detail:"Fires every exploit in globals.XPLOITS simultaneously against the linked metaLib. Load exploits first with meta scan or linkdb.",examples:["meta link 1.2.3.4 22","meta scan","roil"]},
+"sphinx":{cat:"sh-exploit",short:"5phinx — full TUI hacking multi-tool",usage:[["sphinx","Open 5phinx interactive exploit menu"],["sphinx [ip] [port]","Open 5phinx targeting specific host"]],opts:[["[1] Scan","Scan target and load exploits"],["[2] Roil","Fire all loaded exploits"],["[3] Zap","Fire single exploit by address"],["[4] DB","Full database mode"],["[5] SSH","SSH connect"]],detail:"The 5phinx TUI is the interactive all-in-one hacking interface. Guides you through scan → exploit → session management with menu-driven prompts.",examples:["sphinx","sphinx 1.2.3.4 22"]},
+"zap":{cat:"sh-exploit",short:"Fire a single exploit at the linked MetaLib",usage:[["zap [addr] [vuln]","Fire overflow on memory address with vuln name"],["zap [addr] [vuln] [inject]","Include inject value (LAN IP or password)"]],opts:[["PIPED RESPONSE","Returns shell/computer/file object or error string"],["BUFFER","Result also pushed to BUFFER"]],detail:"Fires metaxploit.overflow(addr, vuln) against the currently linked metaLib. Load exploits with meta scan first to get valid addresses.",examples:["meta link 1.2.3.4 22","meta scan","zap 0x0000 VULN_NAME","zap 0x0000 VULN_NAME 192.168.1.1"]},
+"zc":{cat:"sh-exploit",short:"Zero day assistant — guided exploit discovery",usage:[["zc","Interactive zero-day search and exploit assistant"],["zc [ip] [port]","Target specific host"]],detail:"Guided workflow for finding and testing zero-day exploits. Walks through scan, vulnerability analysis, and exploit selection.",examples:["zc","zc 1.2.3.4 8080"]},
+"air":{cat:"sh-network",short:"WiFi attack suite — capture, crack, brute, or connect",usage:[["air","Scan nearby networks and open attack menu"],["air -f","iwlist mode — show networks only"],["air -c [path]","Aircrack a captured .cap file"],["air -a [bssid|essid]","Auto-target a specific network"]],opts:[["[A]ir","aireplay capture + aircrack dictionary attack"],["[B]rutus","Brute force with onboard dictionary"],["[C]redentials","Connect with known key"]],detail:"Full WiFi attack suite. Scans nearby networks and presents a menu for: aireplay+aircrack capture/crack, brute-force with the onboard dictionary, or direct connect with a known password.",examples:["air","air -f","air -a HomeNetwork","air -c /root/capture.cap"]},
+"fwr":{cat:"sh-network",short:"Display firewall rules for current machine",usage:[["fwr","Show local firewall rules"],["fwr [computer]","Show rules for piped computer object"]],detail:"Runs host_computer.get_firewall_rules() and displays the result. Always runs locally — not GLASSPOOL-aware.",examples:["fwr"]},
+"ifconfig":{cat:"sh-network",short:"Show wireless/ethernet network config",usage:[["ifconfig","Display local network interface info"]],detail:"Shows the active network interface configuration. Always runs locally — not GLASSPOOL-aware.",examples:["ifconfig"]},
+"iwlist":{cat:"sh-network",short:"List nearby WiFi networks",usage:[["iwlist","Show available WiFi networks with signal strength"]],detail:"Scans and displays nearby wireless networks. Runs locally only — not GLASSPOOL-aware.",examples:["iwlist"]},
+"lanpro":{cat:"sh-network",short:"Full LAN IP scan",usage:[["lanpro","Scan all local LAN IPs and show live hosts"],["lanpro -p [port]","Scan LAN for hosts with specific port open"]],examples:["lanpro","lanpro -p 22"]},
+"nsl":{cat:"sh-network",short:"Nslookup — resolve domain to IP or IP to domain",usage:[["nsl [domain]","Resolve domain name to IP"],["nsl [ip]","Reverse-lookup IP to domain"]],opts:[["PIPED RESPONSE","Returns IP or domain string"]],examples:["nsl example.com","nsl 1.2.3.4"]},
+"ping":{cat:"sh-network",short:"ICMP ping a host",usage:[["ping [ip]","Ping an IP and show response time"],["ping [ip] [count]","Send N pings"]],opts:[["PIPED RESPONSE","Returns round-trip time string"]],examples:["ping 1.2.3.4","ping 1.2.3.4 5"]},
+"porter":{cat:"sh-network",short:"Search IP list for a specific open port",usage:[["porter [port] [ip_list_file]","Scan IPs in file for open port"],["porter [port]","Scan PORT_MAP IPs for port"]],detail:"Iterates over a list of IPs checking for a specific open port. Useful for finding all machines with SSH, HTTP, or other services.",examples:["porter 22 /root/ips.txt","porter 8080"]},
+"rsi":{cat:"sh-network",short:"Reverse shell server interface",usage:[["rsi","Open rshell server menu"],["rsi -d [opt:#]","Daemon mode: wait for next rshell"],["rsi -D [opt:#]","Daemon mode: wait for new rshell"],["rsi -r [#]","Return rshell[#] as object"],["rsi -l","Return count of connected rshells"],["rsi -s","Silentclean all connected rshells"],["rsi -p [y|exclude]","Purge/kill all rshells"],["rsi --export","Return full rshell list"],["rsi install","Install librshell.so"],["rsi start|stop","Start/stop rshell service"]],detail:"Full reverse shell server management. Run rsi -d to wait for inbound connections. Use rsi -r [n] to pull a shell object.",examples:["rsi","rsi -d","rsi -r 0","rsi -l","rsi -s"]},
+"scpm":{cat:"sh-network",short:"SCP menu — interactive file transfer manager",usage:[["scpm","Interactive menu: pick shell, paths, direction"],["scpm -u [from] [to] [shell]","Force upload"],["scpm -d [from] [to] [shell]","Force download"],["[shell] | scpm","Pipe shell object to skip shell selection"]],detail:"Interactive SCP wrapper. Prompts for shell, source path, destination path, and direction. Pipe a shell object to skip the shell selection menu.",examples:["scpm","scpm -u /root/payload.src /tmp/","scpm -d /etc/passwd /root/"]},
+"ssh":{cat:"sh-network",short:"SSH/FTP connect with optional brute force",usage:[["ssh user@pass [ip] [port]","Connect via SSH with credentials"],["ssh root@- [ip] [port]","Connect with onboard dictionary (brute)"],["ssh user@pass [ip] [port] ftp","FTP connect mode"]],opts:[["PIPED RESPONSE","Returns connected shell object"],["BUFFER","Connected shell pushed to BUFFER"]],detail:"Connects to a remote machine. Use - as the password to trigger brute-force mode with the onboard dictionary.",examples:["ssh root@pass123 1.2.3.4 22","ssh root@- 1.2.3.4 22","ssh guest@guest 1.2.3.4 21 ftp"]},
+"target":{cat:"sh-network",short:"Set or get the current target IP and port",usage:[["target","Show current targetIP and targetPort"],["target [ip]","Set targetIP"],["target -p [port]","Set targetPort"],["target [ip] [port]","Set both IP and port"]],opts:[["globals.targetIP","The active target IP used by db, zap, meta, etc."],["globals.targetPort","The active port — defaults to 'router'"]],examples:["target","target 1.2.3.4","target 1.2.3.4 22","target -p router"]},
+"tws":{cat:"sh-network",short:"Track while scanning — monitor target activity",usage:[["tws [ip]","Start tracking target while scanning ports"],["tws -s","Show current tracking data"]],examples:["tws 1.2.3.4","tws -s"]},
+"whois":{cat:"sh-network",short:"Network whois lookup",usage:[["whois [ip]","Run whois on an IP address"]],opts:[["PIPED RESPONSE","Returns whois data as string"]],examples:["whois 1.2.3.4"]},
+
+"append":{cat:"sh-files",short:"Append text to a file or clipboard slot",usage:[["append [path] [text]","Append text to end of file"],["append -c [a|b|c] [text]","Append text to clipboard slot"]],examples:["append /root/log.txt new entry here","append -c a more text"]},
+"cat":{cat:"sh-files",short:"Display file contents (GLASSPOOL-aware)",usage:[["cat [path]","Print file content"],["cat [path] [line]","Print specific line number"]],opts:[["PIPED RESPONSE","Returns file content as string"]],detail:"Reads and prints file content. GLASSPOOL-aware — reads from remote filesystem when mirroring is active.",examples:["cat /etc/passwd","cat /var/system.log"]},
+"cd":{cat:"sh-files",short:"Change directory (GLASSPOOL-aware)",usage:[["cd [path]","Change working directory"],["cd ..","Go up one directory"],["cd","Go to home directory"]],detail:"Changes globals.currentPath. GLASSPOOL-aware — navigates the remote filesystem when mirroring is active.",examples:["cd /root","cd ..","cd /var/log"]},
+"cp":{cat:"sh-files",short:"Copy file (GLASSPOOL-aware)",usage:[["cp [src] [dest]","Copy file to destination"],["cp -r [src] [dest]","Copy folder recursively"]],detail:"Copies files/folders. GLASSPOOL-aware — copies on the remote machine when mirroring is active.",examples:["cp /root/payload.src /tmp/","cp -r /root/rkit /tmp/rkit"]},
+"felix":{cat:"sh-files",short:"Interactive file explorer",usage:[["felix","Open interactive file browser at current path"],["felix [path]","Open at specific path"]],detail:"A menu-driven file explorer. Browse directories, view file info, open/edit files, and manage permissions interactively.",examples:["felix","felix /etc"]},
+"fetch":{cat:"sh-files",short:"Grab metaxploit lib or log from a shell",usage:[["fetch [shell]","Download metaxploit.so and system.log from shell"],["fetch -l [shell]","Fetch system.log only"]],opts:[["PIPED RESPONSE","Returns fetched file object"]],detail:"Downloads metaxploit.so and/or system.log from a remote shell to your local rkit. Pipe a shell object from BUFFER.",examples:["fetch @B 1","zap | fetch"]},
+"file":{cat:"sh-files",short:"File info, type detection, and encrypt/decrypt",usage:[["file [path]","Show file info (type, size, owner, permissions)"],["file -e [path] [password]","Encrypt file"],["file -d [path] [password]","Decrypt file"]],examples:["file /root/rkit/5hell.so","file -e /root/do.rc secretkey","file -d /root/do.rc secretkey"]},
+"grep":{cat:"sh-files",short:"Recursive regex file search",usage:[["grep [pattern] [path]","Search file content for pattern"],["grep -f [pattern] [path]","Return first matching FILE object"],["grep -F [pattern] [path]","Return last matching FILE object"],["grep -n [pattern] [path]","Return matching file NAME"],["grep -p [pattern] [path]","Return matching file PATH"],["grep -a [pattern] [path]","Return LIST of all matching files"]],opts:[["^ $","Anchors: ^ start of word, $ end of line"],["#","One or more of preceding char"],["*","Any character (wildcard)"]],detail:"Recursive file content search with a custom regex engine. Use -f to pipe a file object into another command.",examples:["grep -p system.log /var","grep -a ^Bank.txt$ /","grep *#:*# /etc/passwd","grep -f payload /root | cat"]},
+"ls":{cat:"sh-files",short:"List files and directories (GLASSPOOL-aware)",usage:[["ls","List current directory"],["ls [path]","List specific path"],["ls -l","Long format with permissions"],["ls -a","Include hidden files"]],opts:[["PIPED RESPONSE","Returns file list"]],detail:"Lists directory contents. GLASSPOOL-aware — lists the remote filesystem when mirroring is active.",examples:["ls","ls /root","ls -l /etc"]},
+"merge":{cat:"sh-files",short:"Append file B content to file A",usage:[["merge [file_a] [file_b]","Append file_b to file_a"]],examples:["merge /root/log.txt /tmp/new_entries.txt"]},
+"mkdir":{cat:"sh-files",short:"Create a new directory (GLASSPOOL-aware)",usage:[["mkdir [path]","Create directory at path"]],detail:"Creates a new directory. GLASSPOOL-aware when mirroring is active.",examples:["mkdir /root/targets","mkdir /tmp/staging"]},
+"mv":{cat:"sh-files",short:"Move or rename a file (GLASSPOOL-aware)",usage:[["mv [src] [dest]","Move or rename file/folder"]],detail:"Moves or renames files and folders. GLASSPOOL-aware — operates on remote filesystem when mirroring is active.",examples:["mv /root/old.txt /root/new.txt","mv /tmp/payload /root/bin/"]},
+"poke":{cat:"sh-files",short:"Create or confirm a file exists",usage:[["poke [path]","Create empty file if it doesn't exist"],["poke [path] [content]","Create file with initial content"]],examples:["poke /root/rkit/database.csv","poke /tmp/notes.txt Hello"]},
+"rm":{cat:"sh-files",short:"Delete file or folder (GLASSPOOL-aware)",usage:[["rm [path]","Delete file"],["rm -r [path]","Delete folder recursively"]],detail:"Deletes files or folders. GLASSPOOL-aware — deletes from the remote machine when mirroring is active.",examples:["rm /var/system.log","rm -r /tmp/staging"]},
+"sl":{cat:"sh-files",short:"Symlink manager",usage:[["sl [target] [link_name]","Create symbolic link"],["sl -l","List all symlinks"],["sl -r [link]","Remove symlink"]],examples:["sl /root/rkit/5hell.so /bin/5hell","sl -l","sl -r /bin/5hell"]},
+"tree":{cat:"sh-files",short:"Recursive directory listing and file finder",usage:[["tree [path]","Print full recursive tree"],["tree [path] [filename]","Find file by name in tree"],["tree -f [path]","Enumerate all files to globals.enumerated"],["tree -r [path]","Return list of file objects"]],opts:[["globals.enumerated","Set by tree -f — list of all file objects found"],["mode r","Send file hashes to T_BUF for hashim"]],detail:"Recursive ls with optional file search. After tree -f, all found files are in globals.enumerated for use with enum.",examples:["tree /","tree / system.log","tree -f /root","tree -r /lib"]},
+"bios":{cat:"sh-system",short:"System info and hardware object",usage:[["bios","Show local system hardware info"],["bios [shell]","Show hardware info for piped shell"]],examples:["bios","bios @B 1"]},
+"clear":{cat:"sh-system",short:"Clear the terminal screen",usage:[["clear","Clear all terminal output"]],examples:["clear"]},
+"cname":{cat:"sh-system",short:"Return the active computer name",usage:[["cname","Print current machine hostname"]],opts:[["PIPED RESPONSE","Returns hostname as string"]],examples:["cname","cname | clipa"]},
+"dm":{cat:"sh-system",short:"Daemon manager — list, start, stop background processes",usage:[["dm list","List all running daemons"],["dm stop [id]","Stop daemon by ID (e.g., kore_01)"],["dm kill [type]","Stop all daemons of a type"]],detail:"Interfaces with the DaemonManager system (5hell.d registry file). Daemon IDs are formatted as type_NN (e.g., hashim_01).",examples:["dm list","dm stop kore_01","dm kill hashim"]},
+"glasspool":{cat:"sh-system",short:"Mirror a remote shell/computer filesystem locally",usage:[["glasspool [shell]","Activate GLASSPOOL on shell object"],["gp [shell]","Alias for glasspool"],["glasspool -r [#]","Mirror rshell[#]"],["glasspool","Show status or deactivate"]],opts:[["Prompt","Turns blue when GLASSPOOL is active"],["gp","Shell alias for glasspool"],["GLASSPOOL-aware cmds","ls, cd, cp, mv, rm, mkdir, cat, tree, grep, ps, pwd"]],detail:"Redirects globals.localmachine (and thus all file ops) to a remote shell's computer. The prompt turns blue. File commands operate on the remote machine transparently. Run glasspool with no args to deactivate.",examples:["zap | gp","glasspool @B 1","gp -r 0","glasspool"]},
+"kill":{cat:"sh-system",short:"Terminate processes by PID or name",usage:[["kill [pid]","Kill process by PID"],["kill [name]","Kill process by name"],["kill -a [name]","Kill all instances of name"]],examples:["kill 1234","kill hashim","kill -a rshell"]},
+"kore":{cat:"sh-system",short:"System automation — rkit, security, and control",usage:[["kore -r | --rkit","Build ~/rkit with 5hell + libs + database.csv"],["kore -s | --secure","Full security sweep (root chown, rm passwd, silentclean)"],["kore -sc","Secure sweep using silentclean"],["kore -S","Paranoid mode: also rm /home /bin /usr"],["kore --hdd","Set /virt/hdd.io size"],["kore --override [color] [code]","Override a color global at runtime"],["kore --silent","Toggle SILENT mode (suppress all print output)"],["kore --control [opt:spool]","Daemon mode: listen on socket_in, execute commands"]],opts:[["kore --control","Creates socket_in/socket_out files for IPC"],["kore --silent","Toggles globals.SILENT between 0 and 2"]],detail:"The main system automation command. Use kore -r to set up a fresh machine. kore -s for full lockdown before leaving. kore --control for headless daemon execution.",examples:["kore -r","kore -s","kore --silent","kore --override colorDefault <#FFFFFFFF>","kore --control spool"]},
+"lock":{cat:"sh-system",short:"Apply secure permissions to files/directories",usage:[["lock [path]","Lock path to root-only access"],["lock all","Lock entire filesystem"],["lock -u [user]","Lock to specific user"]],detail:"Anti-brick protection: checks for Xorg in ps before applying restrictive permissions to avoid bricking a home machine.",examples:["lock /root","lock all"]},
+"make":{cat:"sh-system",short:"Build a .src file into a binary",usage:[["make [src_path] [dest_path]","Compile source to binary"],["make [src_path]","Compile in-place"]],opts:[["PIPED RESPONSE","Returns compiled binary file object"]],examples:["make /root/src/tool.src /root/bin/","make /tmp/payload.src"]},
+"makfit":{cat:"sh-system",short:"Rebuild binary to a target file size",usage:[["makfit [src_path] [target_size]","Re-minify to target byte size"],["makfit [src_path]","Rebuild to minimum size"]],detail:"Re-minifies an existing source file using greybel-compatible compression. Used to shrink tools to fit size limits.",examples:["makfit /root/src/5hell.src 155000","makfit /root/src/payload.src"]},
+"nt":{cat:"sh-system",short:"Open a new terminal window (5pork)",usage:[["nt [command]","Open new terminal, optionally running command"],["nt","Open new blank terminal"]],detail:"Forks the current session and opens a new terminal window via shell.start_terminal. Requires the 5pork launcher.",examples:["nt","nt 5hell"]},
+"passwd":{cat:"sh-system",short:"Change a user's password",usage:[["passwd [user] [new_pass]","Set password for user"],["passwd","Interactive — prompts for current and new password"]],examples:["passwd root newpass123","passwd"]},
+"perms":{cat:"sh-system",short:"Permission management and lock presets",usage:[["perms lock","Apply full lock preset"],["perms [path] [mode]","Set permissions on path"],["perms -r [path] [mode]","Set permissions recursively"]],examples:["perms lock","perms /root rwxr-xr-x","perms -r /etc r-xr-xr-x"]},
+"ps":{cat:"sh-system",short:"Show running processes (GLASSPOOL-aware)",usage:[["ps","List all processes"],["ps [name]","Filter by process name"]],opts:[["PIPED RESPONSE","Returns process list"]],detail:"Shows running processes on the active machine. GLASSPOOL-aware — shows remote processes when mirroring is active.",examples:["ps","ps rshell","ps | grep hashim"]},
+"pwd":{cat:"sh-system",short:"Print working directory",usage:[["pwd","Show current path"]],opts:[["PIPED RESPONSE","Returns current path as string"]],examples:["pwd","pwd | clipa"]},
+"rclean":{cat:"sh-system",short:"Remote log cleaner — cover tracks on a shell",usage:[["rclean [shell]","Blank system.log on remote shell"],["rclean","Clean local system.log"],["rclean -d","Also delete rkit"],["rclean -n","Nuke — delete as much as possible"]],opts:[["PIPED RESPONSE","Returns 1 on success"]],detail:"Copies a blank file over system.log (move method — stealthier than delete). Use after any exploit operation.",examples:["rclean @B 1","zap | rclean","rclean -d"]},
+"reboot":{cat:"sh-system",short:"Reboot the current machine",usage:[["reboot","Reboot local machine"],["reboot [shell]","Reboot remote shell's machine"]],examples:["reboot","reboot @B 1"]},
+"run":{cat:"sh-system",short:"Launch a binary while preserving the session",usage:[["run [binary_path] [args]","Launch binary in current session context"]],detail:"Uses shell.launch with session preservation. Preferred over shell_path when you need the launched process to inherit 5hell's session state.",examples:["run /bin/ls -la","run /root/tools/scanner"]},
+"shell":{cat:"sh-system",short:"Show session info and special shell subcommands",usage:[["shell","Show current session IP info and stack level"],["shell --home [ip]","Update @home IP address"],["shell -q","Query session stack depth"],["shell --export","Export myx0/mys0 to custom_object"]],examples:["shell","shell --home 79.17.2.146","shell -q"]},
+"silentclean":{cat:"sh-system",short:"Log scrubber using move method (alias: sc)",usage:[["silentclean","Clean local system.log"],["silentclean [shell]","Clean log on remote shell"],["sc","Alias for silentclean"],["silentclean -d","Also delete rkit"],["silentclean -n","Nuke mode"]],opts:[["PIPED RESPONSE","Returns 1 on success"]],detail:"Uses file.move() to replace system.log content. The move method is harder to detect than a direct delete.",examples:["silentclean","sc","silentclean @B 1","zap | sc"]},
+"time":{cat:"sh-system",short:"Show system uptime and in-game time",usage:[["time","Display current uptime and game clock"]],examples:["time"]},
+"usr":{cat:"sh-system",short:"User management — chown and add/delete users",usage:[["usr [user] [path]","Change owner of path to user"],["usr -r [user] [path]","Chown recursively"],["usr add [user] [pass]","Add a new user account"],["usr del [user]","Delete user account"]],examples:["usr root /root","usr -r root /","usr add hacker pass123","usr del guest"]},
+"whoami":{cat:"sh-system",short:"Return the active user (root/user/guest)",usage:[["whoami","Print current user privilege level"]],opts:[["PIPED RESPONSE","Returns user string: root, user, or guest"]],examples:["whoami","whoami | clipa"]},
+"grp":{cat:"sh-system",short:"Group management — chgrp and create/delete groups",usage:[["grp [group] [path]","Change group owner of path"],["grp -r [group] [path]","Chgrp recursively"],["grp add [group]","Create new group"],["grp del [group]","Delete group"]],examples:["grp root /root","grp -r root /","grp add hackers"]},
+
+"buffer":{cat:"sh-scripting",short:"Push any value into BUFFER (Memory Alpha)",usage:[["buffer [value]","Push value to globals.BUFFER"],["[cmd] | buffer","Pipe any object into BUFFER"]],opts:[["BUFFER","Global object list seeded with local shell. BUFFER[0] is always the local shell."],["@B [n]","EZ_CLIP token — reference BUFFER[n] in any command"]],detail:"Explicitly pushes a value into BUFFER without opening the malp menu. Useful in pipe chains.",examples:["buffer @a","probe 1.2.3.4 | buffer"]},
+"calc":{cat:"sh-scripting",short:"Calculator including p-adic arithmetic",usage:[["calc [expression]","Evaluate arithmetic expression"],["calc -p [expression]","P-adic arithmetic mode"]],opts:[["PIPED RESPONSE","Returns numeric result"]],examples:["calc 2 + 2","calc 100 * 1024"]},
+"cc":{cat:"sh-scripting",short:"Re-run the previous command",usage:[["cc","Execute last entry from command history"]],examples:["cc"]},
+"chop":{cat:"sh-scripting",short:"String slice and split tool",usage:[["chop [string] [delimiter]","Split string by delimiter"],["chop [string] [start] [end]","Slice string by index range"]],opts:[["PIPED RESPONSE","Returns resulting string or list"]],examples:["chop @a .","chop @a 0 5"]},
+"clipa":{cat:"sh-scripting",short:"Clipboard slot A — store any value",usage:[["clipa [value]","Store value in slot A"],["clipa @B [n]","Store BUFFER[n] in slot A"],["clipa ++","Increment value by 1"],["clipa += [N]","Add N to value"],["clipa -n","Set to null"],["clipa -z","Set to integer 0"],["clipa","Return current value"]],opts:[["@a","EZ_CLIP token — replaced by clipa value in any command"]],detail:"Clipboard slot A stores any type. Use @a to dereference it anywhere. Pipe objects directly: `zap | clipa` stores the result object.",examples:["clipa foobar","echo @a","zap | clipa","clipa @B 1","clipa ++","clipa += 5"]},
+"clipb":{cat:"sh-scripting",short:"Clipboard slot B — store any value",usage:[["clipb [value]","Store value in slot B"],["clipb","Return current value"]],opts:[["@b","EZ_CLIP token — use @b to dereference"]],examples:["clipb 1.2.3.4","echo @b","db -r @b 22"]},
+"clipc":{cat:"sh-scripting",short:"Clipboard slot C — store any value",usage:[["clipc [value]","Store value in slot C"],["clipc","Return current value"]],opts:[["@c","EZ_CLIP token — use @c to dereference"]],examples:["clipc /root/payload.src","make @c /root/bin/"]},
+"cob":{cat:"sh-scripting",short:"Custom object manager — persistent key/value store",usage:[["cob set [key] [val]","Set key. {} = new map, [] = new list, @n = null, @z = int 0"],["cob get [key]","Get value at key"],["cob push [key] [val]","Push val onto list at key"],["cob inspect [opt:key]","Print all key/value pairs"],["cob indexes","Return all keys as list"],["cob del [key]","Delete key"],["cob purge","Clear entire custom object"],["cob install [key]","Install stored function as a command"],["cob validate","Ensure macros/stack_pool/HOME indexes exist"]],opts:[["Dot-syntax","cob set foo.bar baz — nested map access via dots"],["Aliases","set/get/push/inspect all alias to cob"],["@z / @n","@z = int 0, @n = null — prevents string coercion"]],detail:"Wraps get_custom_object with dot-syntax traversal and type guards. Data persists across nested shell.launch calls. Use for config, macros, and inter-session communication.",examples:["cob set foo.bar baz","cob get foo.bar","cob push mylist item","set HOME.pass NewPass","get HOME.ip","inspect"]},
+"code":{cat:"sh-scripting",short:"Decompile object, inspect methods, or execute functions",usage:[["code [object]","List indexes/values of a map or object"],["code [function]","Prompt for args and execute function"],["code [list]","Interactive list menu"],["code [game_object]","List methods and call one via p_exe"]],detail:"Multi-tool for interacting with any object. Decompiles maps, executes functions with prompted arguments, and inspects game objects. Results pushed to BUFFER.",examples:["code @B 1","probe 1.2.3.4 | code"]},
+"do":{cat:"sh-scripting",short:"Run a command or batch file N times",usage:[["do [N] [command]","Run command N times"],["do [N] -f [path]","Run file as batch script N times"],["bat [path]","Alias: do 1 -f path"]],opts:[["@STOP","Place in script to break loop immediately"],["Comment lines","Lines starting with #, -, or | are skipped"]],detail:"Batch executor. Runs each line through the full shell (including pipes). do.rc in ~/Config/ or ~/rkit/ executes on 5hell startup.",examples:["do 5 echo hello","do 1 -f /root/rkit/do.rc","bat /root/myscript.mac"]},
+"echo":{cat:"sh-scripting",short:"Return or concatenate arguments as a string",usage:[["echo [arg1] [arg2] [...]","Concatenate arguments with spaces"],["echo @a","Dereference and print clipa"]],"opts":[["PIPED RESPONSE","Returns joined string"]],examples:["echo hello world","echo @a @b","echo @home"]},
+"enum":{cat:"sh-scripting",short:"List enumeration and iteration",usage:[["enum [list]","Print list items with index numbers"],["enum -a [list]","Add list items to BUFFER"],["enum -p","Print last enumerated list"],["enum -s [n]","Return item at index n"]],opts:[["PIPED RESPONSE","Returns list or item"]],detail:"Iterate over lists from BUFFER, enumerated file results, or any piped list. Use enum -a to bulk-push file objects to BUFFER.",examples:["malp --export | enum","tree -f / | enum -a","enum -s 2"]},
+"glosure":{cat:"sh-scripting",short:"LISP-like scripting interpreter",usage:[["glosure","Open interactive REPL (</> prompt)"],["glosure -e [expr]","Evaluate expression and return result"],["glosure -f [path]","Evaluate a LISP file"]],detail:"A Lisp interpreter embedded in 5hell. Supports defmacro/quote/gensym. Access globals via (get globals 'varname') and (set globals 'varname' value).",examples:["glosure","glosure -e (+ 1 2)","glosure -f /root/myscript.lisp"]},
+"if":{cat:"sh-scripting",short:"Inline if-statement processor",usage:[["if [cond] [true_cmd] [false_cmd]","Evaluate condition and branch"]],detail:"Evaluates a boolean condition and runs true_cmd or false_cmd. Used in do scripts and macros for conditional logic.",examples:["if @a echo yes echo no"]},
+"macro":{cat:"sh-scripting",short:"Define, fire, and manage named command macros",usage:[["macro set [name] [chain]","Define a macro as a command chain"],["macro set [name] -f [path]","Define macro from file (each line separated by pipe)"],["[macroname] [args]","Fire macro by name directly"],["macro [name] [args]","Fire macro explicitly"],["macro -v [name]","Verbose: print chain before firing"],["macro del [name]","Delete macro"],["macro list","List all defined macros"]],opts:[["@pipe","Replaced by piped input when macro is called"]],detail:"Macros are stored in get_custom_object.macros and take priority over commands of the same name. Use @pipe as a placeholder for piped input within macro bodies.",examples:["macro set greet echo Hello @pipe","echo World | greet","macro set pentest probe @pipe | sphinx","macro -v pentest","macro del greet"]},
+"malp":{cat:"sh-scripting",short:"Memory Alpha — BUFFER manager and object handler",usage:[["malp","Open interactive BUFFER menu"],["malp [object]","Push object and open menu"],["malp -p [object]","Push without opening menu"],["malp --export","Return BUFFER as list"]],opts:[["Shell handler","Infiltrate, scp, rclean, glasspool options"],["File handler","Open, edit, cat, scp options"],["List handler","Enumerate, to cob, to buffer"],["@B [n]","Reference BUFFER[n] in any command without opening malp"]],detail:"The main object store manager. BUFFER[0] is always the local shell. Exploit results and piped objects accumulate from index 1+.",examples:["malp","zap | malp","malp --export | enum","malp -p @a"]},
+"pause":{cat:"sh-scripting",short:"Wait until a condition is met",usage:[["pause [seconds]","Wait N seconds"],["pause -f [file]","Wait until file is modified"],["pause -c [condition]","Wait until condition is true"]],examples:["pause 5","pause -f /root/rkit/dump.txt","pause -c @a"]},
+"pwgen":{cat:"sh-scripting",short:"Markov password table generator",usage:[["pwgen [wordlist]","Generate Markov password table from wordlist"],["pwgen -n [count]","Generate N passwords"],["pwgen -s [seed]","Use specific seed word"]],detail:"Generates probabilistic passwords using Markov chains trained on the input wordlist. Extends cerebrum with high-quality generated entries.",examples:["pwgen /root/wordlist.txt","pwgen -n 50","pwgen -s admin"]},
+"string":{cat:"sh-scripting",short:"Advanced string manipulation tools",usage:[["string [str] upper","Convert to uppercase"],["string [str] lower","Convert to lowercase"],["string [str] len","Return string length"],["string [str] reverse","Reverse string"],["string [str] contains [sub]","Check if string contains sub"]],opts:[["PIPED RESPONSE","Returns processed string or result"]],examples:["string hello upper","string @a lower","string @a len"]},
+"cerebrum":{cat:"sh-crypto",short:"Expand the onboard password dictionary",usage:[["cerebrum [wordlist_file]","Import wordlist into dictionary"],["cerebrum -s","Show dictionary stats"],["cerebrum -c","Clear dictionary"]],detail:"Expands the onboard password dictionary used by brutus and air. Merges entries into the persistent dictionary in get_custom_object.",examples:["cerebrum /root/wordlist.txt","cerebrum -s"]},
+"gopher":{cat:"sh-crypto",short:"Hash cracker for files, strings, or lists",usage:[["gopher [hash]","Crack a single hash"],["gopher -f [file]","Crack all hashes in file"],["gopher -l","Crack all hashes in T_BUF"],["gopher -t [path]","Use custom rainbow table at path"]],opts:[["PIPED RESPONSE","Returns cracked password string"]],detail:"Uses rainbow tables and crypto.decipher to crack MD5 and similar hashes. Reads from T_BUF or direct input.",examples:["gopher 5f4dcc3b5aa765d61d8327deb882cf99","gopher -f /root/hashes.txt","gopher -l"]},
+"hashim":{cat:"sh-crypto",short:"Hash cracking daemon for @home server",usage:[["hashim -d","Start hashim daemon (monitors sharedfile)"],["hashim -s","Stop hashim daemon"],["hashim [hash]","Crack a single hash immediately"]],opts:[["@home.sharedfile","File hashim monitors for incoming hashes"],["dump.txt","Results written here by hashim daemon"]],detail:"Runs as a daemon on the @home server. Monitors the configured sharedfile, cracks incoming hashes via rainbow tables, and writes results to dump.txt.",examples:["hashim -d","hashim 5f4dcc3b5aa765d61d8327deb882cf99","hashim -s"]},
+"jtr":{cat:"sh-crypto",short:"Random password generator (John the Ripper style)",usage:[["jtr","Generate a random password using current dictionary"],["jtr -n [count]","Generate N passwords"],["jtr -l [length]","Generate password of specific length"]],examples:["jtr","jtr -n 10","jtr -l 12"]},
+"md5":{cat:"sh-crypto",short:"Hash or decipher a string without storing",usage:[["md5 [string]","MD5 hash the string"],["md5 -d [hash]","Decipher/crack the hash"]],opts:[["PIPED RESPONSE","Returns hash or cracked plaintext"]],examples:["md5 password123","md5 -d 5f4dcc3b5aa765d61d8327deb882cf99"]},
+"tdump":{cat:"sh-crypto",short:"Dump T_BUF (transmission buffer) to file",usage:[["tdump","Write T_BUF contents to ~/pass"],["tdump [path]","Write T_BUF to specific path"]],opts:[["globals.T_BUF","List of hashes/IPs queued for hashim"]],detail:"Writes the transmission buffer to a file for hashim or manual processing. Used in the tree / tdump / transmit / hashim workflow.",examples:["tdump","tdump /root/rkit/hashes.txt"]},
+"transmit":{cat:"sh-crypto",short:"Send T_BUF hashes to @home hashim server",usage:[["transmit","SSH to @home, write T_BUF to sharedfile"]],opts:[["@home.ip / .user / .pass","@home credentials used for SSH"],["@home.sharedfile","Target file on @home server"]],detail:"Connects to the @home server via SSH and writes the T_BUF to the configured sharedfile. Hashim daemon on @home picks up the hashes automatically.",examples:["tree / 0 r","tdump","transmit"]},
+"osint":{cat:"sh-intel",short:"Open source intelligence — email and user search",usage:[["osint [query]","Search for email or username across sources"],["osint -e [email]","Search specific email"],["osint -u [username]","Search specific username"]],examples:["osint johndoe","osint -e john@example.com","osint -u johndoe"]},
+"smtp":{cat:"sh-intel",short:"SMTP email enumeration",usage:[["smtp [ip]","Probe SMTP server at IP"],["smtp [ip] [port]","Probe SMTP at specific port"]],detail:"Enumerates SMTP server info, valid users, and mail headers. Useful for social engineering and phishing recon.",examples:["smtp 1.2.3.4","smtp 1.2.3.4 25"]},
+"sniff":{cat:"sh-intel",short:"SSH connection sniffer",usage:[["sniff","Monitor SSH connections on local machine"],["sniff [port]","Sniff specific port for credentials"]],detail:"Captures SSH authentication attempts and logs credentials. Run before targets try to connect.",examples:["sniff","sniff 22"]},
+"brutus":{cat:"sh-attack",short:"Brute force SSH login using onboard dictionary",usage:[["brutus [ip] [port]","Brute force root login"],["brutus [ip] [port] [user]","Brute force specific username"]],opts:[["PIPED RESPONSE","Returns connected shell object on success"],["BUFFER","Shell pushed to BUFFER"]],detail:"Iterates the onboard password dictionary (expand with cerebrum) against the target SSH service.",examples:["brutus 1.2.3.4 22","brutus 1.2.3.4 22 root"]},
+"infil":{cat:"sh-attack",short:"Upload rkit and launch 5hell on a remote target",usage:[["infil [shell]","Upload rkit to shell and launch 5hell"],["infil -s [shell]","Silent mode — no banner"]],opts:[["PIPED RESPONSE","Returns nested 5hell session"]],detail:"Fully automated infiltration: uploads the rkit to the remote machine, compiles 5hell, and launches a nested session.",examples:["zap | infil","infil @B 1"]},
+"kraken":{cat:"sh-attack",short:"Batch proxy chain management",usage:[["kraken [proxy_list_file]","Route through proxies from file"],["kraken -c","Clear current proxy chain"],["kraken -s","Show active proxy chain"]],detail:"Manages multi-hop proxy routing. Load a list of proxy IPs/ports to build the chain.",examples:["kraken /root/proxies.txt","kraken -s","kraken -c"]},
+"prox":{cat:"sh-attack",short:"Tunnel operations through a proxy chain",usage:[["prox [command]","Route command through active proxy chain"],["prox -r","Reset/clear proxy chain"]],detail:"Executes an operation through the proxy chain configured with kraken. All network operations are routed through the chain.",examples:["prox db -r 1.2.3.4 22","prox ssh root@pass 1.2.3.4","prox -r"]},
+"purge":{cat:"sh-attack",short:"Session memory wipe",usage:[["purge","Clear BUFFER, CLIP, T_BUF, and scan data"],["purge -a","Full purge including cob session data"]],detail:"Wipes all in-memory session data. Useful before switching targets or handing off the machine.",examples:["purge","purge -a"]},
+"rshell":{cat:"sh-attack",short:"Place a reverse shell backdoor on a target",usage:[["rshell [shell] [target_path]","Upload rshell binary and launch on remote shell"],["rshell -p [port]","Specify rshell listen port"]],opts:[["PIPED RESPONSE","Returns reverse shell connection object"]],detail:"Uploads and executes the librshell.so backdoor on a compromised machine. The reverse shell connects back to your rsi listener.",examples:["zap | rshell","rshell @B 1 /tmp/","rshell -p 1222"]},
+"scrub":{cat:"sh-attack",short:"Clean all proxy logs via kraken",usage:[["scrub","Run silentclean on all machines in proxy chain"],["scrub -v","Verbose output per hop"]],detail:"Iterates through the active kraken proxy chain and runs silentclean on each hop to remove logs.",examples:["scrub","scrub -v"]},
+
+};
+
+const CATS_5HELL = {
+  "sh-exploit":  {label:"EXPLOIT",  color:"#ff003c"},
+  "sh-network":  {label:"NETWORK",  color:"#00ff9c"},
+  "sh-files":    {label:"FILES",    color:"#ffb700"},
+  "sh-system":   {label:"SYSTEM",   color:"#00d4ff"},
+  "sh-scripting":{label:"SCRIPTING",color:"#00d4ff"},
+  "sh-crypto":   {label:"CRYPTO",   color:"#b84fff"},
+  "sh-intel":    {label:"INTEL",    color:"#b84fff"},
+  "sh-attack":   {label:"ATTACK",   color:"#ff003c"}
+};
+
+const GUIDES_5HELL = [
+  {id:"guide-install", label:"Getting Started"},
+  {id:"guide-shell",   label:"Shell & Piping"},
+  {id:"guide-clip",    label:"CLIP & BUFFER"},
+  {id:"guide-macros",  label:"Macros & Scripts"},
+  {id:"guide-exploit", label:"Exploit Workflow"},
+  {id:"guide-cob",     label:"Custom Object / cob"}
+];
+
+// ── 5hell sidebar builder ─────────────────────────────────────────────────────
+function build5hellSidebar() {
+  const nav = document.getElementById('sh-sidebarNav');
+  nav.innerHTML = '';
+
+  const total = Object.keys(CMDS_5HELL).length;
+  const tc = document.getElementById('sh-totalCmds');
+  if (tc) tc.textContent = total;
+  const cc = document.getElementById('sh-cmdCount');
+  if (cc) cc.textContent = total + ' commands';
+
+  // Home item
+  const homeEl = document.createElement('div');
+  homeEl.className = 'nav-item active';
+  homeEl.textContent = '⌂  Overview';
+  homeEl.dataset.view = 'home';
+  homeEl.onclick = () => showView5hell('sh-view-home');
+  nav.appendChild(homeEl);
+
+  // Guides section
+  const guideLabel = document.createElement('div');
+  guideLabel.className = 'cat-label';
+  guideLabel.textContent = 'GUIDES';
+  nav.appendChild(guideLabel);
+
+  GUIDES_5HELL.forEach(g => {
+    const el = document.createElement('div');
+    el.className = 'nav-item nav-item-guide';
+    el.textContent = g.label;
+    el.dataset.view = 'sh-view-' + g.id;
+    el.onclick = () => showView5hell('sh-view-' + g.id);
+    nav.appendChild(el);
+  });
+
+  // Commands by category
+  Object.keys(CATS_5HELL).forEach(cat => {
+    const cmds = Object.keys(CMDS_5HELL).sort().filter(k => CMDS_5HELL[k].cat === cat);
+    if (!cmds.length) return;
+
+    const lbl = document.createElement('div');
+    lbl.className = 'cat-label';
+    lbl.textContent = CATS_5HELL[cat].label;
+    nav.appendChild(lbl);
+
+    cmds.forEach(cmd => {
+      const el = document.createElement('div');
+      el.className = 'nav-item';
+      el.textContent = cmd;
+      el.dataset.cmd = cmd;
+      el.onclick = () => show5hellCmd(cmd);
+      nav.appendChild(el);
+    });
+  });
+}
+
+// ── build a 5hell command card (accordion, matches Doom pattern) ───────────────
+function buildCmd5hellCard(cmd) {
+  const d = CMDS_5HELL[cmd];
+  const card = document.createElement('div');
+  card.className = 'cmd-card';
+  card.id = 'sh-card-' + cmd;
+
+  const hdr = document.createElement('div');
+  hdr.className = 'cmd-header';
+  hdr.innerHTML = `<span class="cmd-name">${cmd}</span><span class="cmd-short">${d.short||''}</span><span class="cmd-chevron">›</span>`;
+  hdr.onclick = () => card.classList.toggle('open');
+
+  const body = document.createElement('div');
+  body.className = 'cmd-body';
+
+  let html = '<div class="usage-label">USAGE</div>';
+  html += '<table class="usage-table">';
+  (d.usage||[]).forEach(u => {
+    html += `<tr><td><code>${u[0]}</code></td><td>${u[1]||''}</td></tr>`;
+  });
+  html += '</table>';
+
+  if (d.opts && d.opts.length) {
+    html += '<div class="opt-section-label">PARAMETERS &amp; RETURNS</div>';
+    html += '<ul class="opt-list">';
+    d.opts.forEach(o => {
+      html += `<li><span class="opt-k">${o[0]}</span><span class="opt-v">${o[1]}</span></li>`;
+    });
+    html += '</ul>';
+  }
+
+  if (d.detail) {
+    html += '<div class="details-section-label">DETAILS</div>';
+    html += `<div class="detail-text">${d.detail}</div>`;
+  }
+
+  if (d.examples && d.examples.length) {
+    html += '<div class="ex-section-label">EXAMPLES</div>';
+    html += '<ul class="ex-list ex-list-5hell">';
+    d.examples.forEach(e => { html += `<li>${e}</li>`; });
+    html += '</ul>';
+  }
+
+  body.innerHTML = html;
+  card.appendChild(hdr);
+  card.appendChild(body);
+  return card;
+}
+
+// ── show a view (home or guide) ───────────────────────────────────────────────
+function showView5hell(viewId) {
+  document.querySelectorAll('#sh-mainContent .view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('#sh-sidebarNav .nav-item').forEach(n => n.classList.remove('active'));
+
+  if (viewId === 'sh-view-home') {
+    document.getElementById('sh-view-home').classList.add('active');
+    const ni = document.querySelector('#sh-sidebarNav .nav-item[data-view="home"]');
+    if (ni) ni.classList.add('active');
+  } else if (viewId.includes('guide-')) {
+    const el = document.getElementById(viewId);
+    if (el) el.classList.add('active');
+    const ni = document.querySelector(`#sh-sidebarNav .nav-item[data-view="${viewId}"]`);
+    if (ni) ni.classList.add('active');
+  }
+}
+
+// ── show commands filtered by category ────────────────────────────────────────
+function showCategory5hell(cat) {
+  document.querySelectorAll('#sh-mainContent .view').forEach(v => v.classList.remove('active'));
+  document.getElementById('sh-view-cmds').classList.add('active');
+
+  const grid  = document.getElementById('sh-cmdGrid');
+  const title = document.getElementById('sh-cmdViewTitle');
+  const filtCount = document.getElementById('sh-filteredCount');
+
+  let cmds = Object.keys(CMDS_5HELL).sort();
+  if (cat !== 'all') cmds = cmds.filter(k => CMDS_5HELL[k].cat === cat);
+
+  if (title) title.textContent = cat === 'all'
+    ? 'ALL COMMANDS'
+    : (CATS_5HELL[cat]?.label || cat) + ' COMMANDS';
+  if (filtCount) filtCount.textContent = cmds.length + ' found';
+
+  grid.innerHTML = '';
+  cmds.forEach(cmd => grid.appendChild(buildCmd5hellCard(cmd)));
+}
+
+// ── open a single cmd card ────────────────────────────────────────────────────
+function show5hellCmd(cmd) {
+  const d = CMDS_5HELL[cmd];
+  if (!d) return;
+  showCategory5hell(d.cat);
+  document.querySelectorAll('#sh-sidebarNav .nav-item').forEach(n => n.classList.remove('active'));
+  const ni = document.querySelector(`#sh-sidebarNav .nav-item[data-cmd="${cmd}"]`);
+  if (ni) ni.classList.add('active');
+  setTimeout(() => {
+    const card = document.getElementById('sh-card-' + cmd);
+    if (card) { card.classList.add('open'); card.scrollIntoView({behavior:'smooth',block:'start'}); }
+  }, 50);
+}
+
+// ── search handler ────────────────────────────────────────────────────────────
+(function(){
+  const inp = document.getElementById('sh-searchInput');
+  if (!inp) return;
+  inp.addEventListener('input', function(){
+    const q = this.value.toLowerCase().trim();
+    const nav = document.getElementById('sh-sidebarNav');
+    const items = nav.querySelectorAll('.nav-item[data-cmd]');
+
+    if (!q) {
+      items.forEach(i => { i.style.display = ''; });
+      nav.querySelectorAll('.cat-label').forEach(c => { c.style.display = ''; });
+      const fc = document.getElementById('sh-filteredCount');
+      if (fc) fc.textContent = '';
+      return;
+    }
+
+    let count = 0;
+    items.forEach(i => {
+      const cmd = i.dataset.cmd;
+      const match = cmd.includes(q) ||
+        (CMDS_5HELL[cmd]?.short && CMDS_5HELL[cmd].short.toLowerCase().includes(q));
+      i.style.display = match ? '' : 'none';
+      if (match) count++;
+    });
+
+    const fc = document.getElementById('sh-filteredCount');
+    if (fc) fc.textContent = count + ' found';
+
+    nav.querySelectorAll('.cat-label').forEach(lbl => {
+      let next = lbl.nextElementSibling;
+      let hasVisible = false;
+      while (next && !next.classList.contains('cat-label')) {
+        if (next.dataset.cmd && next.style.display !== 'none') hasVisible = true;
+        next = next.nextElementSibling;
+      }
+      lbl.style.display = hasVisible ? '' : 'none';
+    });
+
+    if (q.length >= 2) {
+      const matched = Object.keys(CMDS_5HELL).sort().filter(k =>
+        k.includes(q) ||
+        (CMDS_5HELL[k].short && CMDS_5HELL[k].short.toLowerCase().includes(q)) ||
+        (CMDS_5HELL[k].detail && CMDS_5HELL[k].detail.toLowerCase().includes(q))
+      );
+      if (matched.length > 0) {
+        document.querySelectorAll('#sh-mainContent .view').forEach(v => v.classList.remove('active'));
+        const grid  = document.getElementById('sh-cmdGrid');
+        const title = document.getElementById('sh-cmdViewTitle');
+        grid.innerHTML = '';
+        title.textContent = 'SEARCH: ' + q.toUpperCase();
+        matched.forEach(cmd => grid.appendChild(buildCmd5hellCard(cmd)));
+        document.getElementById('sh-view-cmds').classList.add('active');
+      }
+    }
+  });
+})();
+
+build5hellSidebar();
+
 
 function openGHModal(){
   document.getElementById("ghModalOverlay").classList.add("open");
@@ -1577,8 +2947,8 @@ function openGHModal(){
 function closeGHModal(){
   document.getElementById("ghModalOverlay").classList.remove("open");
 }
-document.getElementById("ghModalOverlay").addEventListener("click", function(e){
-  if (e.target === this) closeGHModal();
+document.addEventListener("click", function(e){
+  if (e.target && e.target.id === "ghModalOverlay") closeGHModal();
 });
 </script>
 
