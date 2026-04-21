@@ -585,17 +585,112 @@ vertical-align:top;
 }
 .spec-table td:first-child{color:var(--warn);white-space:nowrap;}
 .spec-table td:last-child{color:var(--text-dim);line-height:1.55;}
+
+/* ── GREY HACK LINK ──────────────────────────────────────── */
+.gh-link{
+text-decoration:underline;
+text-decoration-color:var(--primary-dim);
+cursor:pointer;
+transition:text-shadow 0.15s;
+}
+.gh-link:hover{text-shadow:var(--glow-sm);}
+
+/* ── GH MODAL ────────────────────────────────────────────── */
+#ghModalOverlay{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.72);
+z-index:10000;
+align-items:center;
+justify-content:center;
+}
+#ghModalOverlay.open{display:flex;}
+#ghModal{
+background:var(--surface);
+border:1px solid var(--primary-dim);
+box-shadow:0 0 30px rgba(0,255,156,0.15),0 0 60px rgba(0,0,0,0.6);
+min-width:320px;
+max-width:480px;
+width:90%;
+position:relative;
+}
+.gh-modal-header{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:12px 16px;
+border-bottom:1px solid var(--border);
+background:rgba(0,0,0,0.25);
+}
+.gh-modal-title{
+font-family:'Orbitron',monospace;
+font-size:0.75rem;
+color:var(--primary);
+letter-spacing:3px;
+text-shadow:var(--glow-sm);
+}
+.gh-modal-close{
+background:none;
+border:none;
+color:var(--text-dim);
+font-size:1rem;
+cursor:pointer;
+line-height:1;
+padding:2px 4px;
+transition:color 0.15s;
+}
+.gh-modal-close:hover{color:var(--accent);}
+.gh-modal-body{
+padding:20px 16px 16px;
+}
+.gh-modal-message{
+font-size:0.78rem;
+color:var(--text);
+line-height:1.7;
+margin-bottom:16px;
+min-height:32px;
+}
+.gh-modal-footer{
+padding:12px 16px;
+border-top:1px solid var(--border);
+display:flex;
+align-items:center;
+}
+.gh-steam-link{
+display:inline-flex;
+align-items:center;
+gap:8px;
+color:var(--secondary);
+text-decoration:none;
+font-size:0.77rem;
+border:1px solid rgba(0,212,255,0.25);
+padding:6px 12px;
+background:rgba(0,212,255,0.05);
+transition:all 0.15s;
+letter-spacing:1px;
+}
+.gh-steam-link:hover{
+border-color:var(--secondary);
+background:rgba(0,212,255,0.1);
+box-shadow:var(--glow-sec);
+}
+.gh-steam-icon{
+font-size:1rem;
+color:var(--secondary);
+line-height:1;
+}
 </style>
 </hea
 <body>
 
 <header class="header">
   <div>
-    <div class="logo">DOOM - <span>Grey Hack Hacktool // Command Reference</span></div>
+    <div class="logo">DOOM - <span><span class="gh-link" onclick="openGHModal()">Grey Hack</span> Hacktool // Command Reference</span></div>
   </div>
   <div class="header-right">
     <div class="header-badge"><span class="dot"></span> ONLINE</div>
-    <div class="header-badge"><span class="dot sec"></span> GREY HACK</div>
+    <div class="header-badge"><span class="dot sec"></span> <span class="gh-link" style="text-decoration-color:var(--text-dim)" onclick="openGHModal()">GREY HACK</span></div>
     <div class="header-badge"><span class="dot warn"></span> v4+</div>
   </div>
 </header>
@@ -622,7 +717,7 @@ vertical-align:top;
 <div class="view active" id="view-home">
   <div class="home-hero">
     <div class="hero-title">DOOM</div>
-    <div class="hero-sub">GREY HACK HACKTOOL — COMMAND REFERENCE</div>
+    <div class="hero-sub"><span class="gh-link" style="text-decoration-color:var(--text-dim)" onclick="openGHModal()">GREY HACK</span> HACKTOOL — COMMAND REFERENCE</div>
     <div class="hero-divider"></div>
     <div class="guide-p" style="max-width:600px;margin:0 auto;text-align:center;">
       A comprehensive reference for all Doom commands and features. Use the sidebar to browse commands by category or search for specific commands. Navigate guides for in-depth tutorials.
@@ -687,7 +782,7 @@ vertical-align:top;
 <div class="guide-h1">GETTING STARTED</div>
 <div class="guide-divider"></div>
 
-<div class="guide-p">Doom is only available for Grey Hack <b>multiplayer</b>. It can be requested and used by anyone — new player or veteran, guild member or solo.</div>
+<div class="guide-p">Doom is only available for <span class="gh-link" onclick="openGHModal()">Grey Hack</span> <b>multiplayer</b>. It can be requested and used by anyone — new player or veteran, guild member or solo.</div>
 
 <div class="guide-h2">1. JOIN THE DISCORD</div>
 <div class="guide-p">To obtain the tool, first join the official Doom Discord server:</div>
@@ -1475,7 +1570,38 @@ document.getElementById("searchInput").addEventListener("input", function(){
 });
 
 buildSidebar();
+
+function openGHModal(){
+  document.getElementById("ghModalOverlay").classList.add("open");
+}
+function closeGHModal(){
+  document.getElementById("ghModalOverlay").classList.remove("open");
+}
+document.getElementById("ghModalOverlay").addEventListener("click", function(e){
+  if (e.target === this) closeGHModal();
+});
 </script>
+
+<!-- GREY HACK MODAL -->
+<div id="ghModalOverlay">
+  <div id="ghModal">
+    <div class="gh-modal-header">
+      <span class="gh-modal-title">GREY HACK</span>
+      <button class="gh-modal-close" onclick="closeGHModal()">✕</button>
+    </div>
+    <div class="gh-modal-body">
+      <div class="gh-modal-message">All Tools/references/mechanics/functionalities described in this documentation are for the video game Grey Hack.</div>
+      <div class="gh-modal-message"><b>This is not real hacking.</b></div>
+      <div class="gh-modal-message">For more information about the game, visit the link below...</div>
+    </div>
+    <div class="gh-modal-footer">
+      <a class="gh-steam-link align-center" href="https://store.steampowered.com/app/605230/Grey_Hack/" target="_blank">
+        <span class="gh-steam-icon">⊙</span>
+        Steam Page
+      </a>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
