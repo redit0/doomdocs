@@ -33,7 +33,7 @@
 --text:#b8dfc8;
 --text-dim:#4d7a60;
 --text-muted:#2a5040;
---glow:0 0 12px rgba(0,255,156,0.5),0 0 24px rgba(0,255,156,0.2);
+--glow:0 0 12px rgba(197, 0, 0, 0.5),0 0 24px rgba(255, 30, 0, 0.2);
 --glow-sm:0 0 6px rgba(0,255,156,0.4);
 --glow-sec:0 0 8px rgba(0,212,255,0.4);
 }
@@ -248,7 +248,7 @@ padding:40px 0 32px;
 font-family:'Orbitron',monospace;
 font-size:3rem;
 font-weight:900;
-color:var(--primary);
+color:rgb(180, 0, 0);
 text-shadow:var(--glow);
 letter-spacing:12px;
 }
@@ -975,7 +975,7 @@ line-height:1;
       <div class="tc-divider"></div>
       <div class="tc-desc">Full-featured Grey Hack hacking suite. Exploit engine, session manager, proxy chaining, macro system, and network recon — all in one tool.</div>
       <div class="tc-meta">
-        <span class="tc-tag">90+ COMMANDS</span>
+        <span class="tc-tag">121 COMMANDS</span>
         <span class="tc-tag">8 CATEGORIES</span>
         <span class="tc-tag">7 GUIDES</span>
         <span class="tc-tag">MULTIPLAYER</span>
@@ -1062,7 +1062,7 @@ line-height:1;
   <div style="display:flex;align-items:center;gap:16px;">
     <button class="hub-back" onclick="showHub()">◁ HUB</button>
     <div>
-      <div class="logo">DOOM - <span><span class="gh-link" onclick="openGHModal()">Grey Hack</span> Hacktool // Command Reference</span></div>
+      <div class="logo"><span style="color:rgb(146, 1, 1)">DOOM</span> - <span><span class="gh-link" onclick="openGHModal()">Grey Hack</span> Hacktool // Command Reference</span></div>
     </div>
   </div>
   <div class="header-right">
@@ -1093,7 +1093,7 @@ line-height:1;
 <!-- HOME VIEW -->
 <div class="view active" id="view-home">
   <div class="home-hero">
-    <div class="hero-title">DOOM</div>
+    <div class="hero-title" style="color:rgb(146, 1, 1)">DOOM</div>
     <div class="hero-sub"><span class="gh-link" style="text-decoration-color:var(--text-dim)" onclick="openGHModal()">GREY HACK</span> HACKTOOL — COMMAND REFERENCE</div>
     <div class="hero-divider"></div>
     <div class="guide-p" style="max-width:600px;margin:0 auto;text-align:center;">
@@ -1230,7 +1230,10 @@ apt-get update</div>
 
 <div class="guide-h2">MAIN PROMPT</div>
 <div class="guide-p">The main prompt is your home PC. It shows:</div>
-<div class="code-block">—[DOOM]—[P2]—[MAIN]—{PUBLIC_IP}—{LOCAL_IP}—[/current/path]||——[user]:~$</div>
+<div class="code-block">
+  —[<span style="color:red">DOOM</span>]—<span style="color:red">[</span><span style="color:orange">P2</span><span style="color:red">]</span>—[<span style="color:goldenrod">SHELL</span>]—{<span style="color:white">PUBLIC_IP</span>}—{<span style="color:rgb(156, 1, 228)">LOCAL_IP</span>}—[<span style="color:white">/current/path</span>]
+  |—[<span style="color:rgb(143, 0, 0)">root</span>]:~$
+</div>
 <div class="tip-box">
 <div class="tip-label">PROMPT FIELDS</div>
 <b>[P2]</b> — number of proxy sessions in chain<br>
@@ -1242,7 +1245,10 @@ apt-get update</div>
 
 <div class="guide-h2">TARGET PROMPTS</div>
 <div class="guide-p">When connected to a target, sessions stack in a chain. The prompt shows the current target session:</div>
-<div class="code-block">—[DOOM]—[P4]—[SHELL]—{TARGET_PUB}—{TARGET_LAN}—[/root]||——[root]:~$</div>
+<div class="code-block">
+  —[<span style="color:red">DOOM</span>]—[<span style="color:orange">P2</span>]<span style="color:red">[</span><span style="color:rgb(156, 1, 228)">2</span><span style="color:red">]</span>—[<span style="color:goldenrod">SHELL</span>]—{<span style="color:white">PUBLIC_IP</span>}—{<span style="color:rgb(156, 1, 228)">LOCAL_IP</span>}—[<span style="color:white">/current/path</span>]
+  |—[<span style="color:rgb(143, 0, 0)">root</span>]:~$
+</div>
 <div class="tip-box">
 <div class="tip-label">SESSION TYPES</div>
 <b>SHELL</b> — full access, can run scripts, hack, connect, upload binaries<br>
