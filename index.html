@@ -3319,33 +3319,64 @@ myList[0]            // index
 myList[1:3]          // slice</div>
 
 <div class="guide-h2">String Methods</div>
-<div class="code-block">s.len                 // length
-s.lower / s.upper    // case conversion
-s.trim               // strip whitespace
-s.split(", ")        // → list
-s.replace("a","b")   // regex replace
-s.indexOf("x")       // → number or null
-s.is_match("^Hello") // regex match → 1 or 0
-s.val                // parse as number
-s.to_int             // truncate to integer</div>
+<div class="code-block">s.len                        // length
+s.lower / s.upper            // case conversion
+s.trim                       // strip whitespace
+s.code                       // char code of first character
+s.val                        // parse as number → 0 if non-numeric
+s.to_int                     // parse as integer → original string if non-numeric
+s.split(",")                 // → list; optional 2nd arg: regex option ("i","m","s","n","x")
+s.replace("pat", "new")      // regex replace → string
+s.replace_regex("pat","new") // explicit regex replace (same as replace on strings)
+s.indexOf("x")               // → number or null (first occurrence)
+s.indexOf("x", after)        // → number or null (start search after this index)
+s.lastIndexOf("x")           // → number — last occurrence position
+s.is_match("^Hello")         // regex match → 1 or 0
+s.matches("\\w+")            // → map of {startIndex: matchString} for all matches
+s.insert(3, "!")             // → string — insert at character index
+s.remove("x")                // → string — remove first occurrence of substring
+s.hasIndex(n)                // → 1 or 0 — check if character index exists
+s.indexes                    // → list of character indices [0, 1, 2, ...]
+s.values                     // → list of individual characters</div>
 
 <div class="guide-h2">List Methods</div>
-<div class="code-block">myList.push("item")   // append
-myList.pop            // remove + return last
-myList.pull           // remove + return first
-myList.insert(1, "x") // insert at index
-myList.remove("val")  // remove by value
-myList.sort           // sort in-place
-myList.indexOf("x")   // → index or null
-myList.len            // length
-myList.join(", ")     // → string</div>
+<div class="code-block">myList.push("item")            // append → list
+myList.pop                     // remove + return last item
+myList.pull                    // remove + return first item
+myList.insert(1, "x")         // insert at index → list
+myList.remove(n)               // remove item at index n → null
+myList.replace(old, new)       // replace all matching values → list
+myList.replace(old, new, max)  // replace up to max occurrences → list
+myList.sort                    // sort in-place ascending → null
+myList.sort(key)               // sort list-of-maps by field name → null
+myList.sort(key, asc)          // asc: 1 = ascending (default), 0 = descending → null
+myList.reverse                 // reverse in-place → null
+myList.shuffle                 // randomize in-place → null
+myList.indexOf("x")            // → index or null (first match)
+myList.indexOf("x", after)     // → index or null (start search after this index)
+myList.hasIndex(n)             // → 1 or 0 — check if index exists
+myList.len                     // length
+myList.sum                     // → sum of all numeric values
+myList.values                  // → returns the list itself
+myList.join(", ")              // → string</div>
 
 <div class="guide-h2">Map Methods</div>
-<div class="code-block">myMap.hasIndex("key") // → 1 or 0
-myMap.indexes         // list of keys
-myMap.values          // list of values
-myMap.remove("key")   // delete entry
-myMap.len             // number of entries</div>
+<div class="code-block">myMap.hasIndex("key")        // → 1 or 0 — check if key exists
+myMap.indexOf(value)         // → key whose value matches, or null
+myMap.indexOf(value, after)  // → key after the given key, or null
+myMap.indexes                // → list of all keys
+myMap.values                 // → list of all values
+myMap.len                    // → number of entries
+myMap.remove("key")          // delete entry → 1 (found) or 0 (not found)
+myMap.push("tag")            // add key with value 1 (set-like insertion) → map
+myMap.pop                    // remove and return the first key
+myMap.pull                   // remove and return the first key (alias of pop)
+myMap.sum                    // → sum of all numeric values
+myMap.shuffle                // randomize key order in-place → null
+myMap.replace(old, new)      // replace all values matching old with new → map
+myMap.replace(old, new, max) // replace up to max occurrences → map</div>
+
+<div class="tip-box"><div class="tip-label">TIP</div>Maps support the <span class="inline-cmd">+</span> operator for merging: <span class="inline-cmd">{"a": 1} + {"b": 2}</span> → <span class="inline-cmd">{"a": 1, "b": 2}</span>. Duplicate keys are overwritten by the right operand.</div>
 
 <div class="guide-h2">Rich Text Output</div>
 <div class="guide-p">GreyScript's terminal supports TextMeshPro rich text tags in any printed string:</div>
@@ -3380,7 +3411,7 @@ if x &gt; 0 then print "positive"</div>
 <div class="code-block">i = 0
 while i &lt; 10
     print i
-    i += 1
+    i = i + 1
 end while</div>
 
 <div class="guide-h2">For Loop</div>
@@ -3425,7 +3456,7 @@ locals.x  = 42          // explicitly target local scope
 factory = function
     locals.count = 0
     inc = function
-        outer.count += 1
+        outer.count = outer.count + 1
         return outer.count
     end function
     return @inc
@@ -3537,32 +3568,39 @@ Always register built-in type extensions once at startup before any code uses th
 <tr><td>print(value)</td><td>Output to terminal</td></tr>
 <tr><td>print(value, 1)</td><td>Clear screen then print (live mode)</td></tr>
 <tr><td>clear_screen</td><td>Clear terminal</td></tr>
-<tr><td>user_input(prompt, secure, multiLine, newTerminal)</td><td>string — read user input</td></tr>
+<tr><td>user_input(prompt, isPassword, anyKey, addToHistory)</td><td>string — read user input</td></tr>
 <tr><td>exit(code)</td><td>Terminate script</td></tr>
 <tr><td>wait(seconds)</td><td>Pause execution</td></tr>
-<tr><td>yield</td><td>Co-op multitasking yield</td></tr>
+<tr><td>yield</td><td>Waits for the next tick.</td></tr>
 </tbody></table>
 
 <div class="guide-h2">Type &amp; Conversion</div>
 <table class="spec-table"><thead><tr><th>FUNCTION</th><th>RETURNS</th></tr></thead><tbody>
-<tr><td>typeof(value)</td><td>"number" | "string" | "list" | "map" | "function" | "null"</td></tr>
+<tr><td>typeof(value)</td><td>"number" | "string" | "list" | "map" | "function" | "null" | "etc...", Custom types can be added as well by using the classID property in a map</td></tr>
 <tr><td>str(value)</td><td>Convert to string</td></tr>
-<tr><td>val(str)</td><td>Parse string to number</td></tr>
 <tr><td>char(code)</td><td>Char from ASCII/Unicode code</td></tr>
 <tr><td>code(char)</td><td>ASCII/Unicode code of first char</td></tr>
+<tr><td>hash(value)</td><td>Numeric hash of any value → number</td></tr>
 </tbody></table>
 
 <div class="guide-h2">Math</div>
 <table class="spec-table"><thead><tr><th>FUNCTION</th><th>RETURNS</th></tr></thead><tbody>
 <tr><td>abs(n)</td><td>Absolute value</td></tr>
+<tr><td>sign(n)</td><td>Sign of number → -1, 0, or 1</td></tr>
 <tr><td>ceil(n) / floor(n)</td><td>Round up / down</td></tr>
-<tr><td>round(n, decimals)</td><td>Round to N decimal places</td></tr>
+<tr><td>round(n, decimals)</td><td>Round to N decimal places (decimals defaults to 0)</td></tr>
 <tr><td>sqrt(n)</td><td>Square root</td></tr>
-<tr><td>rnd(n)</td><td>Random number 0–n</td></tr>
-<tr><td>sin/cos/tan(n)</td><td>Trig (radians)</td></tr>
-<tr><td>log(n, base)</td><td>Logarithm</td></tr>
-<tr><td>sum(list)</td><td>Sum of list elements</td></tr>
-<tr><td>range(from, to, step)</td><td>Generate number list</td></tr>
+<tr><td>pi</td><td>π constant → 3.14159…</td></tr>
+<tr><td>rnd(seed)</td><td>Random number 0–1. Optional seed (any type) makes output deterministic.</td></tr>
+<tr><td>sin(n) / cos(n) / tan(n)</td><td>Trig functions (radians)</td></tr>
+<tr><td>asin(n) / acos(n) / atan(n)</td><td>Inverse trig functions (radians)</td></tr>
+<tr><td>log(n, base)</td><td>Logarithm (base defaults to 10)</td></tr>
+<tr><td>bitAnd(a, b)</td><td>Bitwise AND → number</td></tr>
+<tr><td>bitOr(a, b)</td><td>Bitwise OR → number</td></tr>
+<tr><td>bitXor(a, b)</td><td>Bitwise XOR → number</td></tr>
+<tr><td>bitwise(op, a, b)</td><td>Generic bitwise op → number. ops: <code>&amp;</code> <code>|</code> <code>^</code> <code>&lt;&lt;</code> <code>&gt;&gt;</code> <code>&gt;&gt;&gt;</code> <code>~</code></td></tr>
+<tr><td>sum(list)</td><td>Sum of list elements → number</td></tr>
+<tr><td>range(from, to, step)</td><td>Generate number list (step defaults to 1 or -1)</td></tr>
 </tbody></table>
 
 <div class="guide-h2">Environment &amp; Paths</div>
@@ -3574,7 +3612,7 @@ Always register built-in type extensions once at startup before any code uses th
 <tr><td>params</td><td>List of CLI args when script runs as a command</td></tr>
 <tr><td>get_abs_path(path)</td><td>Convert relative path to absolute</td></tr>
 <tr><td>parent_path(path)</td><td>Parent directory of path</td></tr>
-<tr><td>time</td><td>Unix timestamp (number)</td></tr>
+<tr><td>time</td><td>Returns a number of seconds representing the elapsed time since the script started.</td></tr>
 <tr><td>current_date</td><td>Formatted date string</td></tr>
 </tbody></table>
 
@@ -3614,8 +3652,12 @@ s.build(srcPath, binPath, allowImport)       // compile .src → binary
 s.connect_service(ip, port, user, pass)      // → shell / ftpShell / string / null
 s.launch(program, params)                    // run binary → number / string
 s.scp(file, folder, remoteShell, isUpload)   // file transfer → 1 or error
-s.start_terminal                             // open terminal (local only)</div>
-
+s.start_terminal                             // Launches an active terminal<b>*</b>
+    <div class="code-block"><b>*</b>-Script execution will be stopped upon starting a new terminal, 
+unless this is called from another script that was executed via 
+shell.launch. In that case, you will enter the shell after closing 
+your root-level script within that terminal window</div></div>
+<div class="guide-p"></div>
 <div class="guide-h2">computer Object</div>
 <div class="guide-p">Obtained via <span class="inline-cmd">shell.host_computer</span>:</div>
 <div class="code-block">c = get_shell.host_computer
@@ -3656,9 +3698,6 @@ f.rename(name)                // → string or 0
 f.delete                      // → string (error) or void
 f.set_owner(owner, recursive) // → string or null</div>
 
-<div class="warn-box"><div class="warn-label">SSH INCOMPATIBLE METHODS</div>
-These methods only work on a <strong>local shell</strong> — they cannot be called over an SSH session: <span class="inline-cmd">computer.touch</span>, <span class="inline-cmd">computer.show_procs</span>, <span class="inline-cmd">file.get_content</span>, <span class="inline-cmd">file.set_content</span>, <span class="inline-cmd">file.copy</span>, <span class="inline-cmd">shell.connect_service</span>, <span class="inline-cmd">metaxploit.net_use</span>. Use <span class="inline-cmd">scp</span> to copy files first if needed.
-</div>
 </div>
 </div>
 
@@ -3693,9 +3732,11 @@ p.is_closed               // → 1 if closed, 0 if open</div>
 <tr><td>22</td><td>SSH</td></tr>
 <tr><td>25</td><td>SMTP</td></tr>
 <tr><td>80 / 8080</td><td>HTTP</td></tr>
+<tr><td>141 / 3306-3308</td><td>SQL</td></tr>
 <tr><td>1222</td><td>RShell</td></tr>
 <tr><td>1542</td><td>Repository / Hackshop</td></tr>
 <tr><td>6667</td><td>Chat</td></tr>
+<tr><td>37777</td><td>CCTV</td></tr>
 </tbody></table>
 
 <div class="guide-h2">SSH Connection</div>
@@ -3735,7 +3776,7 @@ mx.rshell_server                  // → list&lt;shell&gt; or error</div>
 <div class="code-block">lib = mx.net_use("1.2.3.4", 22).dump_lib
 lib.lib_name                      // → "init.so"
 lib.version                       // → "1.0.0"
-lib.is_patched(getDate)           // → 1 or error or null
+lib.is_patched(getDate)           // → 1 or date-patched-string or error-string or null
 lib.overflow(address, value)      // → shell / computer / file / string / null
 lib.debug_tools(user, pass)       // → debugLibrary or null</div>
 
@@ -3795,7 +3836,7 @@ crypto.is_encrypted(filePath)        // → 1, 0, or error
 
 // WiFi cracking
 crypto.airmon("start", "wlan0")      // enable monitor mode
-crypto.aireplay(bssid, essid, maxAcks) // capture handshake → .cap path or null
+crypto.aireplay(bssid, essid, maxAcks) // capture handshake → null or error-string
 crypto.aircrack(capFilePath)         // crack cap file → password or null
 
 // SMTP recon
@@ -3837,7 +3878,7 @@ parts = networks[0].split(" ")
 bssid = parts[0]
 pwr   = parts[1][:-1].to_int
 essid = parts[2]
-crypto.aireplay(bssid, essid, 300000 / pwr)
+crypto.aireplay(bssid, essid, 300000 / (pwr+15))
 password = crypto.aircrack(home_dir + "/file.cap")
 print password</div>
 </div>
@@ -3914,7 +3955,7 @@ end if</div>
 end if
 
 target = params[0]
-path   = get_abs_path(params.len &gt; 1 ? params[1] : ".")</div>
+path   = get_abs_path(target)</div>
 
 <div class="guide-h2">Live-Updating Display</div>
 <div class="code-block">while true
